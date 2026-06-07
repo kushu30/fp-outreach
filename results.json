@@ -1,0 +1,4607 @@
+[
+  {
+    "domain": "plixlife.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/v4/build/gokwik.js"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/non-shopify-core-functions.min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass-sso.html",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/12wyqc2h4ylkse6ovce",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/12wyqc2h4ylkse6ovce?themeId=123456&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "business@plixlife.com",
+      "hello@plixlife.com",
+      "compliance@plixlife.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Google Analytics"
+    ],
+    "title": "Buy Plant Based Products | Vegan Protein Powders, Tablets & Capsules Online - PlixLife",
+    "description": "Looking for plant-based products? Buy Plant Protein Powder, Tablets & Capsules Online for Men & Women in India at PlixLife. We have a wide range of plant based vegan products for weight, skin, hair & ",
+    "page_hash": "e8ac769a91fcc980",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 8.52,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "absolutpet.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Fastrr"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/absolutpet?igsh=MW4yM3VxY245aXNybg==",
+      "facebook": "https://www.facebook.com/profile.php?id=61563821986715",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo"
+    ],
+    "title": "Absolut Pet | India's 1st Tasty Pet Supplement\n – Absolut Pet India",
+    "description": "Pet supplements in a tasty form for dogs and cats!",
+    "page_hash": "865e0dbc923efb01",
+    "lead_score": 41,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 8.51,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "powersports.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "muthu@powersports.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/powersportsinternational",
+      "facebook": "https://www.facebook.com/powersportsinternational/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@PowerSportsInternational"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Intercom",
+      "Recharge"
+    ],
+    "title": "PowerSports | One-Stop Shop for All Riding Gear | Largest Helmet Store",
+    "description": "PowerSports is India’s largest retail chain of motorcycle helmets and riding gear. Buy genuine and certified motorcycle helmets, riding jackets, pants, riding gloves, boots, motorcycle luggage, helmet",
+    "page_hash": "74a9fe404baa9801",
+    "lead_score": 33,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.07,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "myfrido.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jl56lsf7x",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6jl56lsf7x?themeId=161793409314&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "help@myfrido.com",
+      "750a7e063a6f7f2e752d9f6250ee4707@o4509122694807552.ingest.us.sentry.io"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/myfrido",
+      "instagram": "https://www.instagram.com/myfrido/",
+      "facebook": "https://www.facebook.com/myfrido/",
+      "twitter": "https://x.com/ganeshsonawane",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "Shop Innovative Ergonomic Products for Pain Relief & Comfort",
+    "description": "Discover Frido's range of ergonomic products designed to alleviate neck, back, & foot pain. Shop insoles, pillows, cushions, & more for comfort & wellness.",
+    "page_hash": "8983522e5620d01e",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 10.9,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "sleepsia.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19uf340oyqtr",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19uf340oyqtr?themeId=153704464573&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "info@stagheaddesigns.com",
+      "info@sleepsia.com",
+      "cc@sleepsia.in",
+      "cc@sleepsia.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/sleepsiaindia/",
+      "facebook": "https://www.facebook.com/sleepsiapillow",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@sleepsiaindia3646"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "Memory Foam Pillows for Sleeping for Cervical, Lumbar & Knee Pain\n – Sleepsia India Pvt Ltd",
+    "description": "Sleepsia Best Memory Foam Pillow for Sleeping in India for Cervical, Lumbar & Knee Pain. Our wide range best pillow in India to enjoy a comfortable sleep every night. Sleepsia India Pvt Ltd is the pio",
+    "page_hash": "30b5c9638f4180dc",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 16.55,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "uspoloassn.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@uspoloassn.in",
+      "support@glood.ai",
+      "info@stagheaddesigns.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/uspoloassnindia/",
+      "facebook": "https://www.facebook.com/USPoloAssn.India",
+      "twitter": "https://twitter.com/USPoloAssnIn",
+      "youtube": "https://www.youtube.com/@uspoloassnindia"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "U.S. Polo Assn. India | Official Online Store for Men, Women and Kids",
+    "description": "Shop U.S. Polo Assn. online in India for premium shirts, jeans, polos and footwear. Authentic American style for men, women and kids. Free delivery and returns.",
+    "page_hash": "4c2c93e4f58e75a3",
+    "lead_score": 54,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.63,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "aqualogica.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jlvw89r6r",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6jlvw89r6r?themeId=162666676449&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "care@aqualogica.in",
+      "care@bblunt.com",
+      "shop@aqualogicaprod.myshopify.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/aqualogica.in/",
+      "facebook": "https://www.facebook.com/aqualogica.in/",
+      "twitter": "https://twitter.com/i/flow/login?redirect_after_login=%2Faqualogica",
+      "youtube": "https://www.youtube.com/channel/UCUq8lpm2Akn9thoGCMPWpCA"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Aqualogica Sale Live with Buy1 Get1 Free. Use Code-GLOW",
+    "description": "Aqualogica Buy 1 Get 1 Free Sale Live on Clean, Toxin-free & Cruelty-free products. Add minimum 2 products and get lowest priced product FREE. Code: GLOW",
+    "page_hash": "ec9e9302db650005",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 24.09,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "crossword.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Fastrr",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "estore@crossword.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/crosswordbookstores/",
+      "instagram": "https://www.instagram.com/crosswordbookstores/",
+      "facebook": "https://www.facebook.com/Crosswordbookstores",
+      "twitter": "https://x.com/crossword_book",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Buy Books Online – Bestsellers, Novels, Stationary & Gifts",
+    "description": "Buy books online in India at Crossword.in – the best online bookstore for fiction, non-fiction, self-help books, children’s story books & bestsellers. Explore novels, biographies, stationery, gift car",
+    "page_hash": "1b6aaed4da27de98",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 23.0,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "superbottoms.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "GoKwik",
+      "Cashfree"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jl8wx7qm4",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6jl8wx7qm4?themeId=145655627939&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "hello@superbottoms.com",
+      "info@stagheaddesigns.com",
+      "geet.k@superbottoms.com",
+      "connect@superbottoms.com",
+      "dimple@superbottoms.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/superbottoms/",
+      "instagram": "https://www.instagram.com/superbottoms/",
+      "facebook": "https://www.facebook.com/superbottoms/",
+      "twitter": "https://x.com/Superbottoms?s=20",
+      "youtube": "https://www.youtube.com/@SuperbottomsClothDiapersIndia"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "SuperBottoms: India's #1 Reusable Cloth Diapering Brand for Baby",
+    "description": "Want to buy best Cloth Diapers for your baby at offered price? Use SuperBottoms's organic cotton diapers, which are soft & gentle for your newborn. Shop Now!",
+    "page_hash": "c4592e6c13272029",
+    "lead_score": 78,
+    "priority": "HIGH",
+    "last_scan": "2026-06-07",
+    "scan_duration": 22.13,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "theindusvalley.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jlsvjilud",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6jlsvjilud?themeId=150588719281&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "help@theindusvalley.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/theindusvalley/",
+      "instagram": "https://www.instagram.com/theindusvalley/",
+      "facebook": "https://www.facebook.com/official.indusvalley",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/c/TheIndusValleyNaturalCookware/featured"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity",
+      "Recharge"
+    ],
+    "title": "The Indus Valley - 100% Healthy Cookware | Toxin-free",
+    "description": "The Indus Valley Kitchenware. 100% Toxin-free. Made only from healthy materials. Find best cooking utensils for health all in one place. Wide range of kitchen essentials like cast iron cookware, iron ",
+    "page_hash": "98be8f7148f7326a",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.84,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "mokobara.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://mokobara.com/cdn/shop/t/369/assets/kwikpass.css?v=134894309094568637381779275501",
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6im4qsm1ta",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6im4qsm1ta?themeId=149056192582&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "support@mokobara.com",
+      "trb.pun@mokobara.com",
+      "hsr.blr@mokobara.com",
+      "gm.hyd@mokobara.com",
+      "mom.pun@mokobara.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "Mokobara: Luggage Suitcase & Trolley Bags",
+    "description": "Elevate the joy of travel with Mokobara. Shop thoughtfully designed luggage & suitcase bags, travel bags, duffels, and backpacks. Made for modern travel.",
+    "page_hash": "df4110ea6c22ede0",
+    "lead_score": 62,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.06,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "snackdesi.com",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.04,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "canineindia.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Cashfree"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/stories/highlights/17872627734380139/",
+      "facebook": "https://www.facebook.com/canineindia.in/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/playlist?list=PLc6jKIEK5jutfUrvoAFk7xPWHOnO4H17K"
+    },
+    "tech_stack": [
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "India's First Species-Appropriate Pet Food - Canine India",
+    "description": "Explore our range of 100% natural Treats, Chews, Meals & Supplements for dogs & cats | Grain-Free | Ethically-Sourced Farm Protein | Shipping across India",
+    "page_hash": "b0967a0d420cb468",
+    "lead_score": 44,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.07,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "sigor.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "connect@sigor.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://ttps//www.instagram.com/sigor.in",
+      "facebook": "https://www.facebook.com/profile.php?id=61578873133098",
+      "twitter": "",
+      "youtube": "https://youtube.com/@sigor_in?si=cwmTBfdW9RR3QLdE"
+    },
+    "tech_stack": [
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Buy 925 Sterling Silver Jewellery Online for Women | Sigor",
+    "description": "Shop 925 sterling silver jewellery for women. Choose from rings, earrings, necklaces & more crafted in authentic sterling silver with modern designs. Buy now!",
+    "page_hash": "5ceabdd2f9668ad1",
+    "lead_score": 98,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.98,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "boxmine.in",
+    "shopify": true,
+    "live_checkout": "Fastrr",
+    "live_confidence": 95,
+    "live_evidence": [
+      "https://uptime2.fastrr.com/fe2"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Fastrr"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jm7r2rb89",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jm7r2rb89",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jm7r2rb89",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true"
+    ],
+    "emails": [
+      "order@boxmine.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/boxmineofficial/?viewAsMember=true",
+      "instagram": "https://www.instagram.com/boxmineofficial/",
+      "facebook": "https://www.facebook.com/profile.php?id=61586279695085",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@BOXMINEOFFICIAL"
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "6d74637087e8a714",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 10.41,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "amrasa.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "support@amrasa.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/amrasa/",
+      "instagram": "https://www.instagram.com/amrasa_/",
+      "facebook": "https://facebook.com/",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me"
+    ],
+    "title": "Amrasa",
+    "description": "",
+    "page_hash": "5944d1266bd6d49d",
+    "lead_score": 96,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.03,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "houseofceramics.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/4xb1dimg6ssi9t",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/4xb1dimg6ssi9t?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "query@houseofceramics.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/houseofceramics.in/",
+      "facebook": "https://www.facebook.com/houseofceramics.in/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@houseofceramics"
+    },
+    "tech_stack": [
+      "Google Analytics",
+      "Recharge"
+    ],
+    "title": "House of Ceramics | Best Ceramic Crockery in Gurgaon, India | Ceramic",
+    "description": "Transform your home with House of Ceramics exquisite handcrafted ceramic tableware, kitchenware, and one-of-a-kind décor. Experience exceptional craftsmanship and artistry in every item, bringing time",
+    "page_hash": "862eeeb39828a930",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 16.06,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "superyou.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/1944k64z7wbg",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/1944k64z7wbg?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "marketing@superyou.in",
+      "hypedesk@superyou.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/be.superyou",
+      "facebook": "",
+      "twitter": "",
+      "youtube": "https://youtube.com/@be.superyou?si=LC2vtMyoRiIbeK1V"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "SuperYou by Ranveer Singh | Protein snacks and Fermented Yeast Protein",
+    "description": "Craving for a healthy snack? Superyou by Ranveer Singh brings you protein-packed wafers with high protein, fiber, and zero added sugar. Savor delicious flavors like chocolate and peanut butter. Try th",
+    "page_hash": "82910bacba15316d",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.98,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "acriine.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Simpl",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/acriineshop/",
+      "facebook": "https://www.facebook.com/acriine.shop",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@Acriineshop"
+    },
+    "tech_stack": [
+      "Google Analytics"
+    ],
+    "title": "Acriine Fashion",
+    "description": "Elevate your style with Acriine - India's premier online destination for designer women's dresses, gowns, and Lehnga Cholis. Explore exquisite collections, indulge in timeless elegance, and redefine y",
+    "page_hash": "95c01976b636d8d3",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.35,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "perfumenetwork.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/perfumenetworkindia/",
+      "facebook": "",
+      "twitter": "https://twitter.com/perfumenetworki",
+      "youtube": "https://www.youtube.com/channel/UC64osG3B8XviRGcgW2x2T6A"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Buy Perfumes Online in India — 100% Original, 1,600+ Fragrances\n    \n    \n    \n      – Perfume Network India",
+    "description": "Shop 1,600+ original perfumes online in India — Lattafa, Rasasi, Afnan, Armaf, Versace, Davidoff and more. Free delivery on prepaid. Experience Sample Sets, try before you buy.",
+    "page_hash": "8919aa419cd0b981",
+    "lead_score": 93,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.24,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "magari.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/magari.india/",
+      "facebook": "https://facebook.com/magari.india",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Explore Premium Furniture Collection By Magari | Shop Now",
+    "description": "Buy modern, high end premium furniture for your home and office from Magair Furniture. Explore our curated collections of designer furniture online. Shop Now.",
+    "page_hash": "4df3eb97c6b45c3f",
+    "lead_score": 22,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.8,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "ashandamber.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://lumberjack.razorpay.com/v1/track"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "info@ashandamber.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/ashandamber.studio/",
+      "facebook": "https://www.facebook.com/ashandamber.studio",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@ashandamber.studio"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "ash and amber | modern western silhouettes for everyday elegance\n – Ash And Amber",
+    "description": "Premium contemporary womenswear crafted in natural fabrics. Discover modern, elegant dresses, co-ords and timeless everyday styles at ash and amber.",
+    "page_hash": "6a503600fa49ff39",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.76,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "toreto.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "info@stagheaddesigns.com",
+      "info@toreto.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/toreto-india/",
+      "instagram": "https://www.instagram.com/toreto.india/?hl=en",
+      "facebook": "https://www.facebook.com/toreto.india/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@ToretoIndiaOfficial"
+    },
+    "tech_stack": [
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "Toreto India | Premium AM to PM Audio & Lifestyle Tech",
+    "description": "Sync your day with Toreto. Discover innovative wireless earbuds, smartwatches, fast chargers, and booming party speakers built to power your AM to PM hustle.",
+    "page_hash": "dd69f4e263ae6765",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 8.66,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "elare.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "FlexyPe",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "info@elare.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/elare.timelessdecor?igsh=em5oc3Fjd3p1eG05&utm_source=qr",
+      "facebook": "https://www.facebook.com/elaredecor/",
+      "twitter": "",
+      "youtube": "https://youtube.com/@elaretimelessdecor?si=_U5Rq00Py8F710PQ"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Elare",
+    "description": "",
+    "page_hash": "5c7abdfa324d2ce8",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 10.06,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "crosskulture.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Fastrr"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "info@crosskulture.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/crosskulture_/",
+      "facebook": "https://www.facebook.com/people/CrossKulture/61552976152378/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UCOmEf2_P6TfZ_l6xFAMxepw"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "CrossKulture | Women's Scarves, Stoles & Fashion Accessories India",
+    "description": "Shop CrossKulture's curated collection of scarves, stoles, handbags & fashion accessories for women. Luxurious fabrics, global craftsmanship, delivered across India. Up to 50% off!",
+    "page_hash": "02e9d0225c1d2253",
+    "lead_score": 52,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.95,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://www.denzofashion.com/",
+    "shopify": true,
+    "live_checkout": "Shopflo",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://bridge.shopflo.com/js/shopflo.bundle.js"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Fastrr"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/denzo.fashion/",
+      "facebook": "https://www.facebook.com/denzofashion/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@Denzo.fashion"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Denzo Fashion| Stylish Bags for Everyday Fashion | Handbags for Women",
+    "description": "Denzo is a modern accessories brand crafting chic, functional handbags using premium vegan leather. Built for daily wear, Denzo blends trend-first design with conscious materials—perfect for workdays,",
+    "page_hash": "60e3671027927f30",
+    "lead_score": 97,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 18.01,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "thedeconstruct.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19m1ewr7xu3h",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19m1ewr7xu3h?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/v3/kwik-cart/request"
+    ],
+    "emails": [
+      "wecare@thedeconstruct.in",
+      "%20wecare@thedeconstruct.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/the-deconstruct",
+      "instagram": "https://www.instagram.com/deconstruct_skincare/",
+      "facebook": "https://www.facebook.com/deconstructhq",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UCPBXXrn7tw20A6JldPuXEUg"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "Deconstruct | Science-Backed Gentle Skincare Products",
+    "description": "Explore Deconstruct – science-backed skincare for all skin types. Gentle, effective formulas that support healthy, balanced skin.",
+    "page_hash": "ec20ead82117ca93",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.42,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "skylee.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@skylee.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/shopskylee/",
+      "facebook": "https://www.facebook.com/people/Shopskylee/61580698045354/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@shopskylee"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Kurtas & Co-Ord Sets for Women | Ethnic Wear | Skylee",
+    "description": "Shop kurtas and co-ord sets for women at Skylee. Discover stylish ethnic wear, cotton kurtas, and trendy co-ords for everyday and festive looks.",
+    "page_hash": "74820626dc87b157",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 21.32,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "vahdam.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "help@vahdam.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/vahdam-teas/",
+      "instagram": "https://www.instagram.com/vahdamindia/",
+      "facebook": "https://www.facebook.com/vahdamindia",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Premium Wellness Products, Tea Bags & Herbal Infusions | VAHDAM® India",
+    "description": "Explore VAHDAM® India's extensive range of Indian loose leaf teas & tea bags, including organic handpicked Green teas, Black teas, Oolong and more. Try our Curcumin, Moringa, and other supplements for",
+    "page_hash": "61ca2005b67655ee",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 23.81,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://www.mountainor.in/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "FlexyPe"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19xqk9dnbjcw",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19xqk9dnbjcw?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "care@monoskin.health"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/monoskin.health",
+      "facebook": "https://www.facebook.com/monoskin.health/#",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@monoskinhealth"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Mono",
+    "description": "",
+    "page_hash": "a26ee66e9cbbfa6a",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.11,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "northark.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "hello@northark.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/northarkin/",
+      "facebook": "",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@northarkin"
+    },
+    "tech_stack": [
+      "Judge.me"
+    ],
+    "title": "Northark",
+    "description": "Northark is an online store focused on bringing practical, fun, and innovative products into everyday life.",
+    "page_hash": "a920c9477af2a99e",
+    "lead_score": 26,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.37,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "somethingsbrewing.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "sales@somethingsbrewing.in",
+      "hello@somethingsbrewing.in",
+      "support@somethingsbrewing.in"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/somethings-brewing-india ",
+      "instagram": "https://www.instagram.com/smthingsbrewing?igsh=MWMxODBhanp6bTRiNw==",
+      "facebook": "https://www.facebook.com/smthingsbrewing/",
+      "twitter": "https://x.com/Somethingsbrwng",
+      "youtube": "https://www.youtube.com/c/SomethingsBrewing"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Find Premium Coffee Machines Online | Something’s Brewing – Something's Brewing",
+    "description": "Buy coffee machines, grinders, brewers, and accessories online at Somethings Brewing for premium home, office, and café coffee brewing needs across India.",
+    "page_hash": "0b79dbfdd69ecd0d",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 19.56,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "reflexions.in",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "support@gist-apps.com",
+      "info@reflexions.in",
+      "abc@xyz.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/reflexions.in/",
+      "facebook": "https://www.facebook.com/reflexions.in",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@reflexionsunisexsalon"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Yotpo",
+      "Google Analytics",
+      "Recharge"
+    ],
+    "title": "Since 2007!, Providing Genuine Professional Personal Care Products\n– Reflexions Salon",
+    "description": "Discover a wide range of 100% genuine hair and beauty products at Reflexions.in. We offer a curated selection of top brands including Kerastase, Olaplex, L'Oreal Professionnel, De Fabulous, Floractive",
+    "page_hash": "aa12e3abf6d04620",
+    "lead_score": 94,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.76,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "petsway.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19ec7nxhagr8",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19ec7nxhagr8?themeId=183900963114&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "contact@petsway.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/petswaypetcare/posts/?feedView=all",
+      "instagram": "https://www.instagram.com/petsway.in/",
+      "facebook": "https://www.facebook.com/petsway.in",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@petswaypetcare"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity",
+      "Recharge"
+    ],
+    "title": "Pets Way",
+    "description": "",
+    "page_hash": "d9d1e2ea5ad56c89",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.05,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "homeessentials.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19q13tc43r6m",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19q13tc43r6m?themeId=179536101660&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "customer@homeessentials.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/homeessentialsindia",
+      "instagram": "https://www.instagram.com/homeessentials.insta/",
+      "facebook": "",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@Homeessentials.youtube"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Good Quality & Affordable Home Organization, Kitchen\n      \n      \n      \n        – Home Essentials",
+    "description": "Buy affordable home organization, kitchen items & decor at Home Essentials. Buy durable, stylish, and functional products to enhance your home effortlessly.",
+    "page_hash": "1556b7c1630a9fca",
+    "lead_score": 72,
+    "priority": "HIGH",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.46,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "soleselect.in",
+    "shopify": true,
+    "live_checkout": "Fastrr",
+    "live_confidence": 95,
+    "live_evidence": [
+      "https://uptime2.fastrr.com/fe2"
+    ],
+    "historical_checkouts": [
+      "Fastrr"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/soleselect.in/",
+      "facebook": "https://www.facebook.com/profile.php?id=61584643889821",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "sole select",
+    "description": "",
+    "page_hash": "d0142394c7503b74",
+    "lead_score": 75,
+    "priority": "HIGH",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.65,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "styleanny.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/14dj2fimb2g1zm4",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/14dj2fimb2g1zm4?themeId=184016732450&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "happytohelp@styleanny.in",
+      "example@email.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/styleanny_in?igshid=YmMyMTA2M2Y=",
+      "facebook": "https://www.facebook.com/styleanny.in/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@STYLEANNY"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "ANNY - Fashion for Every Occasion | Women Clothing Brand | Top, Bottom",
+    "description": "Stay fashion-forward with ANNY – your hub for women's clothing online shopping. Explore trendy dresses, tops, and more from a top women clothing brand. Shop the best online clothing store for women to",
+    "page_hash": "955d7223e26fc900",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 16.61,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "domesticappliances.philips.co.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19ttqcf41ufw",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19ttqcf41ufw?themeId=161512489202&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "philipshomeliving.shopsupport.india@versuni.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/philipshomelivingindia/",
+      "facebook": "https://www.facebook.com/philipshomelivingindia/",
+      "twitter": "https://twitter.com/PhilipsHomeIN",
+      "youtube": "https://www.youtube.com/c/PhilipsHomeLiving"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Philips Domestic Appliances – Smart Solutions for Every Home",
+    "description": "Explore Philips appliances designed for modern living. Discover innovative, reliable solutions to enhance your everyday home experience.",
+    "page_hash": "960c791ba939acfd",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.62,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "monrow.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilt6sj6ia",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilt6sj6ia?themeId=134881574955&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "care@monrow.in",
+      "monrow_logo_1_130x_2x_d69430df-9900-4609-bcd8-05484197db51_100x@2x.webp",
+      "monrow_logo_1_130x_2x_d69430df-9900-4609-bcd8-05484197db51_60x@2x.webp"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/monrowshoes",
+      "instagram": "https://www.instagram.com/monrowworld/",
+      "facebook": "https://www.facebook.com/monrowshoes",
+      "twitter": "https://twitter.com/monrowshoes",
+      "youtube": "https://www.youtube.com/channel/UCyIvOzsx4T-2JEuwxl0QSYA"
+    },
+    "tech_stack": [
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Latest Collection of Women Footwear & Bags❣️ Comfort - Monrow\n– Monrow Shoes",
+    "description": "Fashion ❣️ Comfort We aim to create shoes and bags that not only look stylish but also feel incredibly comfortable. Designed for the go-getters who deserve effortless elegance every step of the way! ❤",
+    "page_hash": "93aa29e5d9fa5562",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.15,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "cukoo.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilh7i2hj8",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilh7i2hj8?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "info@cukoo.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/cukoo.in/",
+      "facebook": "https://www.facebook.com/cukoo.in",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me"
+    ],
+    "title": "Cukoo - Shop Women Swimwear, Active Wear, Lingerie Online  – cukoo.in",
+    "description": "Shop swimwear for women online including Bikinis, Tankinis, Skirtinis, Swim Capris, Swim Bottoms, and more. Browse our collection of activewear, lingerie, track pants…",
+    "page_hash": "3261b383e5fc66a4",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 24.0,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "store.yugabyte.com",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 16.82,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://www.danodiafoods.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Meta Pixel",
+      "Microsoft Clarity"
+    ],
+    "title": "Danodia Foods | Shop online for  & more",
+    "description": "",
+    "page_hash": "1e3ed22c40489d8c",
+    "lead_score": 22,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.02,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "thesleepcompany.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Shopflo",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@thesleepcompany.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/thesleepcompany_official/",
+      "facebook": "https://www.facebook.com/thsleepco/?_ga=2.228237533.1323233968.1667575705-900091209.1667575705",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UCRC25UW34xBDU2mDFZ71_tQ?_ga=2.170583776.1323233968.1667575705-900091209.1667575705"
+    },
+    "tech_stack": [],
+    "title": "Buy The Sleep Company Mattress Online | Top Mattress Brand in India",
+    "description": "Buy mattresses online from the best mattress brand in India. The Sleep Company offers products with patented Japanese SmartGRID® Technology, including mattresses, pillows, and more. ✔ 100-Night Free T",
+    "page_hash": "f531ab760383124d",
+    "lead_score": 60,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.46,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "nourishmantra.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6hljs80nwk",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6hljs80nwk?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "care@nourishmantra.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/nourishmantra/?viewAsMember=true",
+      "instagram": "https://www.instagram.com/nourishmantra/",
+      "facebook": "https://www.facebook.com/share/1GVhcwAu8p/?mibextid=wwXIfr",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@nourishmantra"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Hotjar"
+    ],
+    "title": "Nourish Mantra- Face Care & Skin Care Products, Beard Oil, Serum Toner",
+    "description": "Unleashing the power of Ayurvedic wellness backed with revolutionary science. Natural | Effective | Holistic | Conscious. PETA Certified 100% Vegan & Cruelty-free. High performance skincare derived fr",
+    "page_hash": "5aeadf3066ada064",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.4,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "shop.resmed.co.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "help@resmed.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/resmed-india/",
+      "instagram": "",
+      "facebook": "https://www.facebook.com/ResMedIndia",
+      "twitter": "https://twitter.com/resmedindia",
+      "youtube": "https://www.youtube.com/@ResMedIndia1"
+    },
+    "tech_stack": [
+      "Yotpo",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Resmed India",
+    "description": "Visit Resmed India online store to explore CPAP devices, masks, accessories, and sleep wellness solutions",
+    "page_hash": "ce1e509f21a7901c",
+    "lead_score": 98,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 21.21,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "sheaffer.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "info@sheaffer.com",
+      "aa4cacd33be28673d7e69be559ce7ad7@o4506196830715904.ingest.us.sentry.io",
+      "back-in-stock@notifyboost.net"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/sheafferpen/",
+      "facebook": "https://www.facebook.com/sharer.php?u=https://sheaffer.com/products/sheaffer%C2%AE-100-9374-coffee-edition-matt-brown-fountain-pen-with-regal-brown-pvd-trims-medium",
+      "twitter": "https://twitter.com/intent/tweet?text=Sheaffer%C2%AE%20100%209374%20Coffee%20Edition%20Matt%20Brown%20Fountain%20Pen%20with%20Regal%20Brown%20PVD%20Trims&url=https://sheaffer.com/products/sheaffer%C2%AE-100-9374-coffee-edition-matt-brown-fountain-pen-with-regal-brown-pvd-trims-medium",
+      "youtube": "https://www.youtube.com/@SheafferOfficial"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Sheaffer",
+    "description": "",
+    "page_hash": "1f6ed2438d92dde3",
+    "lead_score": 53,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.82,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "wellbeingnutrition.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/3mt5u7wu46l3sja2lw",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/3mt5u7wu46l3sja2lw?themeId=125796089936&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "care@wellbeingnutrition.com"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/wellbeing-nutrition",
+      "instagram": "https://www.instagram.com/wellbeing.nutrition",
+      "facebook": "https://www.facebook.com/Wellbeing-Nutrition-107959920549143",
+      "twitter": "https://twitter.com/WBN_India",
+      "youtube": "https://www.youtube.com/channel/UCaXzqAwiiRCOYLLJt0Iv0jA/featured"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Wellbeing Nutrition India - Health and Beauty Supplements Online",
+    "description": "Welcome to Wellbeing Nutrition! India’s first one-stop-shop for organic, whole foods, and multivitamin supplements. Begin your journey to better health today.",
+    "page_hash": "9d0e43c28c8fcdb4",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.22,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "srisritattva.com",
+    "shopify": true,
+    "live_checkout": "Fastrr",
+    "live_confidence": 95,
+    "live_evidence": [
+      "https://uptime2.fastrr.com/fe2"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "onlinesupport@srisritattva.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/srisritattva/",
+      "facebook": "https://www.facebook.com/SriSriTattva/",
+      "twitter": "https://twitter.com/SriSriTattva",
+      "youtube": "https://www.youtube.com/channel/UC-PiB-Bn8K9KKoxZEyebgWQ"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Recharge"
+    ],
+    "title": "Sri Sri Tattva",
+    "description": "Sri Sri Tattva | Grocery | Ayurveda | Personal Care | Health Care | Home Care | Ghee | Herbal Juices | Incense | Fragrance",
+    "page_hash": "f1515cd79a19205c",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.81,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "shopatsc.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "sellers@shopatsc.com",
+      "contactus@shopatsc.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/sonyindiaofficial/",
+      "facebook": "https://www.facebook.com/SonyIndia",
+      "twitter": "https://twitter.com/sony_india",
+      "youtube": "https://www.youtube.com/sonyindia"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Recharge"
+    ],
+    "title": "Online Electronics Store of Sony Products | Sony Center",
+    "description": "ShopatSC is an online electronics shopping website of Sony products. Buy electronic products online like Televisions, Home & Personal Audio, Cameras on Sony Center.",
+    "page_hash": "443b8550ce496846",
+    "lead_score": 35,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 25.61,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "duroflexworld.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://gkx.gokwik.co/v3/kwik-cart/request"
+    ],
+    "emails": [
+      "support@duroflexworld.com",
+      "grievance@duroflexworld.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/duroflexworld?igsh=ZmIzM3VlbmhqM2ht",
+      "facebook": "https://www.facebook.com/share/1CVurS9sck/",
+      "twitter": "https://x.com/Duroflex_world",
+      "youtube": "https://www.youtube.com/@duroflex_world"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity",
+      "Recharge"
+    ],
+    "title": "Buy Duroflex Mattresses, Sofa, Recliner, Beds & Pillows in India",
+    "description": "Duroflex is India’s trusted sleep expert for mattresses, sofas, recliners, pillows and protectors. Buy single, queen and king mattresses with up to 10-year warranty, free shipping and EMI.",
+    "page_hash": "6ab671f03e056cc9",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.69,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "reequil.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Fastrr"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://www.reequil.com/cdn/shop/t/842/assets/kwikpass-core-functions-min.js?v=155774932123987226131777545564",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20250907152527228",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jlmhjuv52",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6jlmhjuv52?themeId=153341296826&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/5043"
+    ],
+    "emails": [
+      "care@reequil.com",
+      "help@reequil.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/reequil/",
+      "facebook": "https://www.facebook.com/reequil/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@Reequil"
+    },
+    "tech_stack": [
+      "Google Analytics",
+      "Intercom"
+    ],
+    "title": "Re’equil Summer Ready Sale | Up to 25% OFF – Re'equil",
+    "description": "Get everyday summer essentials at up to 25% OFF + Free gifts",
+    "page_hash": "5f22d5f4988d81ef",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.99,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://www.atariyadecor.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.93,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://aflairza.com/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "help@aflairza.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me"
+    ],
+    "title": "Aflairza | Enhance your beauty with Makeup",
+    "description": "Magic Drop Serum deeply nourishes your skin, doubles as a smooth primer, and locks in makeup with long-lasting waterproof protection.",
+    "page_hash": "789e1ef94c0e5687",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.85,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "decodeage.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@decodeage.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/decogeage/",
+      "instagram": "https://www.instagram.com/decodeage/",
+      "facebook": "https://www.facebook.com/decodeage/",
+      "twitter": "https://twitter.com/decodeage",
+      "youtube": "https://www.youtube.com/channel/UCuqWkNUAkHyrLFXtRKEzavQ"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Decode Age: Premier Science-Backed Longevity & Health Solutions",
+    "description": "Join India's #1 science-based longevity leader, Decode Age, in redefining healthy aging. Explore our specialized supplements, advanced gut microbiome research, and personalized biological age tests, a",
+    "page_hash": "9717e235ec069322",
+    "lead_score": 58,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.98,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "headsupfortails.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6jlryxc1xi",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6jlryxc1xi?themeId=140253659198&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "hello@headsupfortails.com",
+      "aa4cacd33be28673d7e69be559ce7ad7@o4506196830715904.ingest.us.sentry.io",
+      "u003eorders@headsupfortails.com",
+      "abcd@gmail.com",
+      "orders@headsupfortails.com"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/heads-up-for-tails",
+      "instagram": "https://instagram.com/headsupfortails",
+      "facebook": "https://facebook.com/headsupfortails",
+      "twitter": "",
+      "youtube": "https://youtube.com/shorts/oKZGazYzkX0?feature=share"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "HUFT Pay Day Sale: Up to 30% Off Dog & Cat Food, Treats & More\n – Heads Up For Tails",
+    "description": "HUFT Pay Day Sale is live! Enjoy limited-time discounts on dog & cat food, treats & more. Shop online now before the offers end. Up to 30%Off",
+    "page_hash": "ef6291c571719bca",
+    "lead_score": 78,
+    "priority": "HIGH",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.19,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "starquik.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@starquik.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/starquik/",
+      "facebook": "https://www.facebook.com/TataStarQuik",
+      "twitter": "https://x.com/StarQuik",
+      "youtube": "https://www.youtube.com/@starquikatataenterprise1168"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "Starquik",
+    "description": "",
+    "page_hash": "dee46470587d17e0",
+    "lead_score": 32,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.77,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "bevzilla.co",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19a39hb45vuu",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19a39hb45vuu?themeId=162069315820&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "hello@bevzilla.co",
+      "info@stagheaddesigns.com",
+      "karan.trehan@oneguardian.in",
+      "shop@bellavitaorganic.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/bevzilla_official?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+      "facebook": "https://www.facebook.com/Bevzillaofficial-",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity",
+      "Recharge"
+    ],
+    "title": "Instant Coffee Cubes by Bevzilla",
+    "description": "With zero refined sugar, we make our Instant Coffee Cubes with date palm jaggery and available in 5 flavours! Zero preservatives and so easy to make. Shop now to enjoy real coffee.",
+    "page_hash": "e5bdc7748709e2e6",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.76,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "chicco.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/198605o49g29",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/198605o49g29?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "support@chicco.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/chicco_india/",
+      "facebook": "https://www.facebook.com/chiccoindia",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Yotpo",
+      "Google Analytics"
+    ],
+    "title": "Chicco India",
+    "description": "",
+    "page_hash": "19b5fde19d29e2a3",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.62,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "deodap.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@deodap.com",
+      "info@stagheaddesigns.com"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/deodap",
+      "instagram": "https://www.instagram.com/deodap_india/",
+      "facebook": "https://www.facebook.com/deodap/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@OnlineBusinessIdeasbyDeoDap"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "DeoDap: Wholesale Shopping India | Home, Kitchen, Toys & More | No MOQ",
+    "description": "Sale 365 Days — Unbeatable Prices on trending products, from home & kitchen to gardening products! No MOQ at wholesale price. Easy Returns. Hassle Free Shopping & Exceptional customer service.",
+    "page_hash": "a179670af014f229",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.96,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://svbventures.in/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "FlexyPe",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/svbventures9/",
+      "facebook": "https://www.facebook.com/SVBventures9",
+      "twitter": "https://x.com/PRAKKERE",
+      "youtube": "https://www.youtube.com/channel/UCSLQWhEsKdIKdMF3AIFc6tw"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "Chic Elegance Unleased Explore Timeless Women Fashion at SVB Ventures.\n      \n  | SVB Ventures",
+    "description": "Discover a world of elegance at SVB Ventures– your one-stop destination for women's and men's fashion. Explore our curated collection, featuring Kurtis, Long Gowns,Tops, Paithani Sarees,TShirt, Jean P",
+    "page_hash": "57cf1f1d14caeda0",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 18.6,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "clinikally.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "support@clinikally.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/clinikally",
+      "instagram": "https://www.instagram.com/clinikallyofficial/",
+      "facebook": "https://www.facebook.com/ClinikallyOfficial/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UC7aFA-qRl3C4pX-dbUhLroQ"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Microsoft Clarity"
+    ],
+    "title": "Clinikally | India's Digital Clinic for Skin & Hair Care That Works!",
+    "description": "Find the right treatment that works for your skin & hair type. Consult dermatologists online or get free delivery of the best skin & hair care products.",
+    "page_hash": "b6dc3e163244dd5d",
+    "lead_score": 38,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 24.48,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://alpinebeautysecrets.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.99,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://therealindiankitchen.com/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "support@therealindiankitchen.com",
+      "youremail@gmail.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/trik_therealindiankitchen/",
+      "facebook": "https://www.facebook.com/TRIK-The-Real-Indian-Kitchen-111745741513543",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me"
+    ],
+    "title": "TRIK - The Real Indian Kitchen || Best of Indian Homemade Kitchens",
+    "description": "The Real Indian Kitchen crafts the spice blends we know and love in India and from real Indian homes into sachets that fit your modern lifestyle. Each pack is easy to use and guaranteed to be authenti",
+    "page_hash": "3d2482f759b689d7",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.91,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "guardian.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilmiqln3e",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilmiqln3e?themeId=153294373095&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "hello@guardian.in",
+      "info@stagheaddesigns.com",
+      "abc@xyz.com",
+      "example@email.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/guardiangnc/?hl=en",
+      "facebook": "https://www.facebook.com/GuardianGNC/",
+      "twitter": "https://x.com/GNC_India",
+      "youtube": "https://www.youtube.com/c/GuardianGNC"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar"
+    ],
+    "title": "GNC: GNC India | GNC Nutrition | Buy GNC Products online",
+    "description": "Guardian.in - GNC® India ✓Official Protein, BodyBuilding Site - Upto 40% Off! Buy authentic whey protein powders, multivitamins from GNC®, Optimum Nutrition, Isopure, BSN, Dymatize etc.",
+    "page_hash": "4e6756524bd51568",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 18.76,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://buzzpower.in/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "Vortex Game - Indian Casino Game by Turbo Gaming",
+    "description": "Explore the key features and main storyline of the Vortex Game in India. Discover the top sites offering the game and begin playing now.",
+    "page_hash": "b702fbec3885aa80",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.25,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "shop.byjus.com",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.09,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://shalvie.com/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "hello@shalvie.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/theshalvie/",
+      "facebook": "",
+      "twitter": "https://twitter.com/shalvieofficial",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "Shalvie",
+    "description": "",
+    "page_hash": "94aa34400d18146c",
+    "lead_score": 95,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.49,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://giftsgallery.online/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "tohfakart.in@gmail.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/giftsgallery.online?igshid=YmMyMTA2M2Y=",
+      "facebook": "https://www.facebook.com/profile.php?id=100063594595194",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UCYPudI3PYyimPeuMyisQ6-A"
+    },
+    "tech_stack": [
+      "Judge.me"
+    ],
+    "title": "TOHFAKART – Personalized Gifts for Every Special Occasion",
+    "description": "Gifts are not just boxes or items wrapped in beautiful paper. They express the feeling of unconditional love toward your loved ones. Gifts make you feel special and help you realize the place you hold",
+    "page_hash": "e9c5a0dcefe74e75",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.78,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "myraymond.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "support@myraymond.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/myraymond/",
+      "facebook": "https://www.facebook.com/MyRaymondOfficial",
+      "twitter": "https://twitter.com/MyRaymond_com",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Google Analytics"
+    ],
+    "title": "Shop for Raymond, Park Avenue, ColorPlus, Parx online\n\n        – MyRaymond",
+    "description": "Think fashion, think MyRaymond! A brand new platform to discover, engage and shop men's fashion, MyRaymond comes with a new urban outlook to..",
+    "page_hash": "06287894b2d1b2d0",
+    "lead_score": 97,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 19.79,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "mydesignation.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6im5dmqndu",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6im5dmqndu?themeId=168207155508&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2",
+      "https://gkx.gokwik.co/kp/api/v1/integrations/meta-s2s"
+    ],
+    "emails": [
+      "care@mydesignation.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/mydesignation/mycompany/",
+      "instagram": "https://www.instagram.com/mydesignationofficial/?hl=en",
+      "facebook": "https://www.facebook.com/mydesignationofficial/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UCtb2ioX_CyGNtwHBTUNVVRA"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity",
+      "Intercom"
+    ],
+    "title": "MyDesignation: Fashion Apparels for Men",
+    "description": "MyDesignation offers a wide variety of stylish and comfortable fashion clothing for men including shirts, t-shirts, hoodies, jackets, and more",
+    "page_hash": "ca5b7c9c1a0ec38f",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.83,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "brownliving.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "hello@brownliving.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/brown-living/",
+      "instagram": "https://www.instagram.com/brownlivingindia/",
+      "facebook": "https://www.facebook.com/BrownLivingIndia/",
+      "twitter": "https://twitter.com/brownliving_",
+      "youtube": "https://www.youtube.com/@Brownlivingindia"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Hotjar"
+    ],
+    "title": "Brown Living - A Platform for Conscious Consumption – Brown Living™",
+    "description": "Shop sustainable, handcrafted & planet-friendly products across categories like home, fashion, food, wellness, and gifting helping you choose planet-friendly everyday. Join our movement to make sustai",
+    "page_hash": "e904d6334ac90a15",
+    "lead_score": 38,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 19.24,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://erobold.com/",
+    "shopify": true,
+    "live_checkout": "Shopflo",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://bridge.shopflo.com/js/shopflo.bundle.js"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Fastrr"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "xxx@xxx.xxx"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/erobold-clothing-pvt-ltd",
+      "instagram": "https://www.instagram.com/erobold_",
+      "facebook": "https://www.facebook.com/eroboldhome",
+      "twitter": "https://twitter.com/erobold_",
+      "youtube": "https://www.youtube.com/@erobold"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Erobold® India | Bold Men’s Premium Intimate Wear",
+    "description": "Discover bold, designer men’s innerwear crafted for confidence. Shop premium underwear & bodysuits by Erobold®—unapologetic, stylish, and made for you.",
+    "page_hash": "c4fea967952ae565",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.37,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://hinduhues.store/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.26,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://archadiafurnitures.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.5,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://acenutrimony.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.43,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "nks.neetprep.com",
+    "shopify": true,
+    "live_checkout": "Fastrr",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://sr-cdn.shiprocket.in/sr-promise/static/iframe.html"
+    ],
+    "historical_checkouts": [
+      "Fastrr"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "N.K Sharma",
+    "description": "",
+    "page_hash": "0f61e120e52cb259",
+    "lead_score": 65,
+    "priority": "HIGH",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.95,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://chefling.in/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "sales@chefling.in",
+      "foxcomfoods@gmail.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/101671512/admin/feed/posts/",
+      "instagram": "https://www.instagram.com/cheflingindia/",
+      "facebook": "https://www.facebook.com/chefling.in",
+      "twitter": "https://twitter.com/CheflingIndia",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Chefling - Do It Yourself Kits - As Seen on Shark Tank India Season 3",
+    "description": "Your hassle-free culinary solution for restaurant-style meals at home. Each kit includes all ingredients needed, from sauces to garnishes, eliminating the need to source multiple items. Skip the groce",
+    "page_hash": "b051ddd9805dddfe",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 14.48,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "maharishiayurvedaindia.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6im6kaysj7",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6im6kaysj7?themeId=186605666582&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "abc@xyz.com",
+      "group_216587_2x_100x_2x_8999fc73-f7e5-4f55-9987-24f5367826b5_80x@2x.webp"
+    ],
+    "socials": {
+      "linkedin": "https://in.linkedin.com/company/maharishi-ayurveda-india",
+      "instagram": "https://www.instagram.com/maharishiayurveda.official/",
+      "facebook": "https://www.facebook.com/maharishiayurveda.official",
+      "twitter": "https://twitter.com/maharishi_india?lang=en",
+      "youtube": "https://www.youtube.com/channel/UCvfDBg42FmZFZ3VmXEPVx3A"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "Buy Maharishi Ayurveda – Authentic Ayurvedic Supplements Online",
+    "description": "Explore Maharishi Ayurveda, India’s trusted destination for authentic Ayurvedic Products rooted in Vedic wisdom and backed by modern science. Shop 100% natural, time-tested remedies for holistic healt",
+    "page_hash": "76cdc61b70ed826d",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.69,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://olwenapparel.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 10.26,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "myborosil.com",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "marketing@newsletterborosil.com",
+      "abc@xyz.com",
+      "example@email.com",
+      "myborosil@borosil.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/borosillimited/mycompany/verification/",
+      "instagram": "https://www.instagram.com/borosilandyou/",
+      "facebook": "https://www.facebook.com/borosilandyou/",
+      "twitter": "https://twitter.com/borosilandyou",
+      "youtube": "https://www.youtube.com/channel/UCwvJukI_hr0Zl-NZbl4VPpg"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Microsoft Clarity"
+    ],
+    "title": "Buy Glassware, Appliances, Lunchboxes, Bottles, & More At MyBorosil",
+    "description": "Shop high-quality MyBorosil lunch boxes, kitchen appliances, bottles, glassware, cookware, & more online. Get great deals, easy payment options, & free shipping.",
+    "page_hash": "1ffbe97fb7b0cae3",
+    "lead_score": 97,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 21.69,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "bellavitaorganic.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Fastrr"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19za02u56xea",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19za02u56xea?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "abc@xyz.com",
+      "shop@bellavitaorganic.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/bellavita.official",
+      "facebook": "https://www.facebook.com/bellavitaorganic",
+      "twitter": "https://twitter.com/bellavita_org?s=08",
+      "youtube": "https://www.youtube.com/c/BellaVitaOrganicIndia"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar"
+    ],
+    "title": "Buy Luxury Perfume for Men and Women I Best Perfume Gift Set 2024",
+    "description": "Wanted to buy luxury perfume for men and women at an affordable price then visit our site to get the best perfume in the market. At BellaVita, we are offering top-quality perfume gifts and skincare. O",
+    "page_hash": "7f98c3be2e8bdafb",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.55,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "filterfinder.in",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "sales@mpfiltri.co.uk",
+      "sales@filtertechnik.co.uk",
+      "sales@abcomponents.org",
+      "sales@filtrec.co.uk",
+      "support@filterfinder.co.uk"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/filterfinder/",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "FilterFinder: Buy and Cross Reference Filters Online",
+    "description": "Discover more than 600,000 part numbers quickly, and easily by searching our huge range of products and filters.",
+    "page_hash": "18cf032ee77b42e5",
+    "lead_score": 29,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 21.3,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://daughtersofsouth.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 6.61,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://petrocrib.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 6.26,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "bajaao.com",
+    "shopify": true,
+    "live_checkout": "Razorpay",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://magic-plugins.razorpay.com/shopify/magic-shopify.js"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/bajaao/",
+      "facebook": "https://www.facebook.com/bajaao/",
+      "twitter": "https://x.com/bajaao",
+      "youtube": "https://www.youtube.com/c/bajaao"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Microsoft Clarity",
+      "Recharge"
+    ],
+    "title": "Buy Musical Instruments & Audio Equipment Online in India at Bajaao – BAJAAO.COM",
+    "description": "Get your gear from Bajaao.com India's largest music instrument, studio and audio equipment superstore. Your one stop online music store for your musical needs.",
+    "page_hash": "bdb24c3396455f50",
+    "lead_score": 94,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.24,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://celticindia.com/",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/celticindia",
+      "facebook": "https://www.facebook.com/Celtic_LeatherBags_Accessories",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me"
+    ],
+    "title": "Celtic India – Handcrafted Leather Bags, Belts & Wallets",
+    "description": "Shop handcrafted leather bags, belts, wallets, and footwear at Celtic India. Premium quality, timeless designs, free shipping, and easy returns.",
+    "page_hash": "d6793796445c02c8",
+    "lead_score": 21,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.89,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "herocycles.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/herocycles?originalSubdomain=in",
+      "instagram": "https://www.instagram.com/hero_cycles/",
+      "facebook": "https://www.facebook.com/HeroCyclesOfficial/",
+      "twitter": "https://twitter.com/Hero_Cycles/",
+      "youtube": "https://www.youtube.com/c/HeroCyclesOfficial"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Microsoft Clarity"
+    ],
+    "title": "Hero Cycles – Largest Bicycle Manufacturer and Best Cycle Company",
+    "description": "Hero Cycles - One of the best & trusted cycle manufacturers in India. Shop from our exclusive collection of mountain bikes, city bikes, kids cycles, women cycles, etc at best price.",
+    "page_hash": "0f5124cb4ca6bf8d",
+    "lead_score": 27,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 18.24,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://autosparz.in/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/1win_en/",
+      "facebook": "https://www.facebook.com/English1win",
+      "twitter": "https://x.com/1winPro?mx=2",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "1Win India Official - Casino & Betting in India | Get 500% Bonus",
+    "description": "Legal 1Win online casino and bookmaker in India. Exclusive deal for Indian players: get a 500% bonus and 400 free spins after registration. Create your account now and claim your rewards today!",
+    "page_hash": "6a19d3be6498e2c4",
+    "lead_score": 10,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.75,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "durexindia.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilhzwnelw",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilhzwnelw?themeId=130132148282&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/v3/kwik-cart/request",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "hello@durexindiawos.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/durex.india/",
+      "facebook": "https://www.facebook.com/DurexIndia",
+      "twitter": "https://twitter.com/DurexIndia",
+      "youtube": "https://www.youtube.com/DurexIndia"
+    },
+    "tech_stack": [
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity",
+      "Intercom"
+    ],
+    "title": "Buy Best Quality Condoms Online in India\n – Durex India",
+    "description": "Discover our wide range of high-quality condoms, lubes, and vibe ring online. Enhance your pleasure and stay protected. Shop now for unbeatable satisfaction.",
+    "page_hash": "ac63610c4fcdc080",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.66,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://www.sanskaram.in/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.3,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "kushals.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [
+      "Shopflo"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "hello@kushals.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/kushalsfashionjewellery",
+      "facebook": "https://www.facebook.com/KushalsFashionJewellery/",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Online Shopping for Fashion, Imitation, Artificial Jewellery for Women",
+    "description": "Shop Latest Collection of Designer Fashion, Artificial Jewellery Online at Kushals. Buy jewelry from a wide range of Necklaces, Earrings, Bangles, Pendants, Tikkas, Payals & more.",
+    "page_hash": "e5d51294aa9dc88b",
+    "lead_score": 54,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.11,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "shopmulmul.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "orders@shopmulmul.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/shopmulmul/",
+      "facebook": "https://www.facebook.com/shopmulmul/",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Google Analytics"
+    ],
+    "title": "Mulmul - Exquisite Indian Wear | Timeless Ethnic Fashion",
+    "description": "Discover Mulmul's collection of luxurious and comfortable Indian wear. From elegant kurta sets to vibrant lehengas, each piece is created with intricate embroidery and premium fabrics.",
+    "page_hash": "dda2e36cb1b83078",
+    "lead_score": 31,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.48,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://shoprush.in/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 8.27,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://detailingsupplier.com/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 8.17,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "discoverpilgrim.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "order@discoverpilgrim.com"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/discover-pilgrim/",
+      "instagram": "https://www.instagram.com/discover.pilgrim/",
+      "facebook": "https://www.facebook.com/pilgrim.discover",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@PilgrimIndia"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Pilgrim India - Official Website | Skin • Hair • Makeup • Fragrance",
+    "description": "Pilgrim - Premium International Brand | No Animal Testing, No Harmful Chemicals, Natural, Vegan Friendly, FDA Approved.",
+    "page_hash": "4d798526a0ed2385",
+    "lead_score": 38,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 20.02,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://shusshh.in/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "e89f75f918dbdcee",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 12.37,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://violetvibes.in/",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "care@violetvibes.in",
+      "ecom-swiper@11.css"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/violetvibes_vv?igshid=YmMyMTA2M2Y=",
+      "facebook": "https://facebook.com",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "VioletVibes",
+    "description": "",
+    "page_hash": "1b8ecc2724c449b7",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 19.19,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://easyderma.in/",
+    "shopify": false,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [],
+    "socials": {
+      "linkedin": "",
+      "instagram": "",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [],
+    "title": "",
+    "description": "",
+    "page_hash": "",
+    "lead_score": 0,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.32,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "naturaltein.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-shopify-app-sdk.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/16p35yimhn978qx",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/16p35yimhn978qx?components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "info@naturaltein.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/naturaltein_india/",
+      "facebook": "https://www.facebook.com/naturalteinindia",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/channel/UCtTbjMyfJO2mZOZvPIiARug"
+    },
+    "tech_stack": [
+      "Google Analytics"
+    ],
+    "title": "NATURALTEIN-India's Best Protein Brand\n – naturaltein",
+    "description": "NATURALTEIN brings you whey proteins which are tested, certified, original & made with 100% natural ingredients. Shop the most trusted protein today.",
+    "page_hash": "02f503978399e2cf",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 13.53,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "cosmix.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Fastrr",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilu18e4no",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilu18e4no?themeId=147046301789&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "info@cosmix.in"
+    ],
+    "socials": {
+      "linkedin": "https://www.linkedin.com/company/cosmixwellness/",
+      "instagram": "https://www.instagram.com/cosmixwellness/",
+      "facebook": "https://www.facebook.com/thecosmixway/",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@cosmixwellness"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Hotjar"
+    ],
+    "title": "Cosmix – Premium Plant-Based Protein and Superfood Supplements",
+    "description": "Clinically-proven superfood solutions for every part of your health. Plant based supplements for mind and body. Loved and trusted by 80,000+. As seen in Vogue, Forbes, Grazia.",
+    "page_hash": "1c181bad50081f16",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.34,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "bblunt.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19mgx1ar7uca",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19mgx1ar7uca?themeId=150016655438&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "care@bblunt.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/bbluntindia",
+      "facebook": "https://www.facebook.com/bbluntindia",
+      "twitter": "https://twitter.com/bbluntindia",
+      "youtube": "https://www.youtube.com/c/BBLUNTIndia/videos"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "BOGO Sale Ending Soon | Buy 1 Get 1 Free | Buy 2 Pay for 1\n – BBlunt",
+    "description": "BBlunt Hair to Dare Buy 1 Get 1 Free Sale Ending Soon! Hair care for all types & concerns. Professional styling meets personal needs. Code: BOGO.",
+    "page_hash": "7688e983e37dd7a5",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 17.64,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "wforwoman.com",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1"
+    ],
+    "emails": [
+      "customercare.tcns@abfrl.adityabirla.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/wforwoman",
+      "facebook": "https://www.facebook.com/WforWoman",
+      "twitter": "https://x.com/WforWoman",
+      "youtube": "https://www.youtube.com/user/WforWoman"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Buy Latest Indian Ethnic Wear Online at Best Price\n – wforwoman",
+    "description": "Shop elegant ethnic wear for women at W for Woman. Explore kurtas, co-ord sets , anarkalis & festive styles crafted for modern elegance. COD, Easy Returns, and Pan-India delivery. Shop online now!",
+    "page_hash": "a26b714178853bab",
+    "lead_score": 64,
+    "priority": "MEDIUM",
+    "last_scan": "2026-06-07",
+    "scan_duration": 22.13,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "astrotalk.store",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19pmjg24asf0",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19pmjg24asf0?themeId=177900355881&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2",
+      "https://gkx.gokwik.co/ka/api/v1/e/op2"
+    ],
+    "emails": [
+      "support.store@astrotalk.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/astrotalk/?hl=en",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Astrotalk Store – Karungali, Rudraksha, Pyrite & Crystal Jewellery",
+    "description": "Shop original Karungali Mala, Pyrite Stone, Rudraksha & crystal jewellery at Astrotalk Store. Govt.-Certified, Astrologer-Energised & Fast Delivery.",
+    "page_hash": "a44f7938e79e9505",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 15.48,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://in.teabox.com/",
+    "shopify": true,
+    "live_checkout": "Shopflo",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://bridge.shopflo.com/js/shopflo.bundle.js"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik",
+      "Fastrr",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilye8rlyf",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilye8rlyf?themeId=145978753112&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2"
+    ],
+    "emails": [
+      "abc@xyz.com",
+      "help@teabox.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/teabox.tea",
+      "facebook": "https://facebook.com/teabox.tea",
+      "twitter": "https://in.teabox.com/collections/autumn-flush",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Gorgias"
+    ],
+    "title": "Teabox: Buy Delicious Indian Teas Online - Delivered Fresh",
+    "description": "Enjoy India's finest tea selection. Buy 100% fresh, delicious organic teas direct from the source. Free express shipping on orders above INR 599.",
+    "page_hash": "3a7c50093ac97fea",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 11.81,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://goofon.in/",
+    "shopify": true,
+    "live_checkout": null,
+    "live_confidence": 0,
+    "live_evidence": [],
+    "historical_checkouts": [],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "info@goofon.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/goofon.in/",
+      "facebook": "https://www.facebook.com/GoofOn.in?mibextid=ZbWKwL",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "",
+    "description": "",
+    "page_hash": "020c37beef379025",
+    "lead_score": 34,
+    "priority": "LOW",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.26,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "https://maniarrs.com/",
+    "shopify": true,
+    "live_checkout": "FlexyPe",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://static.flexype.in/scripts/flexype-v2.min.js"
+    ],
+    "historical_checkouts": [
+      "FlexyPe"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "supportsales@maniarrs.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/maniarrs/",
+      "facebook": "https://www.facebook.com/maniarrskhakhra/",
+      "twitter": "https://twitter.com/maniarrs_hsm",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Google Analytics"
+    ],
+    "title": "Maniarr's khakhra Wheat Chips | healthychip | Roast snacks| good snack\n– Maniarrs",
+    "description": "hop over 22+ healthy baked wheat chips & Gujarati khakhra flavors at Maniarrs. Slim Bites, Less-Oil Snacks – perfect for diet, gifting & daily munching!",
+    "page_hash": "f09c59533e2bbff9",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 7.47,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "drsheths.com",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "GoKwik",
+      "Razorpay"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6hlnjz9lmk",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6hlnjz9lmk?themeId=156703359207&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true",
+      "https://gkx.gokwik.co/ka/api/v1/mcd/op2",
+      "https://gkx.gokwik.co/kp/api/v1/integrations/meta-s2s"
+    ],
+    "emails": [
+      "support@drsheths.com",
+      "example@email.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/drsheths/",
+      "facebook": "https://www.facebook.com/drsheths",
+      "twitter": "",
+      "youtube": "https://www.youtube.com/@dr.sheths3011"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Microsoft Clarity"
+    ],
+    "title": "Buy 2 Get 1 FREE on Skincare Products | B2G1\n – Dr Sheth's",
+    "description": "Buy 2 Get 1 FREE! Use code B2G1. Buy any 3 Dr. Sheth's products & get the lowest-priced product one FREE. Toxin-free, vegan skincare made for Indian skin.",
+    "page_hash": "c9f240a4f9bfddf6",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 10.24,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "ramrajcotton.in",
+    "shopify": true,
+    "live_checkout": "GoKwik",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://pdp.gokwik.co/merchant-integration/build/merchant.integration.js?v4"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "GoKwik"
+    ],
+    "has_kwikpass": true,
+    "kwikpass_evidence": [
+      "https://pdp.gokwik.co/kwikpass/kwikpass-core-functions-min.js",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-merchant-v2.js",
+      "https://pdp.gokwik.co/kwikpass/kwikpass.html?version=20260605061448518",
+      "https://gkx.gokwik.co/kp/api/v1/health/merchant",
+      "https://pdp.gokwik.co/kwikpass/plugin/global.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/kwikpass.css",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/index.js?id=kp-sso_v1",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-sso.js",
+      "https://gkx.gokwik.co/kp/api/v1/configurations/19g6ilq0kivjn",
+      "https://gkx.gokwik.co/ka/api/v1/m/op12?platform=META&isActive=true",
+      "https://gkx.gokwik.co/kp/api/v1/fp/cnfgs?platform=web&os-type=Mac+OS&browser=Google+Chrome",
+      "https://pdp.gokwik.co/kwikpass/plugin/build/kp-main/chunks/app-b9f44b81.js",
+      "https://gkx.gokwik.co/kp/api/v1/components/merchants/19g6ilq0kivjn?themeId=155308032226&components=LOGIN_MODAL_ASSETS",
+      "https://gkx.gokwik.co/kp/api/v1/popup-config/list?platform=WEB&isEnabled=true"
+    ],
+    "emails": [
+      "support@starapps.studio",
+      "info@stagheaddesigns.com",
+      "online@ramrajcotton.net"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/ramrajcottonofficial/",
+      "facebook": "https://www.facebook.com/RamrajCottonofficial",
+      "twitter": "https://twitter.com/Ramrajofficial",
+      "youtube": "https://www.youtube.com/user/ramrajcottonmedia"
+    },
+    "tech_stack": [
+      "Klaviyo",
+      "Judge.me",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity",
+      "Gorgias"
+    ],
+    "title": "Online Clothing Store for Dhoti, Shirts, Sarees, More - Ramraj Cotton",
+    "description": "The biggest online clothing store for men’s wear, ladies wear, kid’s wear, boy’s and girl’s wear like, Readymade Dhoti, Shirts, Men's Inner Wear, T-Shirts, Women Kerala Sarees, Women Night Wear Set, N",
+    "page_hash": "b1048057a5f626af",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 6.48,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "thenamestrings.in",
+    "shopify": true,
+    "live_checkout": "Fastrr",
+    "live_confidence": 80,
+    "live_evidence": [
+      "https://sr-cdn.shiprocket.in/sr-promise/static/iframe.html"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Fastrr",
+      "Cashfree"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "hello@thenamestrings.in",
+      "info@stagheaddesigns.com"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://instagram.com/namestrings",
+      "facebook": "",
+      "twitter": "",
+      "youtube": ""
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Meta Pixel",
+      "Google Analytics",
+      "Hotjar",
+      "Microsoft Clarity"
+    ],
+    "title": "Name Strings | Make it memorable",
+    "description": "Name Strings is the personalised jewellery shop. Personalised : Necklaces, Rings, Bracelets & more with engravings to make your gift memorable.",
+    "page_hash": "c23828086c0a41f5",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 7.35,
+    "status": "Not Contacted",
+    "notes": ""
+  },
+  {
+    "domain": "reneecosmetics.in",
+    "shopify": true,
+    "live_checkout": "Fastrr",
+    "live_confidence": 95,
+    "live_evidence": [
+      "https://uptime2.fastrr.com/fe2"
+    ],
+    "historical_checkouts": [
+      "Shopflo",
+      "Fastrr",
+      "Razorpay"
+    ],
+    "has_kwikpass": false,
+    "kwikpass_evidence": [],
+    "emails": [
+      "hi@reneecosmetics.in"
+    ],
+    "socials": {
+      "linkedin": "",
+      "instagram": "https://www.instagram.com/reneeofficial/",
+      "facebook": "https://www.facebook.com/ReneeCosmetics",
+      "twitter": "https://twitter.com/renee_cosmetics",
+      "youtube": "https://www.youtube.com/@reneecosmeticsofficial"
+    },
+    "tech_stack": [
+      "Judge.me",
+      "Google Analytics",
+      "Recharge"
+    ],
+    "title": "Renee Cosmetics - Reinventing Beauty",
+    "description": "RENEE Cosmetics is an Indian makeup brand that's redefining beauty with its range of high quality, cruelty-free and FDA-approved innovative products.",
+    "page_hash": "470dfd0d346b71c6",
+    "lead_score": 100,
+    "priority": "CRITICAL",
+    "last_scan": "2026-06-07",
+    "scan_duration": 9.36,
+    "status": "Not Contacted",
+    "notes": ""
+  }
+]
