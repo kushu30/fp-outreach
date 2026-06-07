@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+logs/
+data/results.csv
+data/results.xlsx
+scan_*.log
