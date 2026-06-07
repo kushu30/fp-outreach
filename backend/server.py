@@ -31,14 +31,23 @@ def scan_domain(domain):
                 except:
                     pass
         
-        # If no JSON found, read from results.json
-        if os.path.exists("results.json"):
-            with open("results.json", "r") as f:
-                all_results = json.load(f)
-                for r in all_results:
-                    if r["domain"] == domain:
-                        return r
-        
+        # If no JSON found in stdout, look for results.json in known locations
+        candidates = [
+            os.path.join('..', 'data', 'results.json'),
+            os.path.join('..', 'results.json'),
+            os.path.join('.', 'results.json'),
+        ]
+        for cand in candidates:
+            if os.path.exists(cand):
+                try:
+                    with open(cand, 'r') as f:
+                        all_results = json.load(f)
+                        for r in all_results:
+                            if r.get('domain') == domain:
+                                return r
+                except Exception:
+                    continue
+
         return None
     except subprocess.TimeoutExpired:
         return None
@@ -119,8 +128,18 @@ def scan():
 
 @app.route('/results.json')
 def results():
-    if os.path.exists("results.json"):
-        return send_from_directory("../data", "results.json")
+    # Try several locations for results.json so frontend can load data
+    candidates = [
+        os.path.join('..', 'data', 'results.json'),
+        os.path.join('..', 'results.json'),
+        os.path.join('.', 'results.json'),
+    ]
+    for cand in candidates:
+        if os.path.exists(cand):
+            directory, filename = os.path.split(cand)
+            if directory == '':
+                directory = '.'
+            return send_from_directory(directory, filename)
     return jsonify([])
 
 @app.route('/health', methods=['GET'])

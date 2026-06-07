@@ -7,7 +7,7 @@ import os
 
 # Import the fast scraper module which defines run_scanner
 try:
-    import backend.fast_scraper as fs
+    import fast_scraper as fs
 except Exception as e:
     print(json.dumps({"error": f"failed to import fast_scraper: {e}"}))
     sys.exit(1)
