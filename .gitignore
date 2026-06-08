@@ -5,4 +5,4 @@ data/results.csv
 data/results.xlsx
 data/results.json
 scan_*.log
-data/results.json
+results.json

@@ -17,7 +17,7 @@ def scan_domain(domain):
     """Run scanner for single domain."""
     try:
         result = subprocess.run(
-            [sys.executable, "scanner_v2.py", "--domain", domain],
+            [sys.executable, "inputScanner.py", "--domain", domain],
             capture_output=True,
             text=True,
             timeout=90
@@ -109,14 +109,14 @@ def scan():
         # Attempt to capture scanner output for diagnostics
         try:
             proc = subprocess.run(
-                [sys.executable, "scanner_v2.py", "--domain", domain],
+                [sys.executable, "inputScanner.py", "--domain", domain],
                 capture_output=True,
                 text=True,
                 timeout=90
             )
             stdout_preview = (proc.stdout or "")[:4000]
             stderr_preview = (proc.stderr or "")[:4000]
-            with open('failed_scans.log', 'a') as lf:
+            with open(FAILED_LOG, 'a') as lf:
                 lf.write(f"=== Scan failure: {domain} | returncode={proc.returncode} ===\n")
                 lf.write(stdout_preview + "\n")
                 lf.write(stderr_preview + "\n\n")

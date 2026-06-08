@@ -7,14 +7,14 @@ import os
 
 # Import the fast scraper module which defines run_scanner
 try:
-    import fast_scraper as fs
+    import main_scraper as ms
 except Exception as e:
     print(json.dumps({"error": f"failed to import fast_scraper: {e}"}))
     sys.exit(1)
 
 async def scan_single(domain):
     try:
-        results = await fs.run_scanner([domain], max_concurrent=1)
+        results = await ms.run_scanner([domain], max_concurrent=1)
         if results and len(results) > 0:
             single = results[0]
             # Persist to results.json (merge/replace by domain)

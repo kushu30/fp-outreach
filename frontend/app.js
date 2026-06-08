@@ -1,357 +1,505 @@
-// app.js - Merchant Intelligence Platform v2
+// app.js — FlexyPe Merchant Intelligence Platform
 
 let leads = [];
 let selectedLead = null;
 let activeRow = null;
 let watchlist = new Set();
 
-const emailTemplates = {
-  intro: `Hello Team,
+// ─── Email Templates ──────────────────────────────────────────────────────────
 
-I am reaching out from FlexyPe Outreach. We help Shopify brands optimize their checkout experience for higher conversion rates.
+const EMAIL_TEMPLATES = {
+  intro: `Hi team,
 
-A few things our merchants appreciate:
-- Fast implementation (under 2 hours)
-- 20-30% increase in checkout completion
-- Dedicated support team
-- No code changes required
+Reaching out from FlexyPe — we help Shopify brands increase checkout conversion rates, typically 20–30%, with same-day setup and zero code changes required.
 
-Would you be open to a 15-minute call to discuss your current setup?
+Worth a 15-minute call to see if it's a fit for your store?
 
-Best regards,
+Best,
 [Your Name]
-FlexyPe Outreach`,
+FlexyPe`,
 
-  competitor: `Hello Team,
+  competitor: `Hi team,
 
-I noticed you are currently using [[PROVIDER]] for checkout.
+Noticed you're using [[PROVIDER]] for checkout. FlexyPe often outperforms [[PROVIDER]] on conversion rate, transaction fees, and load time — with a seamless migration path.
 
-FlexyPe Outreach offers a modern alternative that typically outperforms [[PROVIDER]] on:
-- Conversion rates (25% higher)
-- Transaction fees (lower)
-- Load time (2x faster)
-- Migration support (seamless)
+Happy to share a quick comparison or case studies if useful.
 
-Would you be open to a quick comparison demo?
-
-Best regards,
+Best,
 [Your Name]
-FlexyPe Outreach`,
+FlexyPe`,
 
-  migration: `Hello Team,
+  migration: `Hi team,
 
-If your team is evaluating checkout solutions for 2026, FlexyPe Outreach should be on your shortlist.
+If you're evaluating checkout solutions for 2026, FlexyPe is worth a look — zero-downtime migration, custom checkout flows, subscription support, and multi-currency.
 
-We specialize in:
-- Zero-downtime migration
-- Custom checkout flows
-- Subscription support
-- Multi-currency
+Can share case studies from similar merchants.
 
-Happy to share case studies from similar merchants.
-
-Best regards,
+Best,
 [Your Name]
-FlexyPe Outreach`,
+FlexyPe`,
 
-  partnership: `Hello Team,
+  partnership: `Hi team,
 
-FlexyPe Outreach is looking to partner with high-growth Shopify brands.
+FlexyPe is looking to partner with high-growth Shopify brands — revenue share, priority support, early access to features, and co-marketing.
 
-Benefits include:
-- Revenue share program
-- Priority support
-- Early access to features
-- Co-marketing opportunities
+Happy to jump on a quick call to explore.
 
-Let's schedule a quick call to explore.
-
-Best regards,
+Best,
 [Your Name]
-FlexyPe Outreach`,
+FlexyPe`,
 
-  feature: `Hello Team,
+  feature: `Hi team,
 
-FlexyPe Outreach has launched new features that could benefit your store:
-- One-click upsells
-- Post-purchase offers
-- Abandoned cart recovery
-- Analytics dashboard
+FlexyPe just launched one-click upsells, post-purchase offers, and an analytics dashboard. Merchants are seeing 35% AOV increase on average.
 
-Average AOV increase: 35%
+Interested in a personalised demo?
 
-Interested in a personalized demo?
-
-Best regards,
+Best,
 [Your Name]
-FlexyPe Outreach`,
+FlexyPe`,
 };
 
-function getDomainUrl(domain) {
-  if (!domain) return "";
-  if (domain.startsWith("http://") || domain.startsWith("https://")) {
-    return domain;
-  }
-  return `https://${domain}`;
+// ─── Utilities ────────────────────────────────────────────────────────────────
+
+function esc(str) {
+  if (!str) return "";
+  return String(str).replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
+        c
+      ],
+  );
 }
 
-function showToast(message, type = "info") {
-  const toast = document.getElementById("toast");
-  toast.textContent = message;
-  toast.className = `toast toast-${type}`;
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 3000);
+function domainUrl(domain) {
+  return /^https?:\/\//i.test(domain) ? domain : `https://${domain}`;
 }
 
-function showLoader(show = true, text = "Loading...") {
-  const overlay = document.getElementById("loaderOverlay");
-  const loaderText = document.getElementById("loaderText");
-  if (overlay) {
-    overlay.style.display = show ? "flex" : "none";
-  }
-  if (loaderText && text) {
-    loaderText.textContent = text;
-  }
+function toast(msg, type = "info") {
+  const el = document.getElementById("toast");
+  el.textContent = msg;
+  el.className = `toast show toast-${type}`;
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove("show"), 2800);
 }
 
-function updateLoaderProgress(percent, status) {
-  const progressBar = document.getElementById("loaderProgressBar");
-  const loaderStatus = document.getElementById("loaderStatus");
-  if (progressBar) progressBar.style.width = `${percent}%`;
-  if (loaderStatus && status) loaderStatus.textContent = status;
+function showLoader(show = true, text = "Loading…") {
+  const el = document.getElementById("loaderOverlay");
+  if (el) el.style.display = show ? "flex" : "none";
+  const lt = document.getElementById("loaderText");
+  if (lt && text) lt.textContent = text;
 }
+
+function setProgress(pct, status) {
+  const bar = document.getElementById("loaderProgressBar");
+  const sub = document.getElementById("loaderStatus");
+  if (bar) bar.style.width = `${pct}%`;
+  if (sub && status) sub.textContent = status;
+}
+
+function scoreClass(s) {
+  if (s >= 80) return "sc-crit";
+  if (s >= 65) return "sc-high";
+  if (s >= 50) return "sc-med";
+  return "sc-low";
+}
+
+function priorityClass(p) {
+  return `priority-${(p || "low").toLowerCase()}`;
+}
+
+function priChipClass(p) {
+  return `pri-${(p || "low").toLowerCase()}`;
+}
+
+// ─── Watchlist ─────────────────────────────────────────────────────────────
 
 function loadWatchlist() {
-  const saved = localStorage.getItem("flexype_watchlist");
-  if (saved) {
-    watchlist = new Set(JSON.parse(saved));
+  try {
+    watchlist = new Set(
+      JSON.parse(localStorage.getItem("fp_watchlist") || "[]"),
+    );
+  } catch {
+    watchlist = new Set();
   }
-  updateWatchlistUI();
 }
 
 function saveWatchlist() {
-  localStorage.setItem("flexype_watchlist", JSON.stringify([...watchlist]));
-  updateWatchlistUI();
+  localStorage.setItem("fp_watchlist", JSON.stringify([...watchlist]));
 }
 
 function toggleWatchlist(domain) {
   if (watchlist.has(domain)) {
     watchlist.delete(domain);
-    showToast(`Removed ${domain} from watchlist`);
+    toast(`Removed ${domain}`);
   } else {
     watchlist.add(domain);
-    showToast(`Added ${domain} to watchlist`);
+    toast(`Added ${domain} to watchlist`);
   }
   saveWatchlist();
   renderTable(leads);
+  if (selectedLead) renderWatchlist();
 }
 
-function updateWatchlistUI() {
-  const container = document.getElementById("watchlistItems");
-  if (!container) return;
+// ─── Filters / Stats ──────────────────────────────────────────────────────────
 
-  const watchlistLeads = leads.filter((lead) => watchlist.has(lead.domain));
-  if (watchlistLeads.length === 0) {
-    container.innerHTML =
-      '<div class="watchlist-empty">No merchants in watchlist</div>';
-    return;
+function populateFilters() {
+  const live = new Set(),
+    hist = new Set();
+  leads.forEach((l) => {
+    if (l.live_checkout) live.add(l.live_checkout);
+    (l.historical_checkouts || []).forEach((p) => hist.add(p));
+  });
+
+  const liveEl = document.getElementById("providerFilter");
+  liveEl.innerHTML = '<option value="">All providers</option>';
+  [...live].sort().forEach((p) => {
+    liveEl.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${esc(p)}">${esc(p)}</option>`,
+    );
+  });
+
+  const histEl = document.getElementById("historicalFilter");
+  histEl.innerHTML = '<option value="">Historical</option>';
+  [...hist].sort().forEach((p) => {
+    histEl.insertAdjacentHTML(
+      "beforeend",
+      `<option value="${esc(p)}">${esc(p)}</option>`,
+    );
+  });
+}
+
+function updateStats() {
+  document.getElementById("totalLeads").textContent = leads.length;
+  document.getElementById("liveCount").textContent = leads.filter(
+    (l) => l.live_checkout,
+  ).length;
+  document.getElementById("historicalOnlyCount").textContent = leads.filter(
+    (l) => l.historical_checkouts?.length && !l.live_checkout,
+  ).length;
+  document.getElementById("hotLeads").textContent = leads.filter(
+    (l) => l.lead_score >= 80,
+  ).length;
+  document.getElementById("kwikpassCount").textContent = leads.filter(
+    (l) => l.has_kwikpass,
+  ).length;
+  document.getElementById("emailCount").textContent = leads.filter(
+    (l) => l.emails?.length,
+  ).length;
+}
+
+// ─── Table ────────────────────────────────────────────────────────────────────
+
+function renderTable(data) {
+  const tbody = document.querySelector("#leadTable tbody");
+  const search = (
+    document.getElementById("searchInput")?.value || ""
+  ).toLowerCase();
+  const liveProv = document.getElementById("providerFilter")?.value || "";
+  const histProv = document.getElementById("historicalFilter")?.value || "";
+  const priority = document.getElementById("priorityFilter")?.value || "";
+  const sortBy = document.getElementById("sortFilter")?.value || "score";
+
+  const filtered = data.filter(
+    (l) =>
+      l.domain.toLowerCase().includes(search) &&
+      (!liveProv || l.live_checkout === liveProv) &&
+      (!histProv || (l.historical_checkouts || []).includes(histProv)) &&
+      (!priority || l.priority === priority),
+  );
+
+  if (sortBy === "domain")
+    filtered.sort((a, b) => a.domain.localeCompare(b.domain));
+  else filtered.sort((a, b) => b.lead_score - a.lead_score);
+
+  tbody.innerHTML = "";
+  filtered.forEach((lead) => {
+    const isSel = selectedLead?.domain === lead.domain;
+    const isWL = watchlist.has(lead.domain);
+    const tr = document.createElement("tr");
+    if (isSel) {
+      tr.classList.add("active");
+      activeRow = tr;
+    }
+    if (isWL) tr.classList.add("watchlisted");
+    tr.setAttribute("data-domain", lead.domain);
+
+    tr.innerHTML = `
+      <td title="${esc(lead.domain)}">${esc(lead.domain)}${isWL ? ' <span class="watchlist-star">★</span>' : ""}</td>
+      <td><span class="score-chip ${scoreClass(lead.lead_score)}">${lead.lead_score}</span></td>
+      <td>${lead.live_checkout ? `<span class="live-chip">${esc(lead.live_checkout)}</span>` : '<span class="muted-chip">—</span>'}</td>
+      <td>${lead.whatsapp_number ? "✅" : "—"}</td>
+      <td>${lead.phone_numbers?.length ? "✅" : "—"}</td>
+      <td title="${esc(lead.myshopify_domain || "")}">${lead.myshopify_domain ? `<span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--t2)">${esc(lead.myshopify_domain)}</span>` : "—"}</td>
+      <td><span class="pri-chip ${priChipClass(lead.priority)}">${esc(lead.priority)}</span></td>
+    `;
+
+    tr.addEventListener("click", () => {
+      document
+        .querySelectorAll("#leadTable tbody tr")
+        .forEach((r) => r.classList.remove("active"));
+      tr.classList.add("active");
+      activeRow = tr;
+      showLead(lead);
+    });
+
+    tbody.appendChild(tr);
+  });
+
+  document.getElementById("leadCount").textContent =
+    `${filtered.length} / ${leads.length}`;
+}
+
+// ─── Detail Panel ─────────────────────────────────────────────────────────────
+
+function showLead(lead) {
+  selectedLead = lead;
+
+  document.getElementById("domainTitle").textContent = lead.domain;
+
+  const meta = document.getElementById("merchantMeta");
+  meta.innerHTML = `
+    ${lead.shopify ? '<span class="shopify-tag">Shopify</span>' : ""}
+    <span class="meta-date">Scanned ${esc(lead.last_scan || "—")}</span>
+  `;
+
+  const pb = document.getElementById("priorityBadge");
+  pb.className = `priority-badge ${priorityClass(lead.priority)}`;
+  pb.textContent = lead.priority || "";
+
+  // watchlist button label
+  document.getElementById("watchlistBtn").innerHTML = `
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    ${watchlist.has(lead.domain) ? "Unwatch" : "Watch"}
+  `;
+
+  // ── Live Checkout ──
+  const liveCard = document.getElementById("liveCheckoutCard");
+  if (lead.live_checkout) {
+    const evidence = (lead.live_evidence || [])
+      .slice(0, 3)
+      .map((u) => `<span class="evidence-url">${esc(u.split("?")[0])}</span>`)
+      .join("");
+    liveCard.className = "checkout-card";
+    liveCard.innerHTML = `
+      <div class="checkout-header">
+        <span class="checkout-name">${esc(lead.live_checkout)}</span>
+        <span class="checkout-conf">${lead.live_confidence || 0}% conf</span>
+      </div>
+      ${evidence ? `<div class="checkout-evidence"><div class="evidence-lbl">Network evidence</div>${evidence}</div>` : ""}
+    `;
+  } else {
+    liveCard.className = "checkout-card checkout-empty";
+    liveCard.textContent = "No live checkout detected";
   }
 
-  container.innerHTML = watchlistLeads
+  // ── Historical ──
+  const histEl = document.getElementById("historicalBadges");
+  const histOnly = (lead.historical_checkouts || []).filter(
+    (p) => p !== lead.live_checkout,
+  );
+  histEl.innerHTML =
+    histOnly.length ?
+      histOnly
+        .map((p) => `<span class="badge badge-hist">${esc(p)}</span>`)
+        .join("")
+    : '<span class="badge-empty">None detected</span>';
+
+  // ── Kwikpass ──
+  document.getElementById("kwikpassStatus").innerHTML =
+    lead.has_kwikpass ?
+      '<span class="kp-yes">Kwikpass detected — Login/OTP enabled</span>'
+    : '<span class="kp-no">Not detected</span>';
+
+  // ── Contact ──
+  const contactEl = document.getElementById("contactInfo");
+  let contactHtml = "";
+
+  if (lead.emails?.length) {
+    const emailItems = lead.emails
+      .map(
+        (e) =>
+          `<span class="contact-item"><a href="mailto:${esc(e)}" class="contact-link">${esc(e)}</a><button class="copy-mini" data-copy="${esc(e)}">copy</button></span>`,
+      )
+      .join("");
+    contactHtml += `<div class="contact-row"><span class="contact-icon">✉</span><div class="contact-vals">${emailItems}</div></div>`;
+  }
+
+  if (lead.phone_numbers?.length) {
+    const phoneItems = lead.phone_numbers
+      .map(
+        (p) =>
+          `<span class="contact-item">${esc(p)}<button class="copy-mini" data-copy="${esc(p)}">copy</button></span>`,
+      )
+      .join("");
+    contactHtml += `<div class="contact-row"><span class="contact-icon">📞</span><div class="contact-vals">${phoneItems}</div></div>`;
+  }
+
+  if (lead.whatsapp_number || lead.whatsapp_link) {
+    const num = lead.whatsapp_number || "";
+    const link = lead.whatsapp_link || "";
+    contactHtml += `<div class="contact-row"><span class="contact-icon">💬</span><div class="contact-vals">
+      ${link ? `<a href="${esc(link)}" target="_blank" rel="noopener noreferrer" class="contact-link">WhatsApp</a>` : ""}
+      ${num ? `<span class="contact-item">${esc(num)}<button class="copy-mini" data-copy="${esc(num)}">copy</button></span>` : ""}
+    </div></div>`;
+  }
+
+  if (lead.myshopify_domain) {
+    contactHtml += `<div class="contact-row"><span class="contact-icon">🏷</span><div class="contact-vals">
+      <span class="contact-item" style="font-family:'DM Mono',monospace;font-size:11px">${esc(lead.myshopify_domain)}<button class="copy-mini" data-copy="${esc(lead.myshopify_domain)}">copy</button></span>
+    </div></div>`;
+  }
+
+  const socials = lead.socials || {};
+  const socialLinks = [
+    ["linkedin", "LinkedIn"],
+    ["instagram", "Instagram"],
+    ["facebook", "Facebook"],
+    ["twitter", "Twitter"],
+    ["youtube", "YouTube"],
+  ]
+    .filter(([k]) => socials[k])
     .map(
-      (lead) => `
-    <div class="watchlist-item" data-domain="${lead.domain}">
-      <div class="watchlist-info">
-        <div class="watchlist-domain">${lead.domain}</div>
-        <div class="watchlist-meta">
-          <span class="watchlist-score">Score: ${lead.lead_score}</span>
-          ${lead.live_checkout ? `<span class="watchlist-live">${lead.live_checkout}</span>` : ""}
-        </div>
+      ([k, label]) =>
+        `<a href="${esc(socials[k])}" target="_blank" rel="noopener noreferrer" class="social-link">${label}</a>`,
+    )
+    .join("");
+
+  if (socialLinks) {
+    contactHtml += `<div class="contact-row"><span class="contact-icon">🔗</span><div class="contact-vals">${socialLinks}</div></div>`;
+  }
+
+  contactEl.innerHTML =
+    contactHtml ||
+    '<span class="empty-msg">No contact information found</span>';
+
+  // wire copy-mini buttons
+  contactEl.querySelectorAll(".copy-mini").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(btn.dataset.copy || "");
+      toast("Copied");
+    });
+  });
+
+  // ── Tech Stack ──
+  const techEl = document.getElementById("techStackBadges");
+  techEl.innerHTML =
+    lead.tech_stack?.length ?
+      lead.tech_stack
+        .map((t) => `<span class="badge badge-tech">${esc(t)}</span>`)
+        .join("")
+    : '<span class="badge-empty">None detected</span>';
+
+  // ── Merchant Info ──
+  document.getElementById("merchantInfo").innerHTML = `
+    <div class="info-row"><span class="info-key">Title</span><span class="info-val">${esc(lead.title || "—")}</span></div>
+    <div class="info-row"><span class="info-key">Description</span><span class="info-val">${esc(lead.description || "—")}</span></div>
+    <div class="info-row"><span class="info-key">Page Hash</span><span class="info-val info-mono">${esc(lead.page_hash || "—")}</span></div>
+  `;
+
+  // ── Evidence ──
+  const evEl = document.getElementById("providerEvidence");
+  evEl.innerHTML =
+    lead.live_evidence?.length ?
+      lead.live_evidence
+        .map((u) => `<div class="evidence-item">${esc(u)}</div>`)
+        .join("")
+    : '<span class="empty-msg">No evidence available</span>';
+
+  // ── Notes / Status ──
+  const notesEl = document.getElementById("leadNotes");
+  if (notesEl)
+    notesEl.value =
+      localStorage.getItem(`fp_notes_${lead.domain}`) || lead.notes || "";
+  const statusEl = document.getElementById("leadStatus");
+  if (statusEl)
+    statusEl.value =
+      localStorage.getItem(`fp_status_${lead.domain}`) ||
+      lead.status ||
+      "Not Contacted";
+
+  // ── Email ──
+  generateEmail(lead);
+
+  // ── Watchlist ──
+  renderWatchlist();
+}
+
+// ─── Watchlist Render ─────────────────────────────────────────────────────────
+
+function renderWatchlist() {
+  const el = document.getElementById("watchlistItems");
+  if (!el) return;
+  const items = leads.filter((l) => watchlist.has(l.domain));
+  if (!items.length) {
+    el.innerHTML =
+      '<span class="watchlist-empty">No merchants watchlisted</span>';
+    return;
+  }
+  el.innerHTML = items
+    .map(
+      (l) => `
+    <div class="watchlist-item" data-domain="${esc(l.domain)}">
+      <div>
+        <div class="wl-domain">${esc(l.domain)}</div>
+        <div class="wl-meta">Score: ${l.lead_score} ${l.live_checkout ? `· <span class="wl-live">${esc(l.live_checkout)}</span>` : ""}</div>
       </div>
-      <button class="watchlist-remove" data-domain="${lead.domain}" aria-label="Remove from watchlist">×</button>
+      <button class="wl-remove" data-domain="${esc(l.domain)}" title="Remove">×</button>
     </div>
   `,
     )
     .join("");
 
-  document.querySelectorAll(".watchlist-item").forEach((item) => {
+  el.querySelectorAll(".watchlist-item").forEach((item) => {
     item.addEventListener("click", (e) => {
-      if (!e.target.classList.contains("watchlist-remove")) {
-        const domain = item.dataset.domain;
-        const lead = leads.find((l) => l.domain === domain);
-        if (lead) showLead(lead);
-        const row = document.querySelector(
-          `#leadTable tbody tr[data-domain="${domain}"]`,
-        );
-        if (row) {
-          document
-            .querySelectorAll("#leadTable tbody tr")
-            .forEach((r) => r.classList.remove("active"));
-          row.classList.add("active");
-          activeRow = row;
-        }
+      if (e.target.classList.contains("wl-remove")) return;
+      const lead = leads.find((l) => l.domain === item.dataset.domain);
+      if (lead) {
+        showLead(lead);
+        highlightRow(lead.domain);
       }
     });
   });
-
-  document.querySelectorAll(".watchlist-remove").forEach((btn) => {
+  el.querySelectorAll(".wl-remove").forEach((btn) => {
     btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      const domain = btn.dataset.domain;
-      watchlist.delete(domain);
+      watchlist.delete(btn.dataset.domain);
       saveWatchlist();
       renderTable(leads);
-      if (selectedLead && selectedLead.domain === domain) {
-        const newSelected = leads.find((l) => l.domain !== domain);
-        if (newSelected) showLead(newSelected);
-      }
+      renderWatchlist();
     });
   });
 }
 
-async function scanSingleDomain() {
-  const input = document.getElementById("singleScanInput");
-  const btn = document.getElementById("singleScanBtn");
-  const statusEl = document.getElementById("scanStatus");
-  const domain = input.value.trim().toLowerCase();
-
-  if (!domain) {
-    showToast("Please enter a domain", "error");
-    return;
-  }
-
-  // Validate domain
-  const domainRegex =
-    /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
-  const cleanDomain = domain.replace(/^https?:\/\//, "");
-  if (!domainRegex.test(cleanDomain)) {
-    showToast("Invalid domain format", "error");
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = "Scanning...";
-  statusEl.textContent = "Running scanner...";
-  showToast(`Scanning ${cleanDomain}...`, "info");
-
-  try {
-    const response = await fetch("http://localhost:8080/scan-domain", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ domain: cleanDomain }),
-    });
-
-    if (!response.ok) throw new Error("Server error");
-
-    const result = await response.json();
-
-    if (result && !result.error) {
-      const existingIndex = leads.findIndex((l) => l.domain === result.domain);
-      if (existingIndex === -1) {
-        leads.unshift(result);
-        showToast(`Added ${result.domain}`, "success");
-      } else {
-        leads[existingIndex] = result;
-        showToast(`Updated ${result.domain}`, "success");
-      }
-
-      populateFilters();
-      updateStats();
-      renderTable(leads);
-      showLead(result);
-
-      statusEl.textContent = "Complete";
-      input.value = "";
-
-      setTimeout(() => {
-        const rows = document.querySelectorAll("#leadTable tbody tr");
-        rows.forEach((row) => {
-          if (row.textContent.includes(result.domain)) {
-            row.scrollIntoView({ behavior: "smooth", block: "center" });
-            row.click();
-          }
-        });
-      }, 100);
-    } else {
-      throw new Error("No data received");
-    }
-  } catch (error) {
-    console.error("Scan failed:", error);
-    showToast(
-      `Scan failed. Make sure server is running: python server.py`,
-      "error",
-    );
-    statusEl.textContent = "Failed";
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Scan Domain";
-    setTimeout(() => {
-      if (statusEl.textContent !== "Complete") {
-        statusEl.textContent = "";
-      }
-    }, 3000);
+function highlightRow(domain) {
+  document
+    .querySelectorAll("#leadTable tbody tr")
+    .forEach((r) => r.classList.remove("active"));
+  const row = document.querySelector(
+    `#leadTable tbody tr[data-domain="${domain}"]`,
+  );
+  if (row) {
+    row.classList.add("active");
+    activeRow = row;
+    row.scrollIntoView({ block: "nearest" });
   }
 }
 
-async function checkApiServer() {
-  try {
-    const response = await fetch("http://localhost:8080/health", {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (response.ok) {
-      document.getElementById("scanStatus").textContent = "Ready";
-      return true;
-    }
-  } catch (e) {
-    document.getElementById("scanStatus").textContent = "Server offline";
+// ─── Email ────────────────────────────────────────────────────────────────────
+
+function generateEmail(lead) {
+  const type = document.getElementById("templateType")?.value || "intro";
+  let tpl = EMAIL_TEMPLATES[type] || EMAIL_TEMPLATES.intro;
+  if (type === "competitor" && lead?.live_checkout) {
+    tpl = tpl.replaceAll("[[PROVIDER]]", lead.live_checkout);
   }
-  return false;
+  const el = document.getElementById("emailPreview");
+  if (el) el.value = tpl;
 }
 
-async function loadData() {
-  showLoader(true, "Loading merchant data...");
-  updateLoaderProgress(10, "Reading results.json");
-
-  try {
-    await new Promise((resolve) => setTimeout(resolve, 300));
-    updateLoaderProgress(30, "Fetching merchant data...");
-
-    const response = await fetch("results.json");
-    if (!response.ok) throw new Error("results.json not found");
-
-    updateLoaderProgress(60, "Processing merchant records...");
-    const data = await response.json();
-
-    if (data && data.length > 0) {
-      leads = data;
-      updateLoaderProgress(90, "Building dashboard...");
-      await new Promise((resolve) => setTimeout(resolve, 200));
-      showToast(`Loaded ${leads.length} merchants`);
-    } else {
-      throw new Error("Empty data");
-    }
-  } catch (err) {
-    console.warn("Using demo data:", err.message);
-    updateLoaderProgress(70, "Using demonstration data...");
-    leads = generateDemoData();
-    await new Promise((resolve) => setTimeout(resolve, 200));
-    showToast(`Demo mode: ${leads.length} merchants`);
-  }
-
-  updateLoaderProgress(100, "Ready");
-  await new Promise((resolve) => setTimeout(resolve, 300));
-  showLoader(false);
-
-  loadWatchlist();
-  populateFilters();
-  updateStats();
-  renderTable(leads);
-
-  if (leads.length) {
-    showLead(leads[0]);
-  }
-}
+// ─── Data Loading ─────────────────────────────────────────────────────────────
 
 function generateDemoData() {
   return [
@@ -360,713 +508,401 @@ function generateDemoData() {
       shopify: true,
       live_checkout: "GoKwik",
       live_confidence: 95,
+      live_evidence: ["hits.gokwik.co/api/v1/events"],
       historical_checkouts: ["Shopflo", "Razorpay"],
       has_kwikpass: true,
       emails: ["hello@velvetaura.com", "founder@velvetaura.com"],
+      phone_numbers: ["+91 98765 43210"],
+      whatsapp_link: "https://wa.me/919876543210",
+      whatsapp_number: "+919876543210",
+      myshopify_domain: "velvetaura.myshopify.com",
       socials: {
         linkedin: "https://linkedin.com/company/velvetaura",
         instagram: "https://instagram.com/velvetaura",
-        facebook: "https://facebook.com/velvetaura",
+        facebook: "",
         twitter: "",
         youtube: "",
       },
       tech_stack: ["Klaviyo", "Meta Pixel", "Google Analytics"],
-      title: "Velvet Aura - Premium Beauty Products",
+      title: "Velvet Aura — Premium Beauty",
       description: "Luxury skincare and cosmetics brand",
       lead_score: 94,
       priority: "CRITICAL",
       last_scan: "2026-06-07",
       status: "Not Contacted",
       notes: "",
+      page_hash: "abc123de",
     },
     {
       domain: "stellamart.com",
       shopify: true,
       live_checkout: "GoKwik",
       live_confidence: 98,
+      live_evidence: ["hits.gokwik.co/api/v1/events"],
       historical_checkouts: ["Shopflo"],
       has_kwikpass: true,
       emails: ["hello@stellamart.com", "care@stellamart.com"],
+      phone_numbers: [],
+      whatsapp_link: "",
+      whatsapp_number: "",
+      myshopify_domain: "stellamart.myshopify.com",
       socials: {
-        linkedin: "https://linkedin.com/company/stellamart",
+        linkedin: "",
         instagram: "https://instagram.com/stellamart",
-        facebook: "https://facebook.com/stellamart",
+        facebook: "",
         twitter: "",
         youtube: "",
       },
       tech_stack: ["Klaviyo", "Intercom", "Judge.me"],
-      title: "Stella Mart - Women's Fashion",
-      description: "Trendy clothing and accessories for modern women",
+      title: "Stella Mart — Women's Fashion",
+      description: "Trendy clothing for modern women",
       lead_score: 89,
       priority: "HIGH",
       last_scan: "2026-06-07",
       status: "Contacted",
-      notes: "Spoke with marketing team. Interested in pricing.",
+      notes: "Interested in pricing.",
+      page_hash: "def456gh",
     },
     {
       domain: "modernduke.com",
       shopify: true,
       live_checkout: null,
       live_confidence: 0,
-      historical_checkouts: ["Fastrr", "Razorpay", "ecom360"],
+      live_evidence: [],
+      historical_checkouts: ["Fastrr", "Razorpay"],
       has_kwikpass: false,
-      emails: ["care@modernduke.com", "support@modernduke.com"],
+      emails: ["care@modernduke.com"],
+      phone_numbers: ["+91 87654 32109"],
+      whatsapp_link: "https://wa.me/918765432109",
+      whatsapp_number: "+918765432109",
+      myshopify_domain: "",
       socials: {
         linkedin: "",
         instagram: "https://instagram.com/modernduke",
-        facebook: "https://facebook.com/modernduke",
+        facebook: "",
         twitter: "",
         youtube: "",
       },
-      tech_stack: ["Judge.me", "Hotjar", "Microsoft Clarity"],
-      title: "Modern Duke - Men's Fashion",
-      description: "Premium apparel and accessories for men",
+      tech_stack: ["Judge.me", "Hotjar"],
+      title: "Modern Duke — Men's Fashion",
+      description: "Premium apparel for men",
       lead_score: 68,
       priority: "MEDIUM",
       last_scan: "2026-06-07",
       status: "Not Contacted",
       notes: "",
+      page_hash: "ghi789jk",
     },
   ];
 }
 
-function populateFilters() {
-  const liveProviders = new Set();
-  const historicalProviders = new Set();
+async function loadData() {
+  showLoader(true, "Loading merchant data…");
+  setProgress(10, "Fetching results.json");
+  try {
+    await delay(200);
+    setProgress(35, "Parsing records…");
+    const res = await fetch("results.json");
+    if (!res.ok) throw new Error("Not found");
+    const data = await res.json();
+    if (!data?.length) throw new Error("Empty");
+    leads = data;
+    setProgress(90, "Building dashboard…");
+    await delay(150);
+    toast(`Loaded ${leads.length} merchants`);
+  } catch {
+    setProgress(70, "Using demo data…");
+    leads = generateDemoData();
+    await delay(150);
+    toast(`Demo mode — ${leads.length} merchants`);
+  }
+  setProgress(100, "Ready");
+  await delay(250);
+  showLoader(false);
 
-  leads.forEach((lead) => {
-    if (lead.live_checkout) liveProviders.add(lead.live_checkout);
-    if (lead.historical_checkouts) {
-      lead.historical_checkouts.forEach((p) => historicalProviders.add(p));
-    }
-  });
-
-  const liveFilter = document.getElementById("providerFilter");
-  liveFilter.innerHTML = '<option value="">All Live Providers</option>';
-  [...liveProviders].sort().forEach((p) => {
-    const option = document.createElement("option");
-    option.value = p;
-    option.textContent = p;
-    liveFilter.appendChild(option);
-  });
-
-  const historicalFilter = document.getElementById("historicalFilter");
-  historicalFilter.innerHTML = '<option value="">Historical Checkouts</option>';
-  [...historicalProviders].sort().forEach((p) => {
-    const option = document.createElement("option");
-    option.value = p;
-    option.textContent = p;
-    historicalFilter.appendChild(option);
-  });
+  loadWatchlist();
+  populateFilters();
+  updateStats();
+  renderTable(leads);
+  if (leads.length) showLead(leads[0]);
 }
 
-function updateStats() {
-  document.getElementById("totalLeads").innerText = leads.length;
-  document.getElementById("liveCount").innerText = leads.filter(
-    (l) => l.live_checkout,
-  ).length;
-  document.getElementById("historicalOnlyCount").innerText = leads.filter(
-    (l) =>
-      l.historical_checkouts &&
-      l.historical_checkouts.length > 0 &&
-      !l.live_checkout,
-  ).length;
-  document.getElementById("hotLeads").innerText = leads.filter(
-    (l) => l.lead_score >= 80,
-  ).length;
-  document.getElementById("kwikpassCount").innerText = leads.filter(
-    (l) => l.has_kwikpass,
-  ).length;
-  document.getElementById("emailCount").innerText = leads.filter(
-    (l) => l.emails && l.emails.length > 0,
-  ).length;
+function delay(ms) {
+  return new Promise((r) => setTimeout(r, ms));
 }
 
-function updateLeadCount() {
-  const visibleRows = document.querySelectorAll(
-    "#leadTable tbody tr:not(.hidden)",
-  ).length;
-  document.getElementById("leadCount").innerText =
-    `${visibleRows} / ${leads.length}`;
-}
+// ─── Single Domain Scan ───────────────────────────────────────────────────────
 
-function getScoreClass(score) {
-  if (score >= 80) return "score-critical";
-  if (score >= 65) return "score-high";
-  if (score >= 50) return "score-medium";
-  return "score-low";
-}
+async function scanSingleDomain(domainOverride) {
+  const input = document.getElementById("singleScanInput");
+  const btn = document.getElementById("singleScanBtn");
+  const status = document.getElementById("scanStatus");
 
-function renderTable(data) {
-  const tbody = document.querySelector("#leadTable tbody");
-  tbody.innerHTML = "";
+  const raw =
+    typeof domainOverride === "string" ? domainOverride : input?.value || "";
+  const domain = raw
+    .replace(/^https?:\/\//i, "")
+    .replace(/\/$/, "")
+    .toLowerCase()
+    .trim();
 
-  const search = document.getElementById("searchInput").value.toLowerCase();
-  const liveProvider = document.getElementById("providerFilter").value;
-  const historicalProvider = document.getElementById("historicalFilter").value;
-  const priority = document.getElementById("priorityFilter").value;
-  const sortBy = document.getElementById("sortFilter")?.value || "score";
-
-  const filtered = data.filter((lead) => {
-    const matchesSearch = lead.domain.toLowerCase().includes(search);
-    const matchesLive = !liveProvider || lead.live_checkout === liveProvider;
-    const matchesHistorical =
-      !historicalProvider ||
-      (lead.historical_checkouts &&
-        lead.historical_checkouts.includes(historicalProvider));
-    const matchesPriority = !priority || lead.priority === priority;
-    return matchesSearch && matchesLive && matchesHistorical && matchesPriority;
-  });
-
-  if (sortBy === "domain") {
-    filtered.sort((a, b) => a.domain.localeCompare(b.domain));
-  } else {
-    filtered.sort((a, b) => b.lead_score - a.lead_score);
+  if (!domain) {
+    toast("Enter a domain", "error");
+    return;
   }
-
-  filtered.forEach((lead) => {
-    const row = document.createElement("tr");
-    row.setAttribute("data-domain", lead.domain);
-    if (selectedLead && selectedLead.domain === lead.domain) {
-      row.classList.add("active");
-      activeRow = row;
-    }
-    if (watchlist.has(lead.domain)) {
-      row.classList.add("watchlisted");
-    }
-
-    const historicalCount =
-      lead.historical_checkouts ? lead.historical_checkouts.length : 0;
-
-    row.innerHTML = `
-      <td><strong>${escapeHtml(lead.domain)}</strong>${watchlist.has(lead.domain) ? ' <span class="watchlist-star">⭐</span>' : ""}</td>
-      <td>${lead.live_checkout ? `<span class="badge badge-live">${escapeHtml(lead.live_checkout)}</span>` : '<span class="badge badge-muted">—</span>'}</td>
-      <td>${historicalCount > 0 ? `<span class="badge badge-historical">${historicalCount}</span>` : "—"}</td>
-      <td><span class="score-badge ${getScoreClass(lead.lead_score)}">${lead.lead_score}</span></td>
-      <td><span class="priority-badge priority-${lead.priority.toLowerCase()}">${lead.priority}</span></td>
-    `;
-
-    row.addEventListener("click", () => {
-      if (activeRow) activeRow.classList.remove("active");
-      row.classList.add("active");
-      activeRow = row;
-      showLead(lead);
-    });
-
-    tbody.appendChild(row);
-  });
-
-  updateLeadCount();
-  updateWatchlistUI();
-}
-
-function escapeHtml(str) {
-  if (!str) return "";
-  return str.replace(/[&<>]/g, function (m) {
-    if (m === "&") return "&amp;";
-    if (m === "<") return "&lt;";
-    if (m === ">") return "&gt;";
-    return m;
-  });
-}
-
-function showLead(lead) {
-  selectedLead = lead;
-
-  document.getElementById("domainTitle").innerText = lead.domain;
-  document.getElementById("merchantMeta").innerHTML = `
-    ${lead.shopify ? '<span class="shopify-badge">Shopify</span>' : '<span class="custom-badge">Custom</span>'}
-    <span class="meta-text">Last scan: ${lead.last_scan || "Unknown"}</span>
-  `;
-
-  const priority = lead.priority;
-  const badge = document.getElementById("priorityBadge");
-  badge.className = `priority-badge priority-${priority.toLowerCase()}`;
-  badge.innerText = priority;
-
-  const isWatchlisted = watchlist.has(lead.domain);
-  document.getElementById("watchlistBtn").innerHTML =
-    isWatchlisted ? "Remove from Watchlist" : "Add to Watchlist";
-
-  // Live Checkout Card
-  const liveCard = document.getElementById("liveCheckoutCard");
-  if (lead.live_checkout) {
-    liveCard.innerHTML = `
-      <div class="live-checkout-header">
-        <span class="live-checkout-name">${escapeHtml(lead.live_checkout)}</span>
-        <span class="live-confidence-badge">${lead.live_confidence}% confidence</span>
-      </div>
-      <div class="live-checkout-evidence">
-        <div class="evidence-label">Network evidence:</div>
-        <div class="evidence-list">
-          ${
-            lead.live_evidence && lead.live_evidence.length ?
-              lead.live_evidence
-                .slice(0, 3)
-                .map(
-                  (e) =>
-                    `<code class="evidence-code">${escapeHtml(e.split("?")[0])}</code>`,
-                )
-                .join("")
-            : '<code class="evidence-code">Network request detected</code>'
-          }
-        </div>
-      </div>
-    `;
-  } else {
-    liveCard.innerHTML =
-      '<div class="live-checkout-empty">No live checkout detected</div>';
-  }
-
-  // Historical Checkouts
-  const historicalContainer = document.getElementById("historicalBadges");
-  if (lead.historical_checkouts && lead.historical_checkouts.length > 0) {
-    historicalContainer.innerHTML = lead.historical_checkouts
-      .map(
-        (p) => `<span class="badge badge-historical">${escapeHtml(p)}</span>`,
-      )
-      .join("");
-  } else {
-    historicalContainer.innerHTML =
-      '<div class="empty-message">No historical checkouts found</div>';
-  }
-
-  // Kwikpass
-  const kwikpassDiv = document.getElementById("kwikpassStatus");
-  if (lead.has_kwikpass) {
-    kwikpassDiv.innerHTML =
-      '<span class="kwikpass-badge kwikpass-yes">Kwikpass detected (Login/OTP enabled)</span>';
-  } else {
-    kwikpassDiv.innerHTML =
-      '<span class="kwikpass-badge kwikpass-no">Not detected</span>';
-  }
-
-  // Contact Information
-  const contactDiv = document.getElementById("contactInfo");
-  let contactHtml = "";
-  if (lead.emails && lead.emails.length) {
-    contactHtml += `<div class="contact-row">
-      <span class="contact-icon">📧</span>
-      <div class="contact-values">${lead.emails.map((e) => `<a href="mailto:${escapeHtml(e)}" class="contact-link">${escapeHtml(e)}</a>`).join(", ")}</div>
-    </div>`;
-  }
-  if (lead.socials) {
-    const socialLinks = [];
-    if (lead.socials.linkedin)
-      socialLinks.push(
-        `<a href="${escapeHtml(lead.socials.linkedin)}" target="_blank" class="social-link" rel="noopener noreferrer">LinkedIn</a>`,
-      );
-    if (lead.socials.instagram)
-      socialLinks.push(
-        `<a href="${escapeHtml(lead.socials.instagram)}" target="_blank" class="social-link" rel="noopener noreferrer">Instagram</a>`,
-      );
-    if (lead.socials.facebook)
-      socialLinks.push(
-        `<a href="${escapeHtml(lead.socials.facebook)}" target="_blank" class="social-link" rel="noopener noreferrer">Facebook</a>`,
-      );
-    if (lead.socials.twitter)
-      socialLinks.push(
-        `<a href="${escapeHtml(lead.socials.twitter)}" target="_blank" class="social-link" rel="noopener noreferrer">Twitter</a>`,
-      );
-    if (socialLinks.length) {
-      contactHtml += `<div class="contact-row">
-        <span class="contact-icon">🌐</span>
-        <div class="contact-values">${socialLinks.join(" · ")}</div>
-      </div>`;
-    }
-  }
-  if (!contactHtml)
-    contactHtml =
-      '<div class="empty-message">No contact information available</div>';
-  contactDiv.innerHTML = contactHtml;
-
-  // Technology Stack
-  const techDiv = document.getElementById("techStackBadges");
-  if (lead.tech_stack && lead.tech_stack.length) {
-    techDiv.innerHTML = lead.tech_stack
-      .map((t) => `<span class="badge badge-tech">${escapeHtml(t)}</span>`)
-      .join("");
-  } else {
-    techDiv.innerHTML =
-      '<div class="empty-message">No technology detected</div>';
-  }
-
-  // Merchant Info
-  const infoDiv = document.getElementById("merchantInfo");
-  infoDiv.innerHTML = `
-    <div class="info-row">
-      <span class="info-label">Title</span>
-      <span class="info-value">${escapeHtml(lead.title || "N/A")}</span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">Description</span>
-      <span class="info-value">${escapeHtml(lead.description || "N/A")}</span>
-    </div>
-    <div class="info-row">
-      <span class="info-label">Page Hash</span>
-      <span class="info-value mono">${escapeHtml(lead.page_hash || "N/A")}</span>
-    </div>
-  `;
-
-  // Provider Evidence
-  const evidenceDiv = document.getElementById("providerEvidence");
-  if (lead.live_evidence && lead.live_evidence.length) {
-    evidenceDiv.innerHTML = lead.live_evidence
-      .map(
-        (url) =>
-          `<div class="evidence-item"><code class="evidence-code">${escapeHtml(url)}</code></div>`,
-      )
-      .join("");
-  } else {
-    evidenceDiv.innerHTML =
-      '<div class="empty-message">No evidence available</div>';
-  }
-
-  // Notes and Status
-  const notesEl = document.getElementById("leadNotes");
-  const statusEl = document.getElementById("leadStatus");
-  if (notesEl)
-    notesEl.value =
-      localStorage.getItem(`flexype_notes_${lead.domain}`) || lead.notes || "";
-  if (statusEl)
-    statusEl.value =
-      localStorage.getItem(`flexype_status_${lead.domain}`) ||
-      lead.status ||
-      "Not Contacted";
-
-  // Generate email preview
-  generateEmailPreview(lead);
-}
-
-function generateEmailPreview(lead) {
-  const type = document.getElementById("templateType").value;
-  let email = emailTemplates[type] || emailTemplates.intro;
-
-  if (type === "competitor" && lead.live_checkout) {
-    email = email.replace("[[PROVIDER]]", lead.live_checkout);
-  }
-
-  document.getElementById("emailPreview").value = email;
-}
-
-function updateEmailTemplate() {
-  if (selectedLead) {
-    generateEmailPreview(selectedLead);
-  }
-}
-
-function copyEmail() {
-  const emailContent = document.getElementById("emailPreview").value;
-  navigator.clipboard.writeText(emailContent);
-  showToast("Email copied to clipboard");
-}
-
-function resetEmailTemplate() {
-  if (selectedLead) {
-    generateEmailPreview(selectedLead);
-    showToast("Template reset");
-  }
-}
-
-function exportCSV() {
-  if (!leads.length) {
-    showToast("No leads to export");
+  const validDomain = /^([a-z0-9]([a-z0-9\-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;
+  if (!validDomain.test(domain)) {
+    toast("Invalid domain format", "error");
     return;
   }
 
-  const rows = leads.map((lead) => ({
-    domain: lead.domain,
-    shopify: lead.shopify ? "Yes" : "No",
-    live_checkout: lead.live_checkout || "",
-    live_confidence: lead.live_confidence || 0,
-    historical_count: lead.historical_checkouts?.length || 0,
-    historical_checkouts: (lead.historical_checkouts || []).join(", "),
-    has_kwikpass: lead.has_kwikpass ? "Yes" : "No",
-    emails: (lead.emails || []).join("; "),
-    linkedin: lead.socials?.linkedin || "",
-    instagram: lead.socials?.instagram || "",
-    facebook: lead.socials?.facebook || "",
-    lead_score: lead.lead_score,
-    priority: lead.priority,
-    status:
-      localStorage.getItem(`flexype_status_${lead.domain}`) ||
-      lead.status ||
-      "Not Contacted",
-    last_scan: lead.last_scan,
+  btn.disabled = true;
+  btn.textContent = "…";
+  status.textContent = "Scanning";
+  toast(`Scanning ${domain}`, "info");
+
+  let result = null;
+
+  // Try API
+  for (const port of [8080, 5000]) {
+    try {
+      const res = await fetch(`http://localhost:${port}/scan-domain`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ domain }),
+      });
+      if (res.ok) {
+        result = await res.json();
+        if (!result?.error) break;
+      }
+    } catch {
+      /* try next */
+    }
+  }
+
+  // Fallback: reload results.json
+  if (!result || result.error) {
+    try {
+      const res = await fetch(`results.json?t=${Date.now()}`);
+      if (res.ok) {
+        const all = await res.json();
+        result =
+          all.find((r) => (r.domain || "").toLowerCase() === domain) || null;
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+
+  if (result && !result.error) {
+    const idx = leads.findIndex((l) => l.domain === result.domain);
+    if (idx === -1) leads.unshift(result);
+    else leads[idx] = result;
+    populateFilters();
+    updateStats();
+    renderTable(leads);
+    showLead(result);
+    setTimeout(() => highlightRow(result.domain), 80);
+    status.textContent = "Done";
+    if (input) input.value = "";
+    toast(`Scanned ${result.domain}`, "success");
+  } else {
+    status.textContent = "Not found";
+    toast("Not found. Start API server or run full scan.", "error");
+  }
+
+  btn.disabled = false;
+  btn.textContent = "Scan";
+  setTimeout(() => {
+    if (status.textContent !== "Done") status.textContent = "";
+  }, 3000);
+}
+
+async function checkApi() {
+  const status = document.getElementById("scanStatus");
+  for (const port of [8080, 5000]) {
+    try {
+      const res = await fetch(`http://localhost:${port}/health`);
+      if (res.ok) {
+        status.textContent = `API :${port}`;
+        return;
+      }
+    } catch {
+      /* try next */
+    }
+  }
+  if (status) status.textContent = "API offline";
+}
+
+// ─── Export ───────────────────────────────────────────────────────────────────
+
+function exportCSV() {
+  if (!leads.length) {
+    toast("No leads to export");
+    return;
+  }
+  const rows = leads.map((l) => ({
+    domain: l.domain,
+    shopify: l.shopify ? "Yes" : "No",
+    live_checkout: l.live_checkout || "",
+    live_confidence: l.live_confidence || 0,
+    historical: (l.historical_checkouts || []).join("; "),
+    has_kwikpass: l.has_kwikpass ? "Yes" : "No",
+    emails: (l.emails || []).join("; "),
+    phones: (l.phone_numbers || []).join("; "),
+    whatsapp_number: l.whatsapp_number || "",
+    whatsapp_link: l.whatsapp_link || "",
+    myshopify: l.myshopify_domain || "",
+    linkedin: l.socials?.linkedin || "",
+    instagram: l.socials?.instagram || "",
+    facebook: l.socials?.facebook || "",
+    tech_stack: (l.tech_stack || []).join("; "),
+    lead_score: l.lead_score,
+    priority: l.priority,
+    status: localStorage.getItem(`fp_status_${l.domain}`) || l.status || "",
+    last_scan: l.last_scan || "",
   }));
 
   const headers = Object.keys(rows[0]);
   const csv = [
     headers.join(","),
     ...rows.map((r) =>
-      headers.map((h) => JSON.stringify(r[h] || "")).join(","),
+      headers.map((h) => JSON.stringify(r[h] ?? "")).join(","),
     ),
   ].join("\n");
-
-  const blob = new Blob([csv], { type: "text/csv" });
-  const a = document.createElement("a");
-  const url = URL.createObjectURL(blob);
-  a.href = url;
-  a.download = `flexype_outreach-export-${new Date().toISOString().slice(0, 19)}.csv`;
+  const a = Object.assign(document.createElement("a"), {
+    href: URL.createObjectURL(new Blob([csv], { type: "text/csv" })),
+    download: `flexy-outreach-${new Date().toISOString().slice(0, 10)}.csv`,
+  });
   a.click();
-  URL.revokeObjectURL(url);
-  showToast("CSV exported");
+  URL.revokeObjectURL(a.href);
+  toast("CSV exported");
 }
 
-function saveNotes() {
-  if (selectedLead) {
-    const notes = document.getElementById("leadNotes").value;
-    localStorage.setItem(`flexype_notes_${selectedLead.domain}`, notes);
-    showToast("Notes saved");
+// ─── Action helpers ───────────────────────────────────────────────────────────
+
+function copyField(val, label = "Copied") {
+  if (!val) {
+    toast("Nothing to copy", "error");
+    return;
   }
+  navigator.clipboard.writeText(val);
+  toast(label);
 }
 
-function saveStatus() {
-  if (selectedLead) {
-    const status = document.getElementById("leadStatus").value;
-    localStorage.setItem(`flexype_status_${selectedLead.domain}`, status);
-    showToast(`Status updated to "${status}"`);
-  }
-}
-
-function openWebsite() {
-  if (selectedLead) {
-    const url = getDomainUrl(selectedLead.domain);
-    window.open(url, "_blank", "noopener,noreferrer");
-  }
-}
-
-function copyDomain() {
-  if (selectedLead) {
-    navigator.clipboard.writeText(selectedLead.domain);
-    showToast("Domain copied");
-  }
-}
-
+let watchlistFilterActive = false;
 function toggleWatchlistFilter() {
+  watchlistFilterActive = !watchlistFilterActive;
   const btn = document.getElementById("watchlistFilterBtn");
-  const isActive = btn.classList.toggle("active");
-  if (isActive) {
-    renderTable(leads.filter((l) => watchlist.has(l.domain)));
-    btn.textContent = "Show All";
-  } else {
-    renderTable(leads);
-    btn.textContent = "Watchlist Only";
-  }
+  btn.classList.toggle("active", watchlistFilterActive);
+  renderTable(
+    watchlistFilterActive ?
+      leads.filter((l) => watchlist.has(l.domain))
+    : leads,
+  );
 }
 
-// --- On-demand single domain scan helpers ---
-async function scanSingleDomain(domainOverride) {
-  const input = document.getElementById("singleScanInput");
-  const btn = document.getElementById("singleScanBtn");
-  const statusEl = document.getElementById("scanStatus");
-  const domainRaw = (typeof domainOverride === 'string' && domainOverride.length) ? domainOverride : (input?.value?.trim() || "");
-  const domain = domainRaw.replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
+// ─── Event Bindings ───────────────────────────────────────────────────────────
 
-  if (!domain) {
-    showToast("Please enter a domain", "error");
-    return;
-  }
+document.addEventListener("DOMContentLoaded", () => {
+  // Filters
+  [
+    "searchInput",
+    "providerFilter",
+    "historicalFilter",
+    "priorityFilter",
+    "sortFilter",
+  ].forEach((id) => {
+    document
+      .getElementById(id)
+      ?.addEventListener("input", () => renderTable(leads));
+    document
+      .getElementById(id)
+      ?.addEventListener("change", () => renderTable(leads));
+  });
 
-  const domainRegex = /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,}$/;
-  if (!domainRegex.test(domain)) {
-    showToast("Invalid domain format", "error");
-    return;
-  }
-
-  btn.disabled = true;
-  btn.textContent = "Scanning...";
-  statusEl.textContent = "Scanning...";
-  showToast(`Scanning ${domain}...`, "info");
-
-  let result = null;
-  // Try contacting local API server first (port 8080 then 5000)
-  try {
-    let resp = null;
-    try {
-      resp = await fetch("http://localhost:8080/scan-domain", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain }),
-      });
-    } catch (e) {
-      // fallback to older endpoint
-      resp = await fetch("http://localhost:5000/scan", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain }),
-      });
+  // Search enter = quick scan
+  document.getElementById("searchInput")?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      const v = e.target.value.trim();
+      if (v.includes(".") && !v.includes(" ")) scanSingleDomain(v);
     }
+  });
 
-    if (resp && resp.ok) {
-      result = await resp.json();
-    } else if (resp) {
-      // non-OK response from API: read body for diagnostics
-      try {
-        const body = await resp.text();
-        console.error('API error', resp.status, body);
-        statusEl.textContent = `API error ${resp.status}: ${body.slice(0,200)}`;
-      } catch (e) {
-        console.error('API error and failed to read body', e);
-        statusEl.textContent = `API error ${resp.status}`;
-      }
+  // Scan bar
+  document
+    .getElementById("singleScanBtn")
+    ?.addEventListener("click", () => scanSingleDomain());
+  document
+    .getElementById("singleScanInput")
+    ?.addEventListener("keypress", (e) => {
+      if (e.key === "Enter") scanSingleDomain();
+    });
+
+  // Topbar actions
+  document.getElementById("exportCSVBtn")?.addEventListener("click", exportCSV);
+  document
+    .getElementById("watchlistFilterBtn")
+    ?.addEventListener("click", toggleWatchlistFilter);
+
+  // Detail actions
+  document.getElementById("openWebsiteBtn")?.addEventListener("click", () => {
+    if (selectedLead)
+      window.open(
+        domainUrl(selectedLead.domain),
+        "_blank",
+        "noopener,noreferrer",
+      );
+  });
+  document.getElementById("copyDomainBtn")?.addEventListener("click", () => {
+    copyField(selectedLead?.domain, "Domain copied");
+  });
+  document.getElementById("copyMyShopifyBtn")?.addEventListener("click", () => {
+    copyField(selectedLead?.myshopify_domain, "MyShopify copied");
+  });
+  document.getElementById("copyPhoneBtn")?.addEventListener("click", () => {
+    copyField(selectedLead?.phone_numbers?.[0], "Phone copied");
+  });
+  document.getElementById("copyWhatsAppBtn")?.addEventListener("click", () => {
+    copyField(
+      selectedLead?.whatsapp_number || selectedLead?.whatsapp_link,
+      "WhatsApp copied",
+    );
+  });
+  document.getElementById("watchlistBtn")?.addEventListener("click", () => {
+    if (selectedLead) toggleWatchlist(selectedLead.domain);
+  });
+
+  // Email
+  document.getElementById("templateType")?.addEventListener("change", () => {
+    if (selectedLead) generateEmail(selectedLead);
+  });
+  document.getElementById("copyEmailBtn")?.addEventListener("click", () => {
+    copyField(document.getElementById("emailPreview")?.value, "Email copied");
+  });
+  document.getElementById("resetTemplateBtn")?.addEventListener("click", () => {
+    if (selectedLead) generateEmail(selectedLead);
+  });
+
+  // Notes / Status
+  document.getElementById("saveNotesBtn")?.addEventListener("click", () => {
+    if (selectedLead) {
+      localStorage.setItem(
+        `fp_notes_${selectedLead.domain}`,
+        document.getElementById("leadNotes").value,
+      );
+      toast("Notes saved");
     }
-  } catch (e) {
-    console.error("API server not available, falling back to local results.json", e);
-    statusEl.textContent = `API unreachable: ${e.message}`;
-  }
-
-  // Fallback: reload results.json and search
-  if (!result) {
-    statusEl.textContent = "Loading results.json...";
-    try {
-      const resp = await fetch(`results.json?t=${Date.now()}`);
-      if (resp.ok) {
-        const all = await resp.json();
-        result = all.find((r) => (r.domain || "").toLowerCase() === domain);
-      }
-    } catch (e) {
-      console.error("Failed to load results.json", e);
-      statusEl.textContent = `Failed to load results.json: ${e.message}`;
+  });
+  document.getElementById("saveStatusBtn")?.addEventListener("click", () => {
+    if (selectedLead) {
+      const val = document.getElementById("leadStatus").value;
+      localStorage.setItem(`fp_status_${selectedLead.domain}`, val);
+      toast(`Status: ${val}`);
     }
-  }
+  });
 
-  try {
-    if (result && !result.error) {
-      const existingIndex = leads.findIndex((l) => l.domain === result.domain);
-      if (existingIndex === -1) {
-        leads.unshift(result);
-        showToast(`Added ${result.domain} to database`, "success");
-      } else {
-        leads[existingIndex] = result;
-        showToast(`Updated ${result.domain}`, "success");
-      }
-
-      populateFilters();
-      updateStats();
-      renderTable(leads);
-      showLead(result);
-
-      // Highlight the row
-      const rows = document.querySelectorAll('#leadTable tbody tr');
-      rows.forEach((row) => {
-        if (row.textContent.includes(result.domain)) {
-          row.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          row.click();
-        }
-      });
-
-      statusEl.textContent = 'Complete';
-      input.value = '';
-    } else {
-      showToast('Domain not found. Run full scan or start API server.', 'error');
-      statusEl.textContent = 'Not found';
-    }
-  } catch (err) {
-    console.error('Scan failed:', err);
-    showToast(`Scan failed: ${err.message || err}`, 'error');
-    statusEl.textContent = `Failed: ${err.message || err}`;
-  } finally {
-    btn.disabled = false;
-    btn.textContent = 'Scan Now';
-    setTimeout(() => {
-      if (statusEl.textContent !== 'Complete') statusEl.textContent = '';
-    }, 3000);
-  }
-}
-
-async function checkApiServer() {
-  try {
-    const res = await fetch('http://localhost:8080/health');
-    if (res.ok) {
-      document.getElementById('scanStatus').textContent = 'API ready (8080)';
-      return true;
-    } else {
-      const body = await res.text().catch(() => '');
-      document.getElementById('scanStatus').textContent = `API responded ${res.status}: ${body.slice(0,80)}`;
-      console.error('Health check non-OK', res.status, body);
-      return false;
-    }
-  } catch (e) {
-    console.error('Health check failed on 8080:', e);
-    try {
-      const res2 = await fetch('http://localhost:5000/health');
-      if (res2.ok) {
-        document.getElementById('scanStatus').textContent = 'API ready (5000)';
-        return true;
-      } else {
-        const body2 = await res2.text().catch(() => '');
-        document.getElementById('scanStatus').textContent = `API responded ${res2.status}: ${body2.slice(0,80)}`;
-        console.error('Health check non-OK on 5000', res2.status, body2);
-        return false;
-      }
-    } catch (e2) {
-      console.error('Health check failed on 5000:', e2);
-      document.getElementById('scanStatus').textContent = `API offline: ${e.message || e2.message}`;
-    }
-  }
-  return false;
-}
-
-// Event Listeners
-document
-  .getElementById("searchInput")
-  ?.addEventListener("input", () => renderTable(leads));
-
-// If user presses Enter in the main search input and it looks like a domain, trigger single scan
-document.getElementById("searchInput")?.addEventListener("keypress", (e) => {
-  if (e.key === 'Enter') {
-    const val = e.target.value?.trim() || '';
-    if (val && val.includes('.') && !val.includes(' ')) {
-      scanSingleDomain(val);
-    }
-  }
+  // Boot
+  checkApi();
+  loadData();
 });
-document
-  .getElementById("providerFilter")
-  ?.addEventListener("change", () => renderTable(leads));
-document
-  .getElementById("historicalFilter")
-  ?.addEventListener("change", () => renderTable(leads));
-document
-  .getElementById("priorityFilter")
-  ?.addEventListener("change", () => renderTable(leads));
-document
-  .getElementById("sortFilter")
-  ?.addEventListener("change", () => renderTable(leads));
-document.getElementById("exportCSVBtn")?.addEventListener("click", exportCSV);
-document
-  .getElementById("watchlistFilterBtn")
-  ?.addEventListener("click", toggleWatchlistFilter);
-document
-  .getElementById("openWebsiteBtn")
-  ?.addEventListener("click", openWebsite);
-document.getElementById("copyDomainBtn")?.addEventListener("click", copyDomain);
-document.getElementById("watchlistBtn")?.addEventListener("click", () => {
-  if (selectedLead) {
-    toggleWatchlist(selectedLead.domain);
-    renderTable(leads);
-    if (selectedLead) showLead(selectedLead);
-  }
-});
-document.getElementById("saveNotesBtn")?.addEventListener("click", saveNotes);
-document.getElementById("saveStatusBtn")?.addEventListener("click", saveStatus);
-document
-  .getElementById("templateType")
-  ?.addEventListener("change", () => updateEmailTemplate());
-document.getElementById("copyEmailBtn")?.addEventListener("click", copyEmail);
-document
-  .getElementById("resetTemplateBtn")
-  ?.addEventListener("click", resetEmailTemplate);
-
-// Single-scan UI bindings
-document.getElementById('singleScanBtn')?.addEventListener('click', scanSingleDomain);
-document.getElementById('singleScanInput')?.addEventListener('keypress', (e) => {
-  if (e.key === 'Enter') scanSingleDomain();
-});
-
-// Check if local API server is available
-checkApiServer();
-
-// Initialize
-loadData();

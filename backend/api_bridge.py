@@ -8,7 +8,7 @@ def scan_domain(domain):
     """Run scanner for single domain and return result."""
     try:
         result = subprocess.run(
-            [sys.executable, "scanner_v2.py", "--domain", domain, "--mode", "single"],
+            [sys.executable, "inputScanner.py", "--domain", domain, "--mode", "single"],
             capture_output=True,
             text=True,
             timeout=90

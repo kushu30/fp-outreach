@@ -55,7 +55,7 @@ wellbeingnutrition.com
 ### 4. Run Merchant Scanner
 
 ```bash
-python fast_scraper.py
+python main_scraper.py
 ```
 
 Generated outputs:
@@ -197,5 +197,5 @@ The dashboard consumes the generated merchant intelligence data and provides:
 YouTube Demo:
 
 ```text
-<INSERT_YOUTUBE_LINK>
+https://www.youtube.com/watch?v=d8DG8y0_tlI
 ```
