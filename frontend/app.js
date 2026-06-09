@@ -4,6 +4,7 @@ let leads = [];
 let selectedLead = null;
 let activeRow = null;
 let watchlist = new Set();
+const API_URL = window.VITE_API_URL;
 
 // ─── Email Templates ──────────────────────────────────────────────────────────
 
@@ -602,7 +603,7 @@ async function loadData() {
   try {
     await delay(200);
     setProgress(35, "Parsing records…");
-    const res = await fetch("results.json");
+    const res = await fetch(`${API_URL}/results.json`);
     if (!res.ok) throw new Error("Not found");
     const data = await res.json();
     if (!data?.length) throw new Error("Empty");
@@ -666,14 +667,14 @@ async function scanSingleDomain(domainOverride) {
   // Try API
   for (const port of [8080, 5000]) {
     try {
-      const res = await fetch(`http://localhost:${port}/scan-domain`, {
+      const res = await fetch(`${API_URL}/scan-domain`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ domain }),
       });
+
       if (res.ok) {
         result = await res.json();
-        if (!result?.error) break;
       }
     } catch {
       /* try next */
@@ -720,18 +721,19 @@ async function scanSingleDomain(domainOverride) {
 
 async function checkApi() {
   const status = document.getElementById("scanStatus");
-  for (const port of [8080, 5000]) {
-    try {
-      const res = await fetch(`http://localhost:${port}/health`);
-      if (res.ok) {
-        status.textContent = `API :${port}`;
-        return;
-      }
-    } catch {
-      /* try next */
+
+  try {
+    const res = await fetch(`${API_URL}/health`);
+
+    if (res.ok) {
+      status.textContent = "API Online";
+      return;
     }
+  } catch {}
+
+  if (status) {
+    status.textContent = "API Offline";
   }
-  if (status) status.textContent = "API offline";
 }
 
 // ─── Export ───────────────────────────────────────────────────────────────────
