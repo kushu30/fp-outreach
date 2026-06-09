@@ -7,6 +7,8 @@ import json
 import os
 from db import merchants
 
+FAILED_LOG = "failed_scans.log"
+
 app = Flask(
     __name__,
     static_folder="../frontend",
@@ -23,6 +25,10 @@ def scan_domain(domain):
             text=True,
             timeout=90
         )
+
+        print("RETURN CODE:", result.returncode)
+        print("STDOUT:", result.stdout)
+        print("STDERR:", result.stderr)
         
         # Look for JSON result in output
         for line in result.stdout.split('\n'):
