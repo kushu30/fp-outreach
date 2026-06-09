@@ -57,7 +57,7 @@ def scan_domain(domain):
 
 @app.route('/')
 def index():
-    return send_from_directory("../frontend", "dashboard.html")
+    return send_from_directory("../frontend", "index.html")
 
 @app.route('/styles.css')
 def styles():
