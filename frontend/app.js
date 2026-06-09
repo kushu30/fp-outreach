@@ -4,8 +4,7 @@ let leads = [];
 let selectedLead = null;
 let activeRow = null;
 let watchlist = new Set();
-const API_URL = window.VITE_API_URL;
-
+const API_URL = "https://fp-outreach.onrender.com";
 // ─── Email Templates ──────────────────────────────────────────────────────────
 
 const EMAIL_TEMPLATES = {
