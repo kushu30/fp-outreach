@@ -4,6 +4,8 @@ import asyncio
 import json
 import sys
 import os
+from db import merchants
+
 
 # Import the fast scraper module which defines run_scanner
 try:
@@ -17,6 +19,13 @@ async def scan_single(domain):
         results = await ms.run_scanner([domain], max_concurrent=1)
         if results and len(results) > 0:
             single = results[0]
+            from db import merchants
+
+            merchants.update_one(
+                {"domain": single["domain"]},
+                {"$set": single},
+                upsert=True
+            )
             # Persist to results.json (merge/replace by domain)
             outpath = "../data/results.json"
             try:

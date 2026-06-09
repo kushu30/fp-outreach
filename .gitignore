@@ -6,3 +6,4 @@ data/results.xlsx
 data/results.json
 scan_*.log
 results.json
+.env

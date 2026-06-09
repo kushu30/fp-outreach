@@ -5,6 +5,7 @@ import subprocess
 import sys
 import json
 import os
+from db import merchants
 
 app = Flask(
     __name__,
@@ -128,19 +129,14 @@ def scan():
 
 @app.route('/results.json')
 def results():
-    # Try several locations for results.json so frontend can load data
-    candidates = [
-        os.path.join('..', 'data', 'results.json'),
-        os.path.join('..', 'results.json'),
-        os.path.join('.', 'results.json'),
-    ]
-    for cand in candidates:
-        if os.path.exists(cand):
-            directory, filename = os.path.split(cand)
-            if directory == '':
-                directory = '.'
-            return send_from_directory(directory, filename)
-    return jsonify([])
+    data = list(
+        merchants.find(
+            {},
+            {"_id": 0}
+        )
+    )
+
+    return jsonify(data)
 
 @app.route('/health', methods=['GET'])
 def health():
