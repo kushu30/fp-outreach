@@ -122,8 +122,18 @@ def scan():
                 lf.write(stdout_preview + "\n")
                 lf.write(stderr_preview + "\n\n")
             print(f"[Scan] Failed: {domain} (diagnostics written to failed_scans.log)")
+            print("STDOUT:")
+            print(proc.stdout)
+
+            print("STDERR:")
+            print(proc.stderr)
             return jsonify({"error": "Scan failed", "domain": domain, "diag_file": "failed_scans.log", "returncode": proc.returncode}), 500
         except Exception as e:
+            print("STDOUT:")
+            print(proc.stdout)
+
+            print("STDERR:")
+            print(proc.stderr)
             print(f"[Scan] Failed and diagnostics capture failed: {e}")
             return jsonify({"error": "Scan failed", "domain": domain}), 500
 
