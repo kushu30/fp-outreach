@@ -16,6 +16,7 @@ from asyncio import Semaphore
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from urllib.parse import urlparse, urljoin, unquote
+from db import merchants
 
 # ─────────────────────────────────────────────
 #  LOGGING SETUP
@@ -691,6 +692,11 @@ async def run_scanner(domains: list, max_concurrent: int = 10) -> list:
             print()
             for coro in asyncio.as_completed(tasks):
                 r = await coro
+                merchants.update_one(
+                    {"domain": r["domain"]},
+                    {"$set": r},
+                    upsert=True
+                )
                 results.append(r)
                 done += 1
                 live_c = sum(1 for x in results if x['live_checkout'])

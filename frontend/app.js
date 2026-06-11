@@ -4,7 +4,8 @@ let leads = [];
 let selectedLead = null;
 let activeRow = null;
 let watchlist = new Set();
-const API_URL = "https://fp-outreach.onrender.com";
+const API_URL = "http://localhost:8080";
+
 // ─── Email Templates ──────────────────────────────────────────────────────────
 
 const EMAIL_TEMPLATES = {
