@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080810">
+  <title>Set up 2FA · FlexyPe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <div class="card">
+
+    <div class="card-header">
+      <div class="logo-row">
+        <div class="logo-mark">F</div>
+        <div class="logo-text">
+          <span class="logo-name">FlexyPe</span>
+          <span class="logo-sub">Outreach</span>
+        </div>
+      </div>
+      <h1 class="card-title" id="title">Set up two-factor auth</h1>
+      <p class="card-sub" id="subtitle">Required for all FlexyPe accounts</p>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps-bar">
+        <div class="seg active" id="seg-1"></div>
+        <div class="seg" id="seg-2"></div>
+        <div class="seg" id="seg-3"></div>
+      </div>
+
+      <!-- STEP 1: account -->
+      <div class="step active" id="step-acct">
+        <div class="field">
+          <label for="acctEmail">Account email</label>
+          <input type="email" id="acctEmail" placeholder="you@flexype.in" autocomplete="username">
+          <div class="err-msg" id="acctEmailErr">Enter a valid email</div>
+        </div>
+        <div class="field">
+          <label for="acctPassword">Password</label>
+          <input type="password" id="acctPassword" placeholder="••••••••" autocomplete="current-password">
+          <div class="err-msg" id="acctPasswordErr">Incorrect password</div>
+        </div>
+        <p class="help-text">
+          You need an authenticator app installed on your phone before continuing.
+          We recommend <strong>Google Authenticator</strong>, <strong>Authy</strong>, or <strong>1Password</strong>.
+        </p>
+        <button class="btn" id="acctBtn">Continue</button>
+        <div style="text-align:center;margin-top:14px;">
+          <a href="login.html" class="btn-link">← Back to sign in</a>
+        </div>
+      </div>
+
+      <!-- STEP 2: scan QR -->
+      <div class="step" id="step-scan">
+        <div id="scanUserPill"></div>
+
+        <p class="help-text">
+          <span class="step-num">1</span>
+          Open your authenticator app and scan this QR code.
+        </p>
+
+        <div class="qr-wrap">
+          <canvas id="qrCanvas" width="180" height="180"></canvas>
+          <div class="qr-hint">Or enter the key manually:</div>
+        </div>
+
+        <div class="secret-row">
+          <span class="secret-val" id="secretVal">—</span>
+          <button class="copy-btn" id="copyBtn">Copy</button>
+        </div>
+
+        <p class="help-text" style="margin-top:6px;">
+          <span class="step-num">2</span>
+          Your app will display a 6-digit code that refreshes every 30 seconds.
+        </p>
+
+        <button class="btn" id="scanContinueBtn">I've scanned it</button>
+        <div style="text-align:center;margin-top:14px;">
+          <button class="btn-link" id="scanBackBtn">← Back</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: verify -->
+      <div class="step" id="step-verify">
+        <p class="help-text">
+          <span class="step-num">3</span>
+          Enter the 6-digit code from your app to confirm setup.
+        </p>
+
+        <div class="otp-wrap" id="otpInputs">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 1">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 2">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 3">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 4">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 5">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 6">
+        </div>
+
+        <div class="timer-row">
+          <span class="timer-label">Code refreshes in</span>
+          <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
+          <span class="timer-text" id="timerText">30s</span>
+        </div>
+
+        <div class="status-box" id="setupStatus"></div>
+
+        <button class="btn" id="activateBtn">Activate 2FA</button>
+        <div style="text-align:center;margin-top:14px;">
+          <button class="btn-link" id="verifyBackBtn">← Back</button>
+        </div>
+      </div>
+
+      <!-- STEP 4: done -->
+      <div class="step" id="step-done">
+        <div style="text-align:center;padding:14px 0 20px;">
+          <div style="width:56px;height:56px;border-radius:50%;background:var(--green-dim);border:1px solid rgba(52,211,153,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+          <h2 style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px;">2FA is now active</h2>
+          <p style="font-size:12.5px;color:var(--t2);">You'll be asked for a code each time you sign in.</p>
+        </div>
+
+        <div class="status-box info show" style="margin-bottom:6px;">
+          Save your recovery key somewhere safe — you'll need it if you lose access to your authenticator.
+        </div>
+        <div class="secret-row" style="margin-bottom:18px;">
+          <span class="secret-val" id="recoveryVal">—</span>
+          <button class="copy-btn" id="copyRecoveryBtn">Copy</button>
+        </div>
+
+        <a href="login.html" class="btn" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">
+          Continue to sign in
+        </a>
+      </div>
+
+    </div>
+
+    <div class="card-footer">
+      <a href="login.html">Sign in</a>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <!-- qrcodejs from cdnjs allowlist -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    (function () {
+      const A = window.FP_AUTH;
+      let setupSecret = null;
+      let setupEmail  = null;
+      let timerInterval = null;
+
+      // Pre-fill email if passed via ?email=
+      const params = new URLSearchParams(window.location.search);
+      const preEmail = params.get("email");
+      if (preEmail) A.$("acctEmail").value = preEmail;
+
+      function show(stepId, segCount) {
+        document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+        A.$(stepId).classList.add("active");
+        ["seg-1", "seg-2", "seg-3"].forEach((id, i) => {
+          A.$(id).classList.toggle("active", i < segCount);
+        });
+      }
+
+      // ─── STEP 1: ACCOUNT ───────────────────────
+      A.$("acctBtn").addEventListener("click", handleAcct);
+      ["acctEmail", "acctPassword"].forEach(id => {
+        A.$(id).addEventListener("keydown", e => { if (e.key === "Enter") handleAcct(); });
+        A.$(id).addEventListener("input", () => A.setErr(id, id + "Err", false));
+      });
+
+      function handleAcct() {
+        const email = A.$("acctEmail").value.trim().toLowerCase();
+        const password = A.$("acctPassword").value;
+
+        if (!A.validateEmail(email)) {
+          A.setErr("acctEmail", "acctEmailErr", true, "Enter a valid email");
+          return;
+        }
+        if (!password) {
+          A.setErr("acctPassword", "acctPasswordErr", true, "Password is required");
+          return;
+        }
+
+        const users = A.loadUsers();
+        const user = users[email];
+
+        if (!A.verifyPassword(user, password)) {
+          A.setErr("acctPassword", "acctPasswordErr", true, "Incorrect email or password");
+          return;
+        }
+
+        setupEmail = email;
+        setupSecret = A.generateSecret();
+
+        A.$("scanUserPill").innerHTML =
+          `<div class="user-pill"><div class="user-dot">${email[0].toUpperCase()}</div>${email}</div>`;
+
+        renderQR(setupSecret, email);
+        show("step-scan", 2);
+      }
+
+      // ─── STEP 2: QR ────────────────────────────
+      function renderQR(secret, email) {
+        // format secret with spaces every 4 chars for readability
+        A.$("secretVal").textContent = secret.match(/.{1,4}/g).join(" ");
+
+        const canvas = A.$("qrCanvas");
+        const ctx = canvas.getContext("2d");
+        const size = 180;
+        const uri = A.otpauthURI(secret, email, "FlexyPe");
+
+        if (typeof qrcode === "undefined") {
+          ctx.fillStyle = "#161628";
+          ctx.fillRect(0, 0, size, size);
+          ctx.fillStyle = "#f87171";
+          ctx.font = "11px monospace";
+          ctx.fillText("QR library failed to load.", 12, size / 2 - 6);
+          ctx.fillText("Use the key manually.", 12, size / 2 + 12);
+          return;
+        }
+
+        const qr = qrcode(0, "M");
+        qr.addData(uri);
+        qr.make();
+        const modules = qr.getModuleCount();
+        const margin = 8;
+        const cell = (size - margin * 2) / modules;
+
+        // background
+        ctx.fillStyle = "#0c0c18";
+        ctx.fillRect(0, 0, size, size);
+        // modules
+        ctx.fillStyle = "#e8e8f0";
+        for (let r = 0; r < modules; r++) {
+          for (let c = 0; c < modules; c++) {
+            if (qr.isDark(r, c)) {
+              ctx.fillRect(margin + c * cell, margin + r * cell, cell + 0.5, cell + 0.5);
+            }
+          }
+        }
+      }
+
+      A.$("copyBtn").addEventListener("click", () => {
+        navigator.clipboard.writeText(setupSecret || "").then(() => {
+          A.$("copyBtn").textContent = "Copied";
+          setTimeout(() => A.$("copyBtn").textContent = "Copy", 1500);
+        });
+      });
+
+      A.$("scanContinueBtn").addEventListener("click", () => {
+        show("step-verify", 3);
+        wireOTPInputs();
+        startTimer();
+        setTimeout(() => A.$("otpInputs").querySelector("input").focus(), 60);
+      });
+      A.$("scanBackBtn").addEventListener("click", () => show("step-acct", 1));
+
+      // ─── STEP 3: VERIFY ────────────────────────
+      A.$("activateBtn").addEventListener("click", handleActivate);
+      A.$("verifyBackBtn").addEventListener("click", () => {
+        stopTimer();
+        show("step-scan", 2);
+      });
+
+      function wireOTPInputs() {
+        const inputs = A.$("otpInputs").querySelectorAll("input");
+        inputs.forEach((inp, i) => {
+          inp.value = "";
+          inp.classList.remove("err");
+          inp.addEventListener("input", () => {
+            inp.value = inp.value.replace(/\D/g, "");
+            if (inp.value && i < inputs.length - 1) inputs[i + 1].focus();
+            if (getOTP().length === A.TOTP_DIGITS) handleActivate();
+          });
+          inp.addEventListener("keydown", e => {
+            if (e.key === "Backspace" && !inp.value && i > 0) inputs[i - 1].focus();
+          });
+          inp.addEventListener("paste", e => {
+            const data = (e.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "").slice(0, A.TOTP_DIGITS);
+            if (data) {
+              inputs.forEach((x, j) => x.value = data[j] || "");
+              if (data.length === A.TOTP_DIGITS) handleActivate();
+            }
+            e.preventDefault();
+          });
+        });
+      }
+
+      function getOTP() {
+        return [...A.$("otpInputs").querySelectorAll("input")].map(x => x.value).join("");
+      }
+
+      async function handleActivate() {
+        const code = getOTP();
+        if (code.length < A.TOTP_DIGITS) return;
+
+        const btn = A.$("activateBtn");
+        btn.disabled = true;
+        btn.textContent = "Verifying…";
+
+        const ok = await A.verifyTOTP(setupSecret, code);
+
+        if (ok) {
+          stopTimer();
+          // persist
+          const users = A.loadUsers();
+          users[setupEmail] = {
+            ...(users[setupEmail] || {}),
+            secret: setupSecret,
+            twoFAEnabled: true,
+          };
+          A.saveUsers(users);
+
+          A.$("recoveryVal").textContent = setupSecret.match(/.{1,4}/g).join(" ");
+          show("step-done", 3);
+        } else {
+          A.$("setupStatus").className = "status-box status-box error show";
+          A.$("setupStatus").textContent = "That code didn't match. Make sure your device time is correct and try the next code.";
+          const inputs = A.$("otpInputs").querySelectorAll("input");
+          inputs.forEach(x => { x.classList.add("err"); x.value = ""; });
+          setTimeout(() => {
+            inputs.forEach(x => x.classList.remove("err"));
+            A.$("setupStatus").className = "status-box";
+            btn.disabled = false;
+            btn.textContent = "Activate 2FA";
+            inputs[0].focus();
+          }, 1500);
+        }
+      }
+
+      // ─── STEP 4: DONE ──────────────────────────
+      A.$("copyRecoveryBtn").addEventListener("click", () => {
+        navigator.clipboard.writeText(setupSecret || "").then(() => {
+          A.$("copyRecoveryBtn").textContent = "Copied";
+          setTimeout(() => A.$("copyRecoveryBtn").textContent = "Copy", 1500);
+        });
+      });
+
+      // ─── TIMER ─────────────────────────────────
+      function startTimer() {
+        stopTimer();
+        const bar = A.$("timerBar");
+        const txt = A.$("timerText");
+        function tick() {
+          const rem = A.totpRemaining();
+          bar.style.width = (rem / A.TOTP_PERIOD * 100) + "%";
+          txt.textContent = rem + "s";
+          bar.style.background = rem <= 7 ? "var(--red)" : (rem <= 15 ? "var(--amber)" : "var(--accent)");
+        }
+        tick();
+        timerInterval = setInterval(tick, 500);
+      }
+      function stopTimer() {
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      }
+    })();
+  </script>
+</body>
+</html>

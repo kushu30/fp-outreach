@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080810">
+  <title>Sign in · FlexyPe</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body>
+
+  <div class="card">
+
+    <!-- HEADER -->
+    <div class="card-header">
+      <div class="logo-row">
+        <div class="logo-mark">F</div>
+        <div class="logo-text">
+          <span class="logo-name">FlexyPe</span>
+          <span class="logo-sub">Outreach</span>
+        </div>
+      </div>
+      <h1 class="card-title" id="title">Sign in</h1>
+      <p class="card-sub" id="subtitle">Enter your credentials to continue</p>
+    </div>
+
+    <!-- BODY -->
+    <div class="card-body">
+
+      <!-- STEP 1 — credentials -->
+      <div class="step active" id="step-creds">
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@flexype.in" autocomplete="username" autofocus>
+          <div class="err-msg" id="emailErr">Enter a valid email</div>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
+          <div class="err-msg" id="passwordErr">Incorrect password</div>
+        </div>
+        <button class="btn" id="credBtn">Continue</button>
+        <div class="divider"><span>or</span></div>
+        <a href="setup.html" class="btn btn-ghost" style="display:flex;align-items:center;justify-content:center;text-decoration:none;height:40px;">
+          Set up 2FA on this account
+        </a>
+      </div>
+
+      <!-- STEP 2 — TOTP -->
+      <div class="step" id="step-totp">
+        <div id="userPillWrap"></div>
+        <div class="section-title">Enter 6-digit code from authenticator app</div>
+        <div class="otp-wrap" id="otpInputs">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 1">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 2">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 3">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 4">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 5">
+          <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 6">
+        </div>
+        <div class="timer-row">
+          <span class="timer-label">Code refreshes in</span>
+          <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
+          <span class="timer-text" id="timerText">30s</span>
+        </div>
+        <div class="status-box" id="totpStatus"></div>
+        <button class="btn" id="verifyBtn">Verify &amp; sign in</button>
+        <div style="text-align:center;margin-top:14px;">
+          <button class="btn-link" id="backBtn">← Use a different account</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="card-footer">
+      <a href="setup.html">Set up 2FA</a>
+      <span style="color:var(--t3)">·</span>
+      <a href="#" id="helpLink">Help</a>
+    </div>
+  </div>
+
+  <script src="auth.js"></script>
+  <script>
+    (function () {
+      const A = window.FP_AUTH;
+      let currentEmail = null;
+      let currentUser  = null;
+      let timerInterval = null;
+
+      // Already signed in? Redirect to dashboard.
+      if (A.getSession()) {
+        window.location.replace("index.html");
+        return;
+      }
+
+      // ─── STEP NAVIGATION ───────────────────────
+      function show(stepId, title, sub) {
+        document.querySelectorAll(".step").forEach(s => s.classList.remove("active"));
+        A.$(stepId).classList.add("active");
+        A.$("title").textContent = title;
+        A.$("subtitle").textContent = sub;
+      }
+
+      // ─── STEP 1: CREDENTIALS ───────────────────
+      A.$("credBtn").addEventListener("click", handleCreds);
+      [A.$("email"), A.$("password")].forEach(el => {
+        el.addEventListener("keydown", e => { if (e.key === "Enter") handleCreds(); });
+        el.addEventListener("input", () => {
+          A.setErr(el.id, el.id + "Err", false);
+        });
+      });
+
+      function handleCreds() {
+        const email = A.$("email").value.trim().toLowerCase();
+        const password = A.$("password").value;
+
+        if (!A.validateEmail(email)) {
+          A.setErr("email", "emailErr", true, "Enter a valid email");
+          return;
+        }
+        if (!password) {
+          A.setErr("password", "passwordErr", true, "Password is required");
+          return;
+        }
+
+        const users = A.loadUsers();
+        const user = users[email];
+
+        if (!A.verifyPassword(user, password)) {
+          A.setErr("password", "passwordErr", true, "Incorrect email or password");
+          return;
+        }
+
+        // 2FA is mandatory — every account must have a secret.
+        if (!user.secret) {
+          A.toast("This account has no 2FA configured. Set it up first.", "error");
+          setTimeout(() => window.location.href = "setup.html?email=" + encodeURIComponent(email), 1000);
+          return;
+        }
+
+        currentEmail = email;
+        currentUser  = user;
+
+        // Render user pill on TOTP step
+        A.$("userPillWrap").innerHTML =
+          `<div class="user-pill"><div class="user-dot">${email[0].toUpperCase()}</div>${email}</div>`;
+
+        show("step-totp", "Two-factor auth", "Enter the 6-digit code from your authenticator app");
+        wireOTPInputs();
+        startTimer();
+        setTimeout(() => A.$("otpInputs").querySelector("input").focus(), 60);
+      }
+
+      // ─── STEP 2: TOTP ──────────────────────────
+      A.$("verifyBtn").addEventListener("click", handleVerify);
+      A.$("backBtn").addEventListener("click", () => {
+        stopTimer();
+        A.$("password").value = "";
+        show("step-creds", "Sign in", "Enter your credentials to continue");
+        setTimeout(() => A.$("email").focus(), 60);
+      });
+
+      function wireOTPInputs() {
+        const inputs = A.$("otpInputs").querySelectorAll("input");
+        inputs.forEach((inp, i) => {
+          inp.value = "";
+          inp.classList.remove("err");
+          inp.addEventListener("input", () => {
+            inp.value = inp.value.replace(/\D/g, "");
+            if (inp.value && i < inputs.length - 1) inputs[i + 1].focus();
+            if (getOTP().length === A.TOTP_DIGITS) handleVerify();
+          });
+          inp.addEventListener("keydown", e => {
+            if (e.key === "Backspace" && !inp.value && i > 0) inputs[i - 1].focus();
+            if (e.key === "ArrowLeft" && i > 0) inputs[i - 1].focus();
+            if (e.key === "ArrowRight" && i < inputs.length - 1) inputs[i + 1].focus();
+          });
+          inp.addEventListener("paste", e => {
+            const data = (e.clipboardData || window.clipboardData).getData("text").replace(/\D/g, "").slice(0, A.TOTP_DIGITS);
+            if (data) {
+              inputs.forEach((x, j) => x.value = data[j] || "");
+              const lastIdx = Math.min(data.length, inputs.length) - 1;
+              if (lastIdx >= 0) inputs[lastIdx].focus();
+              if (data.length === A.TOTP_DIGITS) handleVerify();
+            }
+            e.preventDefault();
+          });
+        });
+      }
+
+      function getOTP() {
+        return [...A.$("otpInputs").querySelectorAll("input")].map(x => x.value).join("");
+      }
+
+      async function handleVerify() {
+        const code = getOTP();
+        if (code.length < A.TOTP_DIGITS) return;
+
+        const btn = A.$("verifyBtn");
+        btn.disabled = true;
+        btn.textContent = "Verifying…";
+
+        const ok = await A.verifyTOTP(currentUser.secret, code);
+
+        if (ok) {
+          stopTimer();
+          A.createSession(currentEmail);
+          A.$("totpStatus").className = "status-box status-box success show";
+          A.$("totpStatus").textContent = "Verified. Redirecting…";
+          btn.textContent = "Signed in ✓";
+          setTimeout(() => window.location.replace("index.html"), 600);
+        } else {
+          A.$("totpStatus").className = "status-box status-box error show";
+          A.$("totpStatus").textContent = "Incorrect code. Check your authenticator app and try again.";
+          const inputs = A.$("otpInputs").querySelectorAll("input");
+          inputs.forEach(x => { x.classList.add("err"); x.value = ""; });
+          setTimeout(() => {
+            inputs.forEach(x => x.classList.remove("err"));
+            A.$("totpStatus").className = "status-box";
+            btn.disabled = false;
+            btn.textContent = "Verify & sign in";
+            inputs[0].focus();
+          }, 1400);
+        }
+      }
+
+      // ─── TIMER ─────────────────────────────────
+      function startTimer() {
+        stopTimer();
+        const bar = A.$("timerBar");
+        const txt = A.$("timerText");
+        function tick() {
+          const rem = A.totpRemaining();
+          bar.style.width = (rem / A.TOTP_PERIOD * 100) + "%";
+          txt.textContent = rem + "s";
+          bar.style.background = rem <= 7 ? "var(--red)" : (rem <= 15 ? "var(--amber)" : "var(--accent)");
+        }
+        tick();
+        timerInterval = setInterval(tick, 500);
+      }
+      function stopTimer() {
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
+      }
+
+      A.$("helpLink").addEventListener("click", e => {
+        e.preventDefault();
+        A.toast("Contact your admin to reset 2FA.");
+      });
+    })();
+  </script>
+</body>
+</html>

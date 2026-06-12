@@ -6,6 +6,11 @@ let activeRow = null;
 let watchlist = new Set();
 const API_URL = "http://localhost:8080";
 
+// Expose to pages.js
+window.leads = leads;
+window.watchlist = watchlist;
+window.selectedLead = selectedLead;
+
 // ─── Email Templates ──────────────────────────────────────────────────────────
 
 const EMAIL_TEMPLATES = {
@@ -64,13 +69,8 @@ FlexyPe`,
 
 function esc(str) {
   if (!str) return "";
-  return String(str).replace(
-    /[&<>"']/g,
-    (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[
-        c
-      ],
-  );
+  return String(str).replace(/[&<>"']/g, (c) =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 }
 
 function domainUrl(domain) {
@@ -105,29 +105,21 @@ function scoreClass(s) {
   if (s >= 50) return "sc-med";
   return "sc-low";
 }
-
-function priorityClass(p) {
-  return `priority-${(p || "low").toLowerCase()}`;
-}
-
-function priChipClass(p) {
-  return `pri-${(p || "low").toLowerCase()}`;
-}
+function priorityClass(p) { return `priority-${(p || "low").toLowerCase()}`; }
+function priChipClass(p)  { return `pri-${(p || "low").toLowerCase()}`; }
 
 // ─── Watchlist ─────────────────────────────────────────────────────────────
 
 function loadWatchlist() {
   try {
-    watchlist = new Set(
-      JSON.parse(localStorage.getItem("fp_watchlist") || "[]"),
-    );
-  } catch {
-    watchlist = new Set();
-  }
+    watchlist = new Set(JSON.parse(localStorage.getItem("fp_watchlist") || "[]"));
+  } catch { watchlist = new Set(); }
+  window.watchlist = watchlist;
 }
 
 function saveWatchlist() {
   localStorage.setItem("fp_watchlist", JSON.stringify([...watchlist]));
+  window.watchlist = watchlist;
 }
 
 function toggleWatchlist(domain) {
@@ -136,6 +128,10 @@ function toggleWatchlist(domain) {
     toast(`Removed ${domain}`);
   } else {
     watchlist.add(domain);
+    // record timestamp for "recently added" sort
+    if (!localStorage.getItem(`fp_wl_added_${domain}`)) {
+      localStorage.setItem(`fp_wl_added_${domain}`, String(Date.now()));
+    }
     toast(`Added ${domain} to watchlist`);
   }
   saveWatchlist();
@@ -146,8 +142,7 @@ function toggleWatchlist(domain) {
 // ─── Filters / Stats ──────────────────────────────────────────────────────────
 
 function populateFilters() {
-  const live = new Set(),
-    hist = new Set();
+  const live = new Set(), hist = new Set();
   leads.forEach((l) => {
     if (l.live_checkout) live.add(l.live_checkout);
     (l.historical_checkouts || []).forEach((p) => hist.add(p));
@@ -156,63 +151,43 @@ function populateFilters() {
   const liveEl = document.getElementById("providerFilter");
   liveEl.innerHTML = '<option value="">All providers</option>';
   [...live].sort().forEach((p) => {
-    liveEl.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${esc(p)}">${esc(p)}</option>`,
-    );
+    liveEl.insertAdjacentHTML("beforeend", `<option value="${esc(p)}">${esc(p)}</option>`);
   });
 
   const histEl = document.getElementById("historicalFilter");
   histEl.innerHTML = '<option value="">Historical</option>';
   [...hist].sort().forEach((p) => {
-    histEl.insertAdjacentHTML(
-      "beforeend",
-      `<option value="${esc(p)}">${esc(p)}</option>`,
-    );
+    histEl.insertAdjacentHTML("beforeend", `<option value="${esc(p)}">${esc(p)}</option>`);
   });
 }
 
 function updateStats() {
   document.getElementById("totalLeads").textContent = leads.length;
-  document.getElementById("liveCount").textContent = leads.filter(
-    (l) => l.live_checkout,
-  ).length;
-  document.getElementById("historicalOnlyCount").textContent = leads.filter(
-    (l) => l.historical_checkouts?.length && !l.live_checkout,
-  ).length;
-  document.getElementById("hotLeads").textContent = leads.filter(
-    (l) => l.lead_score >= 80,
-  ).length;
-  document.getElementById("kwikpassCount").textContent = leads.filter(
-    (l) => l.has_kwikpass,
-  ).length;
-  document.getElementById("emailCount").textContent = leads.filter(
-    (l) => l.emails?.length,
-  ).length;
+  document.getElementById("liveCount").textContent = leads.filter((l) => l.live_checkout).length;
+  document.getElementById("historicalOnlyCount").textContent = leads.filter((l) => l.historical_checkouts?.length && !l.live_checkout).length;
+  document.getElementById("hotLeads").textContent = leads.filter((l) => l.lead_score >= 80).length;
+  document.getElementById("kwikpassCount").textContent = leads.filter((l) => l.has_kwikpass).length;
+  document.getElementById("emailCount").textContent = leads.filter((l) => l.emails?.length).length;
 }
 
 // ─── Table ────────────────────────────────────────────────────────────────────
 
 function renderTable(data) {
   const tbody = document.querySelector("#leadTable tbody");
-  const search = (
-    document.getElementById("searchInput")?.value || ""
-  ).toLowerCase();
+  const search   = (document.getElementById("searchInput")?.value || "").toLowerCase();
   const liveProv = document.getElementById("providerFilter")?.value || "";
   const histProv = document.getElementById("historicalFilter")?.value || "";
   const priority = document.getElementById("priorityFilter")?.value || "";
-  const sortBy = document.getElementById("sortFilter")?.value || "score";
+  const sortBy   = document.getElementById("sortFilter")?.value || "score";
 
-  const filtered = data.filter(
-    (l) =>
-      l.domain.toLowerCase().includes(search) &&
-      (!liveProv || l.live_checkout === liveProv) &&
-      (!histProv || (l.historical_checkouts || []).includes(histProv)) &&
-      (!priority || l.priority === priority),
+  const filtered = data.filter((l) =>
+    l.domain.toLowerCase().includes(search) &&
+    (!liveProv || l.live_checkout === liveProv) &&
+    (!histProv || (l.historical_checkouts || []).includes(histProv)) &&
+    (!priority || l.priority === priority)
   );
 
-  if (sortBy === "domain")
-    filtered.sort((a, b) => a.domain.localeCompare(b.domain));
+  if (sortBy === "domain") filtered.sort((a, b) => a.domain.localeCompare(b.domain));
   else filtered.sort((a, b) => b.lead_score - a.lead_score);
 
   tbody.innerHTML = "";
@@ -220,11 +195,8 @@ function renderTable(data) {
     const isSel = selectedLead?.domain === lead.domain;
     const isWL = watchlist.has(lead.domain);
     const tr = document.createElement("tr");
-    if (isSel) {
-      tr.classList.add("active");
-      activeRow = tr;
-    }
-    if (isWL) tr.classList.add("watchlisted");
+    if (isSel) { tr.classList.add("active"); activeRow = tr; }
+    if (isWL)  tr.classList.add("watchlisted");
     tr.setAttribute("data-domain", lead.domain);
 
     tr.innerHTML = `
@@ -238,9 +210,7 @@ function renderTable(data) {
     `;
 
     tr.addEventListener("click", () => {
-      document
-        .querySelectorAll("#leadTable tbody tr")
-        .forEach((r) => r.classList.remove("active"));
+      document.querySelectorAll("#leadTable tbody tr").forEach((r) => r.classList.remove("active"));
       tr.classList.add("active");
       activeRow = tr;
       showLead(lead);
@@ -249,14 +219,14 @@ function renderTable(data) {
     tbody.appendChild(tr);
   });
 
-  document.getElementById("leadCount").textContent =
-    `${filtered.length} / ${leads.length}`;
+  document.getElementById("leadCount").textContent = `${filtered.length} / ${leads.length}`;
 }
 
 // ─── Detail Panel ─────────────────────────────────────────────────────────────
 
 function showLead(lead) {
   selectedLead = lead;
+  window.selectedLead = lead;
 
   document.getElementById("domainTitle").textContent = lead.domain;
 
@@ -270,19 +240,16 @@ function showLead(lead) {
   pb.className = `priority-badge ${priorityClass(lead.priority)}`;
   pb.textContent = lead.priority || "";
 
-  // watchlist button label
   document.getElementById("watchlistBtn").innerHTML = `
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     ${watchlist.has(lead.domain) ? "Unwatch" : "Watch"}
   `;
 
-  // ── Live Checkout ──
+  // Live Checkout
   const liveCard = document.getElementById("liveCheckoutCard");
   if (lead.live_checkout) {
-    const evidence = (lead.live_evidence || [])
-      .slice(0, 3)
-      .map((u) => `<span class="evidence-url">${esc(u.split("?")[0])}</span>`)
-      .join("");
+    const evidence = (lead.live_evidence || []).slice(0, 3)
+      .map((u) => `<span class="evidence-url">${esc(u.split("?")[0])}</span>`).join("");
     liveCard.className = "checkout-card";
     liveCard.innerHTML = `
       <div class="checkout-header">
@@ -296,45 +263,33 @@ function showLead(lead) {
     liveCard.textContent = "No live checkout detected";
   }
 
-  // ── Historical ──
+  // Historical
   const histEl = document.getElementById("historicalBadges");
-  const histOnly = (lead.historical_checkouts || []).filter(
-    (p) => p !== lead.live_checkout,
-  );
-  histEl.innerHTML =
-    histOnly.length ?
-      histOnly
-        .map((p) => `<span class="badge badge-hist">${esc(p)}</span>`)
-        .join("")
+  const histOnly = (lead.historical_checkouts || []).filter((p) => p !== lead.live_checkout);
+  histEl.innerHTML = histOnly.length
+    ? histOnly.map((p) => `<span class="badge badge-hist">${esc(p)}</span>`).join("")
     : '<span class="badge-empty">None detected</span>';
 
-  // ── Kwikpass ──
-  document.getElementById("kwikpassStatus").innerHTML =
-    lead.has_kwikpass ?
-      '<span class="kp-yes">Kwikpass detected — Login/OTP enabled</span>'
+  // Kwikpass
+  document.getElementById("kwikpassStatus").innerHTML = lead.has_kwikpass
+    ? '<span class="kp-yes">Kwikpass detected — Login/OTP enabled</span>'
     : '<span class="kp-no">Not detected</span>';
 
-  // ── Contact ──
+  // Contact
   const contactEl = document.getElementById("contactInfo");
   let contactHtml = "";
 
   if (lead.emails?.length) {
-    const emailItems = lead.emails
-      .map(
-        (e) =>
-          `<span class="contact-item"><a href="mailto:${esc(e)}" class="contact-link">${esc(e)}</a><button class="copy-mini" data-copy="${esc(e)}">copy</button></span>`,
-      )
-      .join("");
+    const emailItems = lead.emails.map((e) =>
+      `<span class="contact-item"><a href="mailto:${esc(e)}" class="contact-link">${esc(e)}</a><button class="copy-mini" data-copy="${esc(e)}">copy</button></span>`
+    ).join("");
     contactHtml += `<div class="contact-row"><span class="contact-icon">✉</span><div class="contact-vals">${emailItems}</div></div>`;
   }
 
   if (lead.phone_numbers?.length) {
-    const phoneItems = lead.phone_numbers
-      .map(
-        (p) =>
-          `<span class="contact-item">${esc(p)}<button class="copy-mini" data-copy="${esc(p)}">copy</button></span>`,
-      )
-      .join("");
+    const phoneItems = lead.phone_numbers.map((p) =>
+      `<span class="contact-item">${esc(p)}<button class="copy-mini" data-copy="${esc(p)}">copy</button></span>`
+    ).join("");
     contactHtml += `<div class="contact-row"><span class="contact-icon">📞</span><div class="contact-vals">${phoneItems}</div></div>`;
   }
 
@@ -355,28 +310,18 @@ function showLead(lead) {
 
   const socials = lead.socials || {};
   const socialLinks = [
-    ["linkedin", "LinkedIn"],
-    ["instagram", "Instagram"],
-    ["facebook", "Facebook"],
-    ["twitter", "Twitter"],
-    ["youtube", "YouTube"],
-  ]
-    .filter(([k]) => socials[k])
-    .map(
-      ([k, label]) =>
-        `<a href="${esc(socials[k])}" target="_blank" rel="noopener noreferrer" class="social-link">${label}</a>`,
-    )
-    .join("");
+    ["linkedin", "LinkedIn"], ["instagram", "Instagram"], ["facebook", "Facebook"],
+    ["twitter", "Twitter"], ["youtube", "YouTube"],
+  ].filter(([k]) => socials[k])
+   .map(([k, label]) => `<a href="${esc(socials[k])}" target="_blank" rel="noopener noreferrer" class="social-link">${label}</a>`)
+   .join("");
 
   if (socialLinks) {
     contactHtml += `<div class="contact-row"><span class="contact-icon">🔗</span><div class="contact-vals">${socialLinks}</div></div>`;
   }
 
-  contactEl.innerHTML =
-    contactHtml ||
-    '<span class="empty-msg">No contact information found</span>';
+  contactEl.innerHTML = contactHtml || '<span class="empty-msg">No contact information found</span>';
 
-  // wire copy-mini buttons
   contactEl.querySelectorAll(".copy-mini").forEach((btn) => {
     btn.addEventListener("click", () => {
       navigator.clipboard.writeText(btn.dataset.copy || "");
@@ -384,64 +329,69 @@ function showLead(lead) {
     });
   });
 
-  // ── Tech Stack ──
-  const techEl = document.getElementById("techStackBadges");
-  techEl.innerHTML =
-    lead.tech_stack?.length ?
-      lead.tech_stack
-        .map((t) => `<span class="badge badge-tech">${esc(t)}</span>`)
-        .join("")
+  // Tech Stack
+  document.getElementById("techStackBadges").innerHTML = lead.tech_stack?.length
+    ? lead.tech_stack.map((t) => `<span class="badge badge-tech">${esc(t)}</span>`).join("")
     : '<span class="badge-empty">None detected</span>';
 
-  // ── Merchant Info ──
+  // Merchant Info
   document.getElementById("merchantInfo").innerHTML = `
     <div class="info-row"><span class="info-key">Title</span><span class="info-val">${esc(lead.title || "—")}</span></div>
     <div class="info-row"><span class="info-key">Description</span><span class="info-val">${esc(lead.description || "—")}</span></div>
     <div class="info-row"><span class="info-key">Page Hash</span><span class="info-val info-mono">${esc(lead.page_hash || "—")}</span></div>
   `;
 
-  // ── Evidence ──
+  // Evidence
   const evEl = document.getElementById("providerEvidence");
-  evEl.innerHTML =
-    lead.live_evidence?.length ?
-      lead.live_evidence
-        .map((u) => `<div class="evidence-item">${esc(u)}</div>`)
-        .join("")
+  evEl.innerHTML = lead.live_evidence?.length
+    ? lead.live_evidence.map((u) => `<div class="evidence-item">${esc(u)}</div>`).join("")
     : '<span class="empty-msg">No evidence available</span>';
 
-  // ── Notes / Status ──
+  // Notes / Status
   const notesEl = document.getElementById("leadNotes");
-  if (notesEl)
-    notesEl.value =
-      localStorage.getItem(`fp_notes_${lead.domain}`) || lead.notes || "";
+  if (notesEl) notesEl.value = localStorage.getItem(`fp_notes_${lead.domain}`) || lead.notes || "";
   const statusEl = document.getElementById("leadStatus");
-  if (statusEl)
-    statusEl.value =
-      localStorage.getItem(`fp_status_${lead.domain}`) ||
-      lead.status ||
-      "Not Contacted";
+  if (statusEl) statusEl.value = localStorage.getItem(`fp_status_${lead.domain}`) || lead.status || "Not Contacted";
 
-  // ── Email ──
+  // Show contacted metadata if recorded
+  const contactedMetaEl = document.getElementById("contactedMeta");
+  if (contactedMetaEl) {
+    const contactedBy = lead.contacted_by;
+    const contactedAt = lead.contacted_at;
+    if (contactedBy && contactedAt) {
+      try {
+        const dateStr = new Date(contactedAt).toLocaleString();
+        contactedMetaEl.innerHTML = `
+          <div style="margin-top: 8px; padding: 6px 10px; background: rgba(16,185,129,0.06); border: 1px solid rgba(16,185,129,0.15); border-radius: 4px; display: flex; flex-direction: column; gap: 2px;">
+            <span style="color: #10b981; font-weight: 500; font-size: 11px;">Outreach Recorded</span>
+            <span style="color: var(--t2); font-size: 10.5px;">By: <strong>${esc(contactedBy)}</strong></span>
+            <span style="color: var(--t3); font-size: 10.5px;">At: ${esc(dateStr)}</span>
+          </div>
+        `;
+        contactedMetaEl.style.display = "block";
+      } catch (e) {
+        contactedMetaEl.style.display = "none";
+      }
+    } else {
+      contactedMetaEl.style.display = "none";
+    }
+  }
+
   generateEmail(lead);
-
-  // ── Watchlist ──
   renderWatchlist();
 }
 
-// ─── Watchlist Render ─────────────────────────────────────────────────────────
+// ─── Watchlist Render (sidebar list in detail) ───────────────────────────────
 
 function renderWatchlist() {
   const el = document.getElementById("watchlistItems");
   if (!el) return;
-  const items = leads.filter((l) => watchlist.has(l.domain));
+  const items = leads.filter((l) => watchlist.has(l.domain)).slice(0, 5);
   if (!items.length) {
-    el.innerHTML =
-      '<span class="watchlist-empty">No merchants watchlisted</span>';
+    el.innerHTML = '<span class="watchlist-empty">No merchants watchlisted</span>';
     return;
   }
-  el.innerHTML = items
-    .map(
-      (l) => `
+  el.innerHTML = items.map((l) => `
     <div class="watchlist-item" data-domain="${esc(l.domain)}">
       <div>
         <div class="wl-domain">${esc(l.domain)}</div>
@@ -449,18 +399,13 @@ function renderWatchlist() {
       </div>
       <button class="wl-remove" data-domain="${esc(l.domain)}" title="Remove">×</button>
     </div>
-  `,
-    )
-    .join("");
+  `).join("");
 
   el.querySelectorAll(".watchlist-item").forEach((item) => {
     item.addEventListener("click", (e) => {
       if (e.target.classList.contains("wl-remove")) return;
       const lead = leads.find((l) => l.domain === item.dataset.domain);
-      if (lead) {
-        showLead(lead);
-        highlightRow(lead.domain);
-      }
+      if (lead) { showLead(lead); highlightRow(lead.domain); }
     });
   });
   el.querySelectorAll(".wl-remove").forEach((btn) => {
@@ -475,17 +420,9 @@ function renderWatchlist() {
 }
 
 function highlightRow(domain) {
-  document
-    .querySelectorAll("#leadTable tbody tr")
-    .forEach((r) => r.classList.remove("active"));
-  const row = document.querySelector(
-    `#leadTable tbody tr[data-domain="${domain}"]`,
-  );
-  if (row) {
-    row.classList.add("active");
-    activeRow = row;
-    row.scrollIntoView({ block: "nearest" });
-  }
+  document.querySelectorAll("#leadTable tbody tr").forEach((r) => r.classList.remove("active"));
+  const row = document.querySelector(`#leadTable tbody tr[data-domain="${domain}"]`);
+  if (row) { row.classList.add("active"); activeRow = row; row.scrollIntoView({ block: "nearest" }); }
 }
 
 // ─── Email ────────────────────────────────────────────────────────────────────
@@ -505,94 +442,35 @@ function generateEmail(lead) {
 function generateDemoData() {
   return [
     {
-      domain: "velvetaura.com",
-      shopify: true,
-      live_checkout: "GoKwik",
-      live_confidence: 95,
-      live_evidence: ["hits.gokwik.co/api/v1/events"],
-      historical_checkouts: ["Shopflo", "Razorpay"],
-      has_kwikpass: true,
-      emails: ["hello@velvetaura.com", "founder@velvetaura.com"],
-      phone_numbers: ["+91 98765 43210"],
-      whatsapp_link: "https://wa.me/919876543210",
-      whatsapp_number: "+919876543210",
-      myshopify_domain: "velvetaura.myshopify.com",
-      socials: {
-        linkedin: "https://linkedin.com/company/velvetaura",
-        instagram: "https://instagram.com/velvetaura",
-        facebook: "",
-        twitter: "",
-        youtube: "",
-      },
+      domain: "velvetaura.com", shopify: true, live_checkout: "GoKwik", live_confidence: 95,
+      live_evidence: ["hits.gokwik.co/api/v1/events"], historical_checkouts: ["Shopflo", "Razorpay"],
+      has_kwikpass: true, emails: ["hello@velvetaura.com", "founder@velvetaura.com"],
+      phone_numbers: ["+91 98765 43210"], whatsapp_link: "https://wa.me/919876543210",
+      whatsapp_number: "+919876543210", myshopify_domain: "velvetaura.myshopify.com",
+      socials: { linkedin: "https://linkedin.com/company/velvetaura", instagram: "https://instagram.com/velvetaura", facebook: "", twitter: "", youtube: "" },
       tech_stack: ["Klaviyo", "Meta Pixel", "Google Analytics"],
-      title: "Velvet Aura — Premium Beauty",
-      description: "Luxury skincare and cosmetics brand",
-      lead_score: 94,
-      priority: "CRITICAL",
-      last_scan: "2026-06-07",
-      status: "Not Contacted",
-      notes: "",
-      page_hash: "abc123de",
+      title: "Velvet Aura — Premium Beauty", description: "Luxury skincare and cosmetics brand",
+      lead_score: 94, priority: "CRITICAL", last_scan: "2026-06-07", status: "Not Contacted", notes: "", page_hash: "abc123de",
     },
     {
-      domain: "stellamart.com",
-      shopify: true,
-      live_checkout: "GoKwik",
-      live_confidence: 98,
-      live_evidence: ["hits.gokwik.co/api/v1/events"],
-      historical_checkouts: ["Shopflo"],
-      has_kwikpass: true,
-      emails: ["hello@stellamart.com", "care@stellamart.com"],
-      phone_numbers: [],
-      whatsapp_link: "",
-      whatsapp_number: "",
-      myshopify_domain: "stellamart.myshopify.com",
-      socials: {
-        linkedin: "",
-        instagram: "https://instagram.com/stellamart",
-        facebook: "",
-        twitter: "",
-        youtube: "",
-      },
+      domain: "stellamart.com", shopify: true, live_checkout: "GoKwik", live_confidence: 98,
+      live_evidence: ["hits.gokwik.co/api/v1/events"], historical_checkouts: ["Shopflo"],
+      has_kwikpass: true, emails: ["hello@stellamart.com", "care@stellamart.com"], phone_numbers: [],
+      whatsapp_link: "", whatsapp_number: "", myshopify_domain: "stellamart.myshopify.com",
+      socials: { linkedin: "", instagram: "https://instagram.com/stellamart", facebook: "", twitter: "", youtube: "" },
       tech_stack: ["Klaviyo", "Intercom", "Judge.me"],
-      title: "Stella Mart — Women's Fashion",
-      description: "Trendy clothing for modern women",
-      lead_score: 89,
-      priority: "HIGH",
-      last_scan: "2026-06-07",
-      status: "Contacted",
-      notes: "Interested in pricing.",
-      page_hash: "def456gh",
+      title: "Stella Mart — Women's Fashion", description: "Trendy clothing for modern women",
+      lead_score: 89, priority: "HIGH", last_scan: "2026-06-07", status: "Contacted", notes: "Interested in pricing.", page_hash: "def456gh",
     },
     {
-      domain: "modernduke.com",
-      shopify: true,
-      live_checkout: null,
-      live_confidence: 0,
-      live_evidence: [],
-      historical_checkouts: ["Fastrr", "Razorpay"],
-      has_kwikpass: false,
-      emails: ["care@modernduke.com"],
-      phone_numbers: ["+91 87654 32109"],
-      whatsapp_link: "https://wa.me/918765432109",
-      whatsapp_number: "+918765432109",
-      myshopify_domain: "",
-      socials: {
-        linkedin: "",
-        instagram: "https://instagram.com/modernduke",
-        facebook: "",
-        twitter: "",
-        youtube: "",
-      },
+      domain: "modernduke.com", shopify: true, live_checkout: null, live_confidence: 0,
+      live_evidence: [], historical_checkouts: ["Fastrr", "Razorpay"], has_kwikpass: false,
+      emails: ["care@modernduke.com"], phone_numbers: ["+91 87654 32109"],
+      whatsapp_link: "https://wa.me/918765432109", whatsapp_number: "+918765432109", myshopify_domain: "",
+      socials: { linkedin: "", instagram: "https://instagram.com/modernduke", facebook: "", twitter: "", youtube: "" },
       tech_stack: ["Judge.me", "Hotjar"],
-      title: "Modern Duke — Men's Fashion",
-      description: "Premium apparel for men",
-      lead_score: 68,
-      priority: "MEDIUM",
-      last_scan: "2026-06-07",
-      status: "Not Contacted",
-      notes: "",
-      page_hash: "ghi789jk",
+      title: "Modern Duke — Men's Fashion", description: "Premium apparel for men",
+      lead_score: 68, priority: "MEDIUM", last_scan: "2026-06-07", status: "Not Contacted", notes: "", page_hash: "ghi789jk",
     },
   ];
 }
@@ -608,12 +486,14 @@ async function loadData() {
     const data = await res.json();
     if (!data?.length) throw new Error("Empty");
     leads = data;
+    window.leads = leads;
     setProgress(90, "Building dashboard…");
     await delay(150);
     toast(`Loaded ${leads.length} merchants`);
   } catch {
     setProgress(70, "Using demo data…");
     leads = generateDemoData();
+    window.leads = leads;
     await delay(150);
     toast(`Demo mode — ${leads.length} merchants`);
   }
@@ -628,9 +508,7 @@ async function loadData() {
   if (leads.length) showLead(leads[0]);
 }
 
-function delay(ms) {
-  return new Promise((r) => setTimeout(r, ms));
-}
+function delay(ms) { return new Promise((r) => setTimeout(r, ms)); }
 
 // ─── Single Domain Scan ───────────────────────────────────────────────────────
 
@@ -639,23 +517,12 @@ async function scanSingleDomain(domainOverride) {
   const btn = document.getElementById("singleScanBtn");
   const status = document.getElementById("scanStatus");
 
-  const raw =
-    typeof domainOverride === "string" ? domainOverride : input?.value || "";
-  const domain = raw
-    .replace(/^https?:\/\//i, "")
-    .replace(/\/$/, "")
-    .toLowerCase()
-    .trim();
+  const raw = typeof domainOverride === "string" ? domainOverride : input?.value || "";
+  const domain = raw.replace(/^https?:\/\//i, "").replace(/\/$/, "").toLowerCase().trim();
 
-  if (!domain) {
-    toast("Enter a domain", "error");
-    return;
-  }
+  if (!domain) { toast("Enter a domain", "error"); return; }
   const validDomain = /^([a-z0-9]([a-z0-9\-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/i;
-  if (!validDomain.test(domain)) {
-    toast("Invalid domain format", "error");
-    return;
-  }
+  if (!validDomain.test(domain)) { toast("Invalid domain format", "error"); return; }
 
   btn.disabled = true;
   btn.textContent = "…";
@@ -663,42 +530,30 @@ async function scanSingleDomain(domainOverride) {
   toast(`Scanning ${domain}`, "info");
 
   let result = null;
+  try {
+    const res = await fetch(`${API_URL}/scan-domain`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ domain }),
+    });
+    if (res.ok) result = await res.json();
+  } catch {}
 
-  // Try API
-  for (const port of [8080, 5000]) {
-    try {
-      const res = await fetch(`${API_URL}/scan-domain`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ domain }),
-      });
-
-      if (res.ok) {
-        result = await res.json();
-      }
-    } catch {
-      /* try next */
-    }
-  }
-
-  // Fallback: reload results.json
   if (!result || result.error) {
     try {
       const res = await fetch(`results.json?t=${Date.now()}`);
       if (res.ok) {
         const all = await res.json();
-        result =
-          all.find((r) => (r.domain || "").toLowerCase() === domain) || null;
+        result = all.find((r) => (r.domain || "").toLowerCase() === domain) || null;
       }
-    } catch {
-      /* ignore */
-    }
+    } catch {}
   }
 
   if (result && !result.error) {
     const idx = leads.findIndex((l) => l.domain === result.domain);
     if (idx === -1) leads.unshift(result);
     else leads[idx] = result;
+    window.leads = leads;
     populateFilters();
     updateStats();
     renderTable(leads);
@@ -714,64 +569,39 @@ async function scanSingleDomain(domainOverride) {
 
   btn.disabled = false;
   btn.textContent = "Scan";
-  setTimeout(() => {
-    if (status.textContent !== "Done") status.textContent = "";
-  }, 3000);
+  setTimeout(() => { if (status.textContent !== "Done") status.textContent = ""; }, 3000);
 }
 
 async function checkApi() {
   const status = document.getElementById("scanStatus");
-
   try {
     const res = await fetch(`${API_URL}/health`);
-
-    if (res.ok) {
-      status.textContent = "API Online";
-      return;
-    }
+    if (res.ok) { status.textContent = "API Online"; return; }
   } catch {}
-
-  if (status) {
-    status.textContent = "API Offline";
-  }
+  if (status) status.textContent = "API Offline";
 }
 
 // ─── Export ───────────────────────────────────────────────────────────────────
 
 function exportCSV() {
-  if (!leads.length) {
-    toast("No leads to export");
-    return;
-  }
+  if (!leads.length) { toast("No leads to export"); return; }
   const rows = leads.map((l) => ({
-    domain: l.domain,
-    shopify: l.shopify ? "Yes" : "No",
-    live_checkout: l.live_checkout || "",
-    live_confidence: l.live_confidence || 0,
+    domain: l.domain, shopify: l.shopify ? "Yes" : "No",
+    live_checkout: l.live_checkout || "", live_confidence: l.live_confidence || 0,
     historical: (l.historical_checkouts || []).join("; "),
     has_kwikpass: l.has_kwikpass ? "Yes" : "No",
-    emails: (l.emails || []).join("; "),
-    phones: (l.phone_numbers || []).join("; "),
-    whatsapp_number: l.whatsapp_number || "",
-    whatsapp_link: l.whatsapp_link || "",
+    emails: (l.emails || []).join("; "), phones: (l.phone_numbers || []).join("; "),
+    whatsapp_number: l.whatsapp_number || "", whatsapp_link: l.whatsapp_link || "",
     myshopify: l.myshopify_domain || "",
-    linkedin: l.socials?.linkedin || "",
-    instagram: l.socials?.instagram || "",
-    facebook: l.socials?.facebook || "",
-    tech_stack: (l.tech_stack || []).join("; "),
-    lead_score: l.lead_score,
-    priority: l.priority,
+    linkedin: l.socials?.linkedin || "", instagram: l.socials?.instagram || "",
+    facebook: l.socials?.facebook || "", tech_stack: (l.tech_stack || []).join("; "),
+    lead_score: l.lead_score, priority: l.priority,
     status: localStorage.getItem(`fp_status_${l.domain}`) || l.status || "",
     last_scan: l.last_scan || "",
   }));
 
   const headers = Object.keys(rows[0]);
-  const csv = [
-    headers.join(","),
-    ...rows.map((r) =>
-      headers.map((h) => JSON.stringify(r[h] ?? "")).join(","),
-    ),
-  ].join("\n");
+  const csv = [headers.join(","), ...rows.map((r) => headers.map((h) => JSON.stringify(r[h] ?? "")).join(","))].join("\n");
   const a = Object.assign(document.createElement("a"), {
     href: URL.createObjectURL(new Blob([csv], { type: "text/csv" })),
     download: `flexy-outreach-${new Date().toISOString().slice(0, 10)}.csv`,
@@ -784,10 +614,7 @@ function exportCSV() {
 // ─── Action helpers ───────────────────────────────────────────────────────────
 
 function copyField(val, label = "Copied") {
-  if (!val) {
-    toast("Nothing to copy", "error");
-    return;
-  }
+  if (!val) { toast("Nothing to copy", "error"); return; }
   navigator.clipboard.writeText(val);
   toast(label);
 }
@@ -797,33 +624,17 @@ function toggleWatchlistFilter() {
   watchlistFilterActive = !watchlistFilterActive;
   const btn = document.getElementById("watchlistFilterBtn");
   btn.classList.toggle("active", watchlistFilterActive);
-  renderTable(
-    watchlistFilterActive ?
-      leads.filter((l) => watchlist.has(l.domain))
-    : leads,
-  );
+  renderTable(watchlistFilterActive ? leads.filter((l) => watchlist.has(l.domain)) : leads);
 }
 
 // ─── Event Bindings ───────────────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Filters
-  [
-    "searchInput",
-    "providerFilter",
-    "historicalFilter",
-    "priorityFilter",
-    "sortFilter",
-  ].forEach((id) => {
-    document
-      .getElementById(id)
-      ?.addEventListener("input", () => renderTable(leads));
-    document
-      .getElementById(id)
-      ?.addEventListener("change", () => renderTable(leads));
+  ["searchInput", "providerFilter", "historicalFilter", "priorityFilter", "sortFilter"].forEach((id) => {
+    document.getElementById(id)?.addEventListener("input", () => renderTable(leads));
+    document.getElementById(id)?.addEventListener("change", () => renderTable(leads));
   });
 
-  // Search enter = quick scan
   document.getElementById("searchInput")?.addEventListener("keypress", (e) => {
     if (e.key === "Enter") {
       const v = e.target.value.trim();
@@ -831,51 +642,27 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Scan bar
-  document
-    .getElementById("singleScanBtn")
-    ?.addEventListener("click", () => scanSingleDomain());
-  document
-    .getElementById("singleScanInput")
-    ?.addEventListener("keypress", (e) => {
-      if (e.key === "Enter") scanSingleDomain();
-    });
+  document.getElementById("singleScanBtn")?.addEventListener("click", () => scanSingleDomain());
+  document.getElementById("singleScanInput")?.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") scanSingleDomain();
+  });
 
-  // Topbar actions
   document.getElementById("exportCSVBtn")?.addEventListener("click", exportCSV);
-  document
-    .getElementById("watchlistFilterBtn")
-    ?.addEventListener("click", toggleWatchlistFilter);
+  document.getElementById("watchlistFilterBtn")?.addEventListener("click", toggleWatchlistFilter);
 
-  // Detail actions
   document.getElementById("openWebsiteBtn")?.addEventListener("click", () => {
-    if (selectedLead)
-      window.open(
-        domainUrl(selectedLead.domain),
-        "_blank",
-        "noopener,noreferrer",
-      );
+    if (selectedLead) window.open(domainUrl(selectedLead.domain), "_blank", "noopener,noreferrer");
   });
-  document.getElementById("copyDomainBtn")?.addEventListener("click", () => {
-    copyField(selectedLead?.domain, "Domain copied");
-  });
-  document.getElementById("copyMyShopifyBtn")?.addEventListener("click", () => {
-    copyField(selectedLead?.myshopify_domain, "MyShopify copied");
-  });
-  document.getElementById("copyPhoneBtn")?.addEventListener("click", () => {
-    copyField(selectedLead?.phone_numbers?.[0], "Phone copied");
-  });
+  document.getElementById("copyDomainBtn")?.addEventListener("click", () => copyField(selectedLead?.domain, "Domain copied"));
+  document.getElementById("copyMyShopifyBtn")?.addEventListener("click", () => copyField(selectedLead?.myshopify_domain, "MyShopify copied"));
+  document.getElementById("copyPhoneBtn")?.addEventListener("click", () => copyField(selectedLead?.phone_numbers?.[0], "Phone copied"));
   document.getElementById("copyWhatsAppBtn")?.addEventListener("click", () => {
-    copyField(
-      selectedLead?.whatsapp_number || selectedLead?.whatsapp_link,
-      "WhatsApp copied",
-    );
+    copyField(selectedLead?.whatsapp_number || selectedLead?.whatsapp_link, "WhatsApp copied");
   });
   document.getElementById("watchlistBtn")?.addEventListener("click", () => {
     if (selectedLead) toggleWatchlist(selectedLead.domain);
   });
 
-  // Email
   document.getElementById("templateType")?.addEventListener("change", () => {
     if (selectedLead) generateEmail(selectedLead);
   });
@@ -886,13 +673,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (selectedLead) generateEmail(selectedLead);
   });
 
-  // Notes / Status
   document.getElementById("saveNotesBtn")?.addEventListener("click", () => {
     if (selectedLead) {
-      localStorage.setItem(
-        `fp_notes_${selectedLead.domain}`,
-        document.getElementById("leadNotes").value,
-      );
+      localStorage.setItem(`fp_notes_${selectedLead.domain}`, document.getElementById("leadNotes").value);
       toast("Notes saved");
     }
   });
@@ -904,7 +687,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Boot
   checkApi();
   loadData();
 });
+
+// ─── Final state exposure for pages.js ────────────────────────────────────────
+
+window.showLead = showLead;
+window.renderTable = renderTable;
+window.saveWatchlist = saveWatchlist;
+window.toggleWatchlist = toggleWatchlist;
