@@ -4,7 +4,7 @@ let leads = [];
 let selectedLead = null;
 let activeRow = null;
 let watchlist = new Set();
-const API_URL = "http://localhost:8080";
+const API_URL = localStorage.getItem("fp_api_url") || "http://localhost:8080";
 
 // Expose to pages.js
 window.leads = leads;

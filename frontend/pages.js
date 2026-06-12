@@ -3,7 +3,7 @@
 
 (function () {
 
-  const API_URL = "http://localhost:8080";
+  const API_URL = localStorage.getItem("fp_api_url") || "http://localhost:8080";
   let selectedDomains = new Set();
   let gmailStatus = { connected: false };
 
