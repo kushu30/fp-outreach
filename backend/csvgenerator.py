@@ -9,8 +9,9 @@ VALID_PROVIDERS = {
     "Razorpay",
     "Simpl",
     "FlexyPe",
-    "ecom360",
-    "Magic Checkout"
+    "Cashfree",
+    "Magic Checkout",
+    "ecom360"
 }
 
 df = pd.read_csv(

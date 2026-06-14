@@ -7,3 +7,4 @@ data/results.json
 scan_*.log
 results.json
 .env
+.env.example

@@ -16,7 +16,18 @@ from asyncio import Semaphore
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from urllib.parse import urlparse, urljoin, unquote
-from db import merchants
+from db import merchants, fingerprint_history
+
+def canonical_domain(domain: str) -> str:
+    domain = str(domain).strip().lower()
+    if domain.startswith("https://"):
+        domain = domain[8:]
+    elif domain.startswith("http://"):
+        domain = domain[7:]
+    domain = domain.split('/')[0]
+    if domain.startswith("www."):
+        domain = domain[4:]
+    return domain
 
 # ─────────────────────────────────────────────
 #  LOGGING SETUP
@@ -366,10 +377,76 @@ def extract_myshopify(html: str) -> str:
 # ─────────────────────────────────────────────
 
 def normalize_url(domain: str) -> str:
+    """Normalize domain to a full URL, prepending www. for bare root domains."""
     domain = str(domain).strip().lower()
-    if not domain.startswith(('http://', 'https://')):
-        return f'https://{domain}'
-    return domain
+    protocol = 'https://'
+    host = domain
+    if host.startswith('https://'):
+        host = host[8:]
+    elif host.startswith('http://'):
+        host = host[7:]
+        protocol = 'http://'
+    # Strip trailing slashes/paths for the bare-domain check
+    host_only = host.split('/')[0]
+    parts = host_only.split('.')
+    is_bare = False
+    if len(parts) == 2 and not host_only.startswith('www.'):
+        is_bare = True
+    elif len(parts) == 3 and parts[-2] in ('co', 'com', 'net', 'org', 'gov', 'edu') and not host_only.startswith('www.'):
+        is_bare = True
+    if is_bare:
+        return f'{protocol}www.{host}'
+    return f'{protocol}{host}'
+
+
+def send_slack_notification(domain: str, old_provider: str, new_provider: str, reason: str):
+    webhook_url = os.getenv("SLACK_WEBHOOK_URL")
+    if not webhook_url:
+        logger.warning("[Slack Warning] SLACK_WEBHOOK_URL is not set. Skipping Slack notification.")
+        return
+        
+    old_display = old_provider if old_provider else "None"
+    new_display = new_provider if new_provider else "None"
+    
+    is_flexype_removed = old_provider and old_provider.lower() == "flexype" and (not new_provider or new_provider.lower() != "flexype")
+    if is_flexype_removed:
+        emoji = "🚨 *CRITICAL ALERT: Merchant left FlexyPe*"
+    else:
+        emoji = "🔄 *Checkout Provider Changed*"
+        
+    text = (
+        f"{emoji} for *{domain}*\n"
+        f"• *Old Provider:* `{old_display}`\n"
+        f"• *New Provider:* `{new_display}`\n"
+        f"• *Trigger Reason:* {reason}\n"
+    )
+    
+    payload = {"text": text}
+    try:
+        response = requests.post(webhook_url, json=payload, timeout=10)
+        if response.status_code == 200:
+            print(f"[Slack Success] Sent checkout change notification for {domain}")
+        else:
+            print(f"[Slack Error] Failed to send notification. Status code: {response.status_code}, Response: {response.text}")
+    except Exception as e:
+        print(f"[Slack Error] Exception while sending notification: {e}")
+
+
+def delete_old_logs():
+    try:
+        import glob
+        # Find all files in LOG_DIR
+        for filepath in glob.glob(os.path.join(LOG_DIR, "*.log")):
+            # Don't delete the current log file or failed scans log
+            if os.path.basename(filepath) not in (os.path.basename(log_filename), os.path.basename(FAILED_LOG)):
+                try:
+                    os.remove(filepath)
+                except Exception:
+                    pass
+        print("[Logs] Deleted old log files.")
+    except Exception as e:
+        logger.warning(f"Failed to delete old logs: {e}")
+
 
 
 class SourceDetector:
@@ -441,6 +518,10 @@ class SourceDetector:
     def scan(self, domain: str) -> dict:
         base_url = normalize_url(domain)
         html, _ = self.fetch_html(base_url)
+        # Fallback: if www. version fails, try bare domain
+        if (not html or len(html) < 100) and '/www.' in base_url:
+            bare_url = base_url.replace('://www.', '://', 1)
+            html, _ = self.fetch_html(bare_url)
 
         empty = {
             'historical_checkouts': [], 'emails': [], 'phone_numbers': [],
@@ -571,7 +652,7 @@ class ScoringEngine:
         if data.get('shopify'):                         score += 10
         if data.get('emails'):                          score += 10
         if data.get('phone_numbers'):                   score += 5
-        if data.get('whatsapp', {}).get('number'):      score += 5
+        if data.get('whatsapp_number') or data.get('whatsapp', {}).get('number'):      score += 5
 
         s = data.get('socials', {})
         score += sum(5 for k in ('linkedin', 'instagram', 'facebook') if s.get(k))
@@ -672,7 +753,8 @@ async def scan_domain(browser, domain: str, semaphore: Semaphore) -> dict:
 #  RUNNER
 # ─────────────────────────────────────────────
 
-async def run_scanner(domains: list, max_concurrent: int = 10) -> list:
+async def run_scanner(domains: list, max_concurrent: int = 10, exclude_master: bool = False) -> list:
+    delete_old_logs()
     results   = []
     semaphore = Semaphore(max_concurrent)
 
@@ -684,7 +766,7 @@ async def run_scanner(domains: list, max_concurrent: int = 10) -> list:
             args=['--disable-dev-shm-usage', '--no-sandbox']
         )
         try:
-            tasks    = [scan_domain(browser, d, semaphore) for d in domains]
+            tasks    = [scan_domain(browser, canonical_domain(d), semaphore) for d in domains]
             total    = len(tasks)
             pbar     = ProgressBar(total)
             done     = 0
@@ -692,15 +774,49 @@ async def run_scanner(domains: list, max_concurrent: int = 10) -> list:
             print()
             for coro in asyncio.as_completed(tasks):
                 r = await coro
-                merchants.update_one(
-                    {"domain": r["domain"]},
-                    {"$set": r},
-                    upsert=True
-                )
-                results.append(r)
+                if r:
+                    canonical = canonical_domain(r["domain"])
+                    r["domain"] = canonical
+                    if not exclude_master:
+                        try:
+                            existing = merchants.find_one({"domain": canonical})
+                            if existing:
+                                old_chk = existing.get("live_checkout")
+                                new_chk = r["live_checkout"]
+                                if old_chk != new_chk:
+                                    send_slack_notification(canonical, old_chk, new_chk, "Scan Run")
+                                    # Log all live_checkout changes to fingerprint_history so they persist until acknowledged
+                                    fingerprint_history.insert_one({
+                                        "merchant": canonical,
+                                        "old_hash": "",
+                                        "new_hash": "",
+                                        "changes": {
+                                            "live_checkout": {
+                                                "old": old_chk if old_chk else "None",
+                                                "new": new_chk if new_chk else "None"
+                                            }
+                                        },
+                                        "timestamp": datetime.utcnow()
+                                    })
+                                    
+                                    # Append old provider to historical checkouts list
+                                    if old_chk and old_chk.lower() not in ["none", "unknown"]:
+                                        hists = r.get("historical_checkouts", [])
+                                        if old_chk not in hists:
+                                            hists.append(old_chk)
+                                            r["historical_checkouts"] = hists
+                        except Exception as e:
+                            logger.warning(f"Error checking provider change: {e}")
+
+                        merchants.update_one(
+                            {"domain": canonical},
+                            {"$set": r},
+                            upsert=True
+                        )
+                    results.append(r)
                 done += 1
-                live_c = sum(1 for x in results if x['live_checkout'])
-                hist_c = sum(1 for x in results if x['historical_checkouts'])
+                live_c = sum(1 for x in results if x.get('live_checkout'))
+                hist_c = sum(1 for x in results if x.get('historical_checkouts'))
                 pbar.update(done, live_c, hist_c)
             print('\n')
         finally:

@@ -5,13 +5,25 @@ import hashlib
 import requests
 import asyncio
 import argparse
-from datetime import datetime
+import os
+from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin, urlparse
 from playwright.async_api import async_playwright
 
 from db import db, merchants, merchant_fingerprints, fingerprint_history, playwright_runs
 from main_scraper import PlaywrightDetector, HEADERS, normalize_url
+
+def canonical_domain(domain: str) -> str:
+    domain = str(domain).strip().lower()
+    if domain.startswith("https://"):
+        domain = domain[8:]
+    elif domain.startswith("http://"):
+        domain = domain[7:]
+    domain = domain.split('/')[0]
+    if domain.startswith("www."):
+        domain = domain[4:]
+    return domain
 
 # Keywords for detecting competitor checkout scripts
 CHECKOUT_KEYWORDS = [
@@ -175,8 +187,59 @@ def calculate_hash(fp: dict) -> str:
     serialized = json.dumps(fp, sort_keys=True)
     return hashlib.sha256(serialized.encode("utf-8")).hexdigest()[:16]
 
+def send_slack_notification(domain: str, old_provider: str, new_provider: str, reason: str):
+    webhook_url = os.getenv("SLACK_WEBHOOK_URL")
+    if not webhook_url:
+        print("[Slack Warning] SLACK_WEBHOOK_URL is not set. Skipping Slack notification.")
+        return
+        
+    old_display = old_provider if old_provider else "None"
+    new_display = new_provider if new_provider else "None"
+    
+    is_flexype_removed = old_provider and old_provider.lower() == "flexype" and (not new_provider or new_provider.lower() != "flexype")
+    if is_flexype_removed:
+        emoji = "🚨 *CRITICAL ALERT: Merchant left FlexyPe*"
+    else:
+        emoji = "🔄 *Checkout Provider Changed*"
+        
+    text = (
+        f"{emoji} for *{domain}*\n"
+        f"• *Old Provider:* `{old_display}`\n"
+        f"• *New Provider:* `{new_display}`\n"
+        f"• *Trigger Reason:* {reason}\n"
+    )
+    
+    payload = {"text": text}
+    try:
+        response = requests.post(webhook_url, json=payload, timeout=10)
+        if response.status_code == 200:
+            print(f"[Slack Success] Sent checkout change notification for {domain}")
+        else:
+            print(f"[Slack Error] Failed to send notification. Status code: {response.status_code}, Response: {response.text}")
+    except Exception as e:
+        print(f"[Slack Error] Exception while sending notification: {e}")
+
+def cleanup_old_records():
+    """Delete database history records older than RETENTION_DAYS."""
+    try:
+        retention_days = int(os.getenv("RETENTION_DAYS", "10"))
+        cutoff = datetime.utcnow() - timedelta(days=retention_days)
+        
+        # Delete old fingerprint change logs
+        hist_res = fingerprint_history.delete_many({"timestamp": {"$lt": cutoff}})
+        # Delete old playwright verification run logs
+        run_res = playwright_runs.delete_many({"timestamp": {"$lt": cutoff}})
+        
+        if hist_res.deleted_count > 0 or run_res.deleted_count > 0:
+            print(f"[Retention Cleanup] Cleaned up older records (older than {retention_days} days). "
+                  f"Deleted {hist_res.deleted_count} history entries and {run_res.deleted_count} Playwright run entries.")
+    except Exception as e:
+        print(f"[Retention Error] Failed to clean up old records: {e}")
+
 async def trigger_playwright_check(domain: str, trigger_reason: str):
+
     """Run Playwright live verification for the merchant."""
+    domain = canonical_domain(domain)
     print(f"[Escalation] Running Playwright verification for {domain} due to: {trigger_reason}")
     async with async_playwright() as p:
         browser = await p.chromium.launch(
@@ -194,17 +257,85 @@ async def trigger_playwright_check(domain: str, trigger_reason: str):
                 "status": "success" if result["live_checkout"] else "no_checkout",
                 "checkout_detected": result["live_checkout"] is not None,
                 "detected_provider": result["live_checkout"],
+                "live_confidence": result.get("live_confidence", 0),
+                "live_evidence": result.get("live_evidence", []),
+                "checkout_scan_stages": result.get("checkout_scan_stages", []),
+                "provider_candidates": result.get("provider_candidates", []),
                 "timestamp": datetime.utcnow()
             }
             playwright_runs.insert_one(run_doc)
             
             # Update the merchant's profile status in DB if checkout was broken/changed
+            merchant_doc = merchants.find_one({"domain": domain})
+            if merchant_doc:
+                old_live_checkout = merchant_doc.get("live_checkout")
+                new_live_checkout = result["live_checkout"]
+
+                # Update checkout details
+                merchant_doc["live_checkout"] = result["live_checkout"]
+                merchant_doc["live_confidence"] = result.get("live_confidence", 0)
+                merchant_doc["live_evidence"] = result.get("live_evidence", [])
+                merchant_doc["has_kwikpass"] = result.get("has_kwikpass", False)
+                merchant_doc["kwikpass_evidence"] = result.get("kwikpass_evidence", [])
+                
+                # Recalculate lead score and priority
+                from main_scraper import ScoringEngine
+                merchant_doc["lead_score"] = ScoringEngine.calculate_score(merchant_doc)
+                merchant_doc["priority"] = ScoringEngine.get_priority(merchant_doc["lead_score"])
+                merchant_doc["last_scan"] = datetime.utcnow().strftime('%Y-%m-%d')
+                
+                merchants.update_one(
+                    {"domain": domain},
+                    {"$set": {
+                        "live_checkout": merchant_doc["live_checkout"],
+                        "live_confidence": merchant_doc["live_confidence"],
+                        "live_evidence": merchant_doc["live_evidence"],
+                        "has_kwikpass": merchant_doc["has_kwikpass"],
+                        "kwikpass_evidence": merchant_doc["kwikpass_evidence"],
+                        "lead_score": merchant_doc["lead_score"],
+                        "priority": merchant_doc["priority"],
+                        "last_scan": merchant_doc["last_scan"]
+                    }}
+                )
+                print(f"[Database Sync] Updated {domain} in merchants collection. Live checkout: {result['live_checkout']}. Score: {merchant_doc['lead_score']}, Priority: {merchant_doc['priority']}")
+
+                if old_live_checkout != new_live_checkout:
+                    send_slack_notification(domain, old_live_checkout, new_live_checkout, trigger_reason)
+                    # Log all live_checkout changes to fingerprint_history so they persist until acknowledged
+                    fingerprint_history.insert_one({
+                        "merchant": domain,
+                        "old_hash": "",
+                        "new_hash": "",
+                        "changes": {
+                            "live_checkout": {
+                                "old": old_live_checkout if old_live_checkout else "None",
+                                "new": new_live_checkout if new_live_checkout else "None"
+                            }
+                        },
+                        "timestamp": datetime.utcnow()
+                    })
+
+                    # Update historical checkouts if old_live_checkout is a valid provider and not already in list
+                    if old_live_checkout and old_live_checkout.lower() not in ["none", "unknown"]:
+                        hist = merchant_doc.get("historical_checkouts", [])
+                        if old_live_checkout not in hist:
+                            hist.append(old_live_checkout)
+                            merchants.update_one(
+                                {"domain": domain},
+                                {"$set": {"historical_checkouts": hist}}
+                            )
+
             if not result["live_checkout"]:
-                # If no checkout detected by Playwright, mark status as "Broken" or similar?
-                # For now, let's log it and optionally update merchants
-                print(f"[Warning] Playwright did not detect a live checkout for {domain}!")
+                stages = ", ".join(result.get("checkout_scan_stages", [])) or "none"
+                print(
+                    f"[Warning] Playwright did not detect a live checkout for {domain}! "
+                    f"Stages: {stages}"
+                )
             else:
-                print(f"[Success] Playwright verified checkout for {domain} -> {result['live_checkout']}")
+                print(
+                    f"[Success] Playwright verified checkout for {domain} -> "
+                    f"{result['live_checkout']} ({result.get('live_confidence', 0)}%)"
+                )
         except Exception as e:
             print(f"[Escalation Error] Playwright run failed for {domain}: {e}")
             run_doc = {
@@ -252,20 +383,30 @@ def analyze_diff_and_escalate(domain: str, old_fp: dict, new_fp: dict) -> list:
         
     return triggers
 
+
 async def scan_all_merchants_fingerprint():
-    """Run cheap fingerprint scan for all merchants in the DB."""
+    """Run Lite Fingerprint Scan for all merchants in the DB."""
+    cleanup_old_records()
     all_merchants = list(merchants.find({}, {"domain": 1}))
-    print(f"Starting cheap fingerprint scan for {len(all_merchants)} merchants...")
+    total_count = len(all_merchants)
+    print(f"Starting Lite Fingerprint Scan for {total_count} merchants...")
     
     scanner = CheapScanner()
+    success_count = 0
+    failed_count = 0
+    changed_count = 0
+    escalated_count = 0
+    changes_list = []
     
     for m in all_merchants:
         domain = m["domain"]
         fp = scanner.scan_merchant(domain)
         if not fp:
             print(f"[{domain}] Fetch failed during fingerprint scan.")
+            failed_count += 1
             continue
             
+        success_count += 1
         new_hash = calculate_hash(fp)
         
         # Check against db
@@ -304,19 +445,8 @@ async def scan_all_merchants_fingerprint():
                 
                 triggers = analyze_diff_and_escalate(domain, old_fp, fp)
                 
-                # Record change history
-                diff = {}
-                for k in ["theme_id", "theme_family", "checkout_providers", "checkout_scripts", "app_signatures"]:
-                    if old_fp[k] != fp[k]:
-                        diff[k] = {"old": old_fp[k], "new": fp[k]}
-                        
-                fingerprint_history.insert_one({
-                    "merchant": domain,
-                    "old_hash": old_hash,
-                    "new_hash": new_hash,
-                    "changes": diff,
-                    "timestamp": datetime.utcnow()
-                })
+                # Note: We do not log cheap scan changes (themes, scripts, signatures) to fingerprint_history anymore.
+                # Only Playwright-verified live_checkout changes are written to the database.
                 
                 # Update latest fingerprint in DB
                 merchant_fingerprints.update_one(
@@ -333,25 +463,91 @@ async def scan_all_merchants_fingerprint():
                 )
                 
                 print(f"[{domain}] Fingerprint changed: {old_hash} -> {new_hash}")
+                changed_count += 1
+                changes_list.append(domain)
                 
                 # Escalate if required
                 if triggers:
+                    escalated_count += 1
                     reason = ", ".join(triggers)
                     await trigger_playwright_check(domain, reason)
 
+    # Send Slack notification with summary
+    webhook_url = os.getenv("SLACK_WEBHOOK_URL")
+    if webhook_url:
+        summary_text = (
+            f"✅ *Lite Fingerprint Scan Completed Summary*\n"
+            f"• *Total Merchants:* {total_count}\n"
+            f"• *Successful Scans:* {success_count}\n"
+            f"• *Failed Fetches:* {failed_count}\n"
+            f"• *Fingerprint Changes:* {changed_count}\n"
+            f"• *Escalations Triggered:* {escalated_count}\n"
+        )
+        if changes_list:
+            formatted_changes = ", ".join(f"`{d}`" for d in changes_list[:10])
+            summary_text += f"• *Changes List:* {formatted_changes}"
+            if len(changes_list) > 10:
+                summary_text += f" and {len(changes_list) - 10} more"
+        try:
+            requests.post(webhook_url, json={"text": summary_text}, timeout=10)
+            print("[Slack Success] Sent Lite Scan summary notification.")
+        except Exception as e:
+            print(f"[Slack Error] Failed to send summary: {e}")
+
+
 async def run_daily_playwright_verification():
     """Run full Playwright validation for all merchants once every 24 hours."""
+    cleanup_old_records()
     all_merchants = list(merchants.find({}, {"domain": 1}))
-    print(f"Starting daily full Playwright verification for {len(all_merchants)} merchants...")
+    total_count = len(all_merchants)
+    print(f"Starting daily full Playwright verification for {total_count} merchants...")
+    
+    success_count = 0
+    failed_count = 0
+    changes_count = 0
+    changes_list = []
     
     for m in all_merchants:
         domain = m["domain"]
-        await trigger_playwright_check(domain, "daily_verification")
+        merchant_before = merchants.find_one({"domain": domain})
+        old_checkout = merchant_before.get("live_checkout") if merchant_before else None
+        
+        try:
+            await trigger_playwright_check(domain, "daily_verification")
+            success_count += 1
+            
+            # Check if it changed
+            merchant_after = merchants.find_one({"domain": domain})
+            new_checkout = merchant_after.get("live_checkout") if merchant_after else None
+            if old_checkout != new_checkout:
+                changes_count += 1
+                changes_list.append(f"`{domain}` (`{old_checkout}` -> `{new_checkout}`)")
+        except Exception:
+            failed_count += 1
+            
+    # Send Slack notification with summary
+    webhook_url = os.getenv("SLACK_WEBHOOK_URL")
+    if webhook_url:
+        summary_text = (
+            f"🚀 *Full Playwright Test Completed Summary*\n"
+            f"• *Total Merchants:* {total_count}\n"
+            f"• *Successful Runs:* {success_count}\n"
+            f"• *Failed Runs:* {failed_count}\n"
+            f"• *Checkout Provider Changes:* {changes_count}\n"
+        )
+        if changes_list:
+            summary_text += f"• *Changes List:* {', '.join(changes_list[:10])}"
+            if len(changes_list) > 10:
+                summary_text += f" and {len(changes_list) - 10} more"
+        try:
+            requests.post(webhook_url, json={"text": summary_text}, timeout=10)
+        except Exception as e:
+            print(f"[Slack Error] Failed to send summary: {e}")
 
 def main():
     parser = argparse.ArgumentParser(description="FlexyPe Outreach Merchant Monitoring System")
     parser.add_argument("--test", help="Test cheap scan on a single domain")
-    parser.add_argument("--cron-6h", action="store_true", help="Trigger 6-hour cheap fingerprint check")
+    parser.add_argument("--cron-12h", action="store_true", help="Trigger 12-hour cheap fingerprint check")
     parser.add_argument("--cron-24h", action="store_true", help="Trigger 24-hour Playwright validation check")
     args = parser.parse_args()
     
@@ -362,7 +558,7 @@ def main():
         print("Extracted Fingerprint:")
         print(json.dumps(fp, indent=2))
         print("Fingerprint Hash:", calculate_hash(fp))
-    elif args.cron_6h:
+    elif args.cron_12h:
         asyncio.run(scan_all_merchants_fingerprint())
     elif args.cron_24h:
         asyncio.run(run_daily_playwright_verification())

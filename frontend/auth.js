@@ -1,42 +1,24 @@
 // auth.js — FlexyPe authentication
 // TOTP (RFC 6238), session, demo user store
 
-// ──────────────────────────────────────────────────────────────
-// DEMO USER STORE
-// Replace with API calls to your backend in production.
-// Format: { email: { passwordHash, secret (Base32), twoFAEnabled } }
-// ──────────────────────────────────────────────────────────────
+const _API_BASE = localStorage.getItem("fp_api_url") || "http://localhost:8080";
 
-const DEFAULT_USERS = {
-  "admin@flexype.in": {
-    // pw: admin@flexy2026
-    passwordHash: "8c6976e5b5410415bde908bd4dee15dfb16751b2", // placeholder — see verifyPassword
-    password: "admin@flexy2026",
-    secret: "JBSWY3DPEHPK3PXPMFXFGZJWMRSXG5BR",
-    twoFAEnabled: true,
-  },
-  "om@flexype.in": {
-    password: "flexype2026",
-    secret: "MFRGGZDFMZTWQ2LKNNSXS5BRGIYTONJV",
-    twoFAEnabled: true,
-  },
-    "kushu@flexype.in": {
-    password: "kushu2026",
-    secret: "MFRGGZDFMZTWQ2LKNNSXS5BRGIYTONJV",
-    twoFAEnabled: true,
-  },
-};
-
-function loadUsers() {
+/**
+ * Verify email + password against the backend MongoDB user store.
+ */
+async function verifyCredentialsAPI(email, password) {
   try {
-    const stored = JSON.parse(localStorage.getItem("fp_users") || "null");
-    if (stored && typeof stored === "object") return stored;
-  } catch {}
-  localStorage.setItem("fp_users", JSON.stringify(DEFAULT_USERS));
-  return DEFAULT_USERS;
-}
-function saveUsers(users) {
-  localStorage.setItem("fp_users", JSON.stringify(users));
+    const res = await fetch(`${_API_BASE}/api/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return data.ok ? data : null;
+  } catch {
+    return null;
+  }
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -44,7 +26,7 @@ function saveUsers(users) {
 // ──────────────────────────────────────────────────────────────
 
 const BASE32 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
-const TOTP_PERIOD = 30; // seconds
+const TOTP_PERIOD = 30;
 const TOTP_DIGITS = 6;
 
 function generateSecret(length = 32) {
@@ -100,7 +82,6 @@ async function computeTOTP(secret, timestamp = Date.now()) {
   return String(code).padStart(TOTP_DIGITS, "0");
 }
 
-// Verify with ±1 step drift tolerance (90 sec window)
 async function verifyTOTP(secret, code) {
   if (!code || code.length !== TOTP_DIGITS) return false;
   const now = Date.now();
@@ -125,7 +106,7 @@ function otpauthURI(secret, email, issuer = "FlexyPe") {
 // ──────────────────────────────────────────────────────────────
 
 const SESSION_KEY = "fp_session";
-const SESSION_TTL_MS = 8 * 60 * 60 * 1000; // 8 hours
+const SESSION_TTL_MS = 8 * 60 * 60 * 1000;
 
 function getSession() {
   try {
@@ -149,10 +130,7 @@ function clearSession() {
   sessionStorage.removeItem(SESSION_KEY);
 }
 
-// ──────────────────────────────────────────────────────────────
-// PASSWORD CHECK (demo — replace with backend call)
-// ──────────────────────────────────────────────────────────────
-
+// Kept for compatibility
 function verifyPassword(user, password) {
   return user && user.password === password;
 }
@@ -195,8 +173,7 @@ function validateEmail(e) {
 
 // Expose globally for the page scripts
 window.FP_AUTH = {
-  loadUsers,
-  saveUsers,
+  verifyCredentialsAPI,
   generateSecret,
   base32Decode,
   computeTOTP,
@@ -214,3 +191,138 @@ window.FP_AUTH = {
   TOTP_PERIOD,
   TOTP_DIGITS,
 };
+
+// ──────────────────────────────────────────────────────────────
+// GMAIL PILL & OAUTH RETURN HANDLER
+// ──────────────────────────────────────────────────────────────
+(function () {
+  let gmailStatus = { connected: false };
+  const API_URL = localStorage.getItem("fp_api_url") || "http://localhost:8080";
+
+  function esc(s) {
+    return String(s || "").replace(/[&<>"']/g, (c) =>
+      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  async function checkGmailStatus() {
+    try {
+      const email = window.FP_currentUser || "admin@flexype.in";
+      const res = await fetch(`${API_URL}/api/auth/google/status`, {
+        headers: { "X-User-Email": email }
+      });
+      if (res.ok) {
+        gmailStatus = await res.json();
+      } else {
+        gmailStatus = { connected: false };
+      }
+    } catch {
+      gmailStatus = { connected: false };
+    }
+  }
+
+  async function startGmailConnect() {
+    try {
+      const email = window.FP_currentUser || "admin@flexype.in";
+      const res = await fetch(`${API_URL}/api/auth/google/start`, {
+        headers: { "X-User-Email": email }
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.authorize_url) {
+          window.location.href = data.authorize_url;
+        }
+      }
+    } catch (e) {
+      window.FP_AUTH.toast("OAuth connection failed", "error");
+    }
+  }
+
+  async function disconnectGmail() {
+    if (!confirm("Disconnect Gmail? You'll need to re-authorize to send again.")) return;
+    try {
+      const email = window.FP_currentUser || "admin@flexype.in";
+      const res = await fetch(`${API_URL}/api/auth/google/disconnect`, {
+        method: "POST",
+        headers: { "X-User-Email": email }
+      });
+      if (res.ok) {
+        window.FP_AUTH.toast("Gmail disconnected");
+        await checkGmailStatus();
+        renderGmailPill();
+      }
+    } catch {
+      window.FP_AUTH.toast("Failed to disconnect", "error");
+    }
+  }
+
+  function renderGmailPill() {
+    const pill = document.getElementById("gmailPill");
+    if (!pill) return;
+    if (gmailStatus.connected) {
+      pill.className = "gmail-pill gmail-pill-connected";
+      pill.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>${esc(gmailStatus.google_email || "connected")}</span>
+        <span class="gmail-status-dot connected"></span>
+      `;
+      pill.title = `Connected as ${gmailStatus.google_name || gmailStatus.google_email}. Click to disconnect.`;
+    } else {
+      pill.className = "gmail-pill gmail-pill-disconnected";
+      pill.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>Connect Gmail</span>
+        <span class="gmail-status-dot disconnected"></span>
+      `;
+      pill.title = "Click to connect your Google account to send emails from this dashboard";
+    }
+  }
+
+  function wireGmailPill() {
+    document.getElementById("gmailPill")?.addEventListener("click", () => {
+      if (gmailStatus.connected) disconnectGmail();
+      else startGmailConnect();
+    });
+  }
+
+  function injectGmailPill() {
+    if (document.getElementById("gmailPill")) return;
+    const topRight = document.querySelector(".topbar-right");
+    if (!topRight) return;
+    const pill = document.createElement("button");
+    pill.id = "gmailPill";
+    pill.className = "gmail-pill gmail-pill-disconnected";
+    topRight.insertBefore(pill, topRight.firstChild);
+    wireGmailPill();
+    renderGmailPill();
+  }
+
+  async function handleOAuthReturn() {
+    const params = new URLSearchParams(location.search);
+    const g = params.get("gmail");
+    if (!g) return;
+    if (g === "connected") {
+      window.FP_AUTH.toast("Gmail connected", "success");
+    } else if (g === "error") {
+      window.FP_AUTH.toast("Gmail connection failed: " + (params.get("reason") || "unknown"), "error");
+    }
+    history.replaceState({}, "", location.pathname + location.hash);
+    await checkGmailStatus();
+    renderGmailPill();
+  }
+
+  // Expose helpers globally
+  window.FP_AUTH.checkGmailStatus = checkGmailStatus;
+  window.FP_AUTH.startGmailConnect = startGmailConnect;
+  window.FP_AUTH.disconnectGmail = disconnectGmail;
+  window.FP_AUTH.getGmailStatus = () => gmailStatus;
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    const topRight = document.querySelector(".topbar-right");
+    if (!topRight) return;
+
+    injectGmailPill();
+    await checkGmailStatus();
+    renderGmailPill();
+    await handleOAuthReturn();
+  });
+})();

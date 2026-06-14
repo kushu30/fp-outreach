@@ -3,44 +3,81 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080810">
-  <title>FlexyPe Outreach</title>
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Dashboard — FlexyPe Outreach</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="FlexyPe_logo.png">
   <script src="guard.js"></script>
 </head>
 <body>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+  <!-- ═══════════════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
     <div class="sidebar-logo">
-      <div class="logo-mark"><span class="logo-f">F</span></div>
+      <img src="FlexyPe_logo.png" alt="FlexyPe Logo" class="sidebar-logo-img">
       <div class="logo-text">
         <span class="logo-name">FlexyPe</span>
         <span class="logo-sub">Outreach</span>
       </div>
     </div>
 
-    <nav class="sidebar-nav">
-      <a href="#dashboard" class="nav-item" data-route="dashboard">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+    <nav class="sidebar-nav" aria-label="Main">
+      <a href="index.html" class="nav-item active" data-route="dashboard" aria-current="page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="9" rx="1"/>
+          <rect x="14" y="3" width="7" height="5" rx="1"/>
+          <rect x="14" y="12" width="7" height="9" rx="1"/>
+          <rect x="3" y="16" width="7" height="5" rx="1"/>
+        </svg>
         <span>Dashboard</span>
       </a>
-      <a href="#watchlist" class="nav-item" data-route="watchlist">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+
+      <a href="watchlist.html" class="nav-item" data-route="watchlist">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
         <span>Watchlist</span>
         <span class="nav-badge" id="navWatchlistCount">0</span>
       </a>
-      <a href="#outreach" class="nav-item" data-route="outreach">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+
+      <a href="outreach.html" class="nav-item" data-route="outreach">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
         <span>Outreach</span>
+      </a>
+
+      <a href="changes.html" class="nav-item" data-route="changes">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M16 3h5v5"/>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+          <path d="M8 21H3v-5"/>
+        </svg>
+        <span>Scan Changes</span>
+      </a>
+
+      <a href="batch.html" class="nav-item" data-route="batch">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 22V4c0-.5.2-1 .6-1.4C5 2.2 5.5 2 6 2h12c.5 0 1 .2 1.4.6.4.4.6.9.6 1.4v18"/>
+          <path d="M10 6h4"/>
+          <path d="M10 10h4"/>
+          <path d="M10 14h4"/>
+          <path d="M10 18h4"/>
+        </svg>
+        <span>Batch Scans</span>
       </a>
     </nav>
 
     <div class="sidebar-bottom">
-      <!-- USER + SIGN OUT (fixed layout) -->
       <div class="user-block">
         <div class="user-avatar" id="userAvatar">?</div>
         <div class="user-info">
@@ -48,7 +85,7 @@
           <div class="user-status"><span class="status-dot"></span>Signed in</div>
         </div>
         <button class="user-signout" id="signOutBtn" title="Sign out" aria-label="Sign out">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
             <polyline points="16 17 21 12 16 7"/>
             <line x1="21" y1="12" x2="9" y2="12"/>
@@ -58,37 +95,55 @@
     </div>
   </aside>
 
-  <!-- MAIN -->
+  <!-- ═══════════════════════════════════════════════
+       MAIN
+       ═══════════════════════════════════════════════ -->
   <div class="main-wrap">
 
     <!-- TOPBAR -->
-    <header class="topbar">
+    <header class="topbar" role="banner">
       <div class="topbar-left">
-        <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <span class="breadcrumb-item">Outreach</span>
+          <svg class="breadcrumb-sep" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+          <h1 class="page-title" id="pageTitle">Dashboard</h1>
+        </nav>
       </div>
+
       <div class="topbar-center">
         <div class="search-box">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-          <input type="text" id="searchInput" placeholder="Search domains…" autocomplete="off">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Search domains, or paste a URL to scan…" autocomplete="off" aria-label="Search domains">
         </div>
       </div>
+
       <div class="topbar-right">
-        <select id="providerFilter"><option value="">All providers</option></select>
-        <select id="historicalFilter"><option value="">Historical</option></select>
-        <select id="priorityFilter">
+        <select id="providerFilter" aria-label="Filter by provider">
+          <option value="">All providers</option>
+        </select>
+        <select id="historicalFilter" aria-label="Filter by historical provider">
+          <option value="">Historical</option>
+        </select>
+        <select id="priorityFilter" aria-label="Filter by priority">
           <option value="">Priority</option>
           <option value="CRITICAL">Critical</option>
           <option value="HIGH">High</option>
           <option value="MEDIUM">Medium</option>
           <option value="LOW">Low</option>
         </select>
-        <select id="sortFilter">
-          <option value="score">Score ↓</option>
-          <option value="domain">Domain A–Z</option>
-        </select>
-        <button id="exportCSVBtn" class="btn-outline">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Export
+
+        <button id="exportCSVBtn" class="btn-outline" title="Export to CSV">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          <span>Export</span>
         </button>
       </div>
     </header>
@@ -96,128 +151,289 @@
     <!-- ═══════════════════════════════════════════════
          PAGE: DASHBOARD
          ═══════════════════════════════════════════════ -->
-    <main class="page page-route" id="page-dashboard">
+    <main class="page page-route" id="page-dashboard" role="main">
 
-      <div class="scan-strip">
-        <label class="scan-label">Quick Scan</label>
+      <!-- QUICK SCAN -->
+      <section class="scan-strip" aria-label="Quick scan">
+        <span class="scan-label">Quick scan</span>
         <div class="scan-field">
-          <input type="text" id="singleScanInput" placeholder="example.com" class="scan-input">
+          <input type="text" id="singleScanInput" placeholder="example.com" class="scan-input" aria-label="Domain to scan">
           <button id="singleScanBtn" class="btn-scan">Scan</button>
         </div>
-        <span id="scanStatus" class="scan-status"></span>
-      </div>
+        <span id="scanStatus" class="scan-status" role="status"></span>
+      </section>
 
-      <div class="stats-row">
-        <div class="stat-pill"><span class="stat-num" id="totalLeads">0</span><span class="stat-lbl">Total</span></div>
+      <!-- STATS ROW -->
+      <section class="stats-row" aria-label="Lead summary">
+        <div class="stat-pill">
+          <span class="stat-num" id="totalLeads">0</span>
+          <span class="stat-lbl">Total</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat-pill"><span class="stat-num live-num" id="liveCount">0</span><span class="stat-lbl">Live</span><span class="live-dot"></span></div>
+
+        <div class="stat-pill">
+          <span class="stat-num live-num" id="liveCount">0</span>
+          <span class="stat-lbl">Live</span>
+          <span class="live-dot" aria-hidden="true"></span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat-pill"><span class="stat-num amber-num" id="historicalOnlyCount">0</span><span class="stat-lbl">Historical</span></div>
+
+        <div class="stat-pill">
+          <span class="stat-num amber-num" id="historicalOnlyCount">0</span>
+          <span class="stat-lbl">Historical</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat-pill"><span class="stat-num red-num" id="hotLeads">0</span><span class="stat-lbl">Hot 80+</span></div>
+
+        <div class="stat-pill">
+          <span class="stat-num red-num" id="hotLeads">0</span>
+          <span class="stat-lbl">Hot 80+</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat-pill"><span class="stat-num" id="kwikpassCount">0</span><span class="stat-lbl">Kwikpass</span></div>
+
+        <div class="stat-pill">
+          <span class="stat-num" id="kwikpassCount">0</span>
+          <span class="stat-lbl">Kwikpass</span>
+        </div>
         <div class="stat-divider"></div>
-        <div class="stat-pill"><span class="stat-num" id="emailCount">0</span><span class="stat-lbl">Emails</span></div>
+
+        <div class="stat-pill">
+          <span class="stat-num" id="emailCount">0</span>
+          <span class="stat-lbl">Emails</span>
+        </div>
+
         <div class="stat-spacer"></div>
-        <button id="watchlistFilterBtn" class="btn-watchlist-toggle">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          Watchlist
-        </button>
-        <span id="leadCount" class="lead-count">0 / 0</span>
-      </div>
 
+        <button id="watchlistFilterBtn" class="btn-watchlist-toggle" title="Show only watchlisted merchants">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+          <span>Watchlist</span>
+        </button>
+
+        <span id="leadCount" class="lead-count">0 / 0</span>
+      </section>
+
+      <!-- SPLIT: TABLE + DETAILS -->
       <div class="split">
-        <div class="panel table-panel">
+
+        <!-- LEAD TABLE -->
+        <section class="panel table-panel" id="leftPanel" aria-label="Lead table">
           <div class="table-scroll">
             <table id="leadTable">
-              <thead><tr><th>Domain</th><th>Score</th><th>Live</th><th>WhatsApp</th><th>Phone</th><th>MyShopify</th><th>Priority</th></tr></thead>
+              <thead>
+                <tr>
+                  <th class="sortable" data-sort="domain">Domain <span class="sort-icon" id="sort-icon-domain">↕</span></th>
+                  <th class="sortable" data-sort="score">Score <span class="sort-icon" id="sort-icon-score">↓</span></th>
+                  <th>Live</th>
+                  <th>WhatsApp</th>
+                  <th>Phone</th>
+                  <th>MyShopify</th>
+                  <th class="sortable" data-sort="priority">Priority <span class="sort-icon" id="sort-icon-priority">↕</span></th>
+                </tr>
+              </thead>
               <tbody></tbody>
             </table>
           </div>
-        </div>
 
-        <div class="panel detail-panel" id="detailPanel">
+          <!-- PAGINATION FOOTER -->
+          <div class="table-footer">
+            <div class="pagination-size">
+              <span class="footer-lbl">Rows per page</span>
+              <select id="pageSizeSelect" aria-label="Rows per page">
+                <option value="10">10</option>
+                <option value="25" selected>25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="all">All</option>
+              </select>
+            </div>
+            <div class="pagination-info">
+              <span id="paginationInfoLabel">Showing 1–25 of 0</span>
+            </div>
+            <div class="pagination-actions">
+              <button id="prevPageBtn" class="pagination-btn" title="Previous page" aria-label="Previous page">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 18 9 12 15 6"/>
+                </svg>
+              </button>
+              <span id="currentPageLabel" class="pagination-current-page">1</span>
+              <button id="nextPageBtn" class="pagination-btn" title="Next page" aria-label="Next page">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- RESIZER -->
+        <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" aria-label="Resize panels"></div>
+
+        <!-- DETAIL PANEL -->
+        <aside class="panel detail-panel" id="detailPanel" aria-label="Merchant details">
+
+          <!-- HEADER -->
           <div class="detail-header">
             <div class="detail-domain-wrap">
               <h2 id="domainTitle">Select a merchant</h2>
               <div id="merchantMeta" class="detail-meta"></div>
             </div>
-            <span id="priorityBadge" class="priority-badge"></span>
+            <div class="detail-header-right">
+              <span id="priorityBadge" class="priority-badge"></span>
+              <button id="closeDetailBtn" title="Close details" aria-label="Close details">×</button>
+            </div>
           </div>
 
+          <!-- QUICK ACTIONS -->
           <div class="detail-actions">
-            <button id="openWebsiteBtn" class="action-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Visit</button>
-            <button id="copyDomainBtn" class="action-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>Copy</button>
+            <button id="openWebsiteBtn" class="action-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/>
+                <line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Visit
+            </button>
+            <button id="copyDomainBtn" class="action-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="9" y="9" width="13" height="13" rx="2"/>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+              Copy
+            </button>
             <button id="copyMyShopifyBtn" class="action-btn">MyShopify</button>
             <button id="copyPhoneBtn" class="action-btn">Phone</button>
             <button id="copyWhatsAppBtn" class="action-btn">WhatsApp</button>
-            <button id="watchlistBtn" class="action-btn watchlist-btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Watch</button>
+            <button id="watchlistBtn" class="action-btn watchlist-btn">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+              </svg>
+              Watch
+            </button>
           </div>
 
+          <!-- LIVE CHECKOUT -->
           <div class="detail-block">
-            <div class="block-title"><span class="dot dot-green"></span>Live Checkout</div>
+            <div class="block-title"><span class="dot dot-green"></span>Live checkout</div>
             <div id="liveCheckoutCard" class="checkout-card checkout-empty">No live checkout detected</div>
           </div>
 
+          <!-- HISTORICAL -->
           <div class="detail-block">
             <div class="block-title"><span class="dot dot-amber"></span>Historical</div>
             <div id="historicalBadges" class="badges-wrap"></div>
           </div>
 
+          <!-- KWIKPASS -->
           <div class="detail-block">
             <div class="block-title"><span class="dot dot-blue"></span>Kwikpass</div>
             <div id="kwikpassStatus"></div>
           </div>
 
+          <!-- CONTACT -->
           <div class="detail-block">
             <div class="block-title">Contact</div>
             <div id="contactInfo" class="contact-list"></div>
           </div>
 
+          <!-- TECH STACK -->
           <div class="detail-block">
-            <div class="block-title">Tech Stack</div>
+            <div class="block-title">Tech stack</div>
             <div id="techStackBadges" class="badges-wrap"></div>
           </div>
 
+          <!-- MERCHANT INFO -->
           <div class="detail-block">
-            <div class="block-title">Merchant Info</div>
+            <div class="block-title">Merchant info</div>
             <div id="merchantInfo" class="info-rows"></div>
           </div>
 
+          <!-- EVIDENCE -->
           <div class="detail-block">
-            <div class="block-title">Network Evidence</div>
+            <div class="block-title">Network evidence</div>
             <div id="providerEvidence" class="evidence-list"></div>
           </div>
 
+          <!-- OUTREACH EMAIL -->
           <div class="detail-block">
             <div class="block-title-row">
-              <div class="block-title" style="margin:0">Outreach Email</div>
-              <select id="templateType" class="inline-select">
+              <div class="block-title">Outreach email</div>
+              <select id="templateType" class="inline-select" aria-label="Email template">
                 <option value="intro">Introduction</option>
                 <option value="competitor">Competitor</option>
                 <option value="migration">Migration</option>
                 <option value="partnership">Partnership</option>
-                <option value="feature">Feature Launch</option>
+                <option value="feature">Feature launch</option>
               </select>
             </div>
-            <textarea id="emailPreview" rows="7" placeholder="Select a merchant to generate email…"></textarea>
+
+            <!-- TO recipient -->
+            <div class="email-recipients-row">
+              <input type="text" id="emailTo" placeholder="To (recipient email)" aria-label="To recipient">
+              <select id="emailToSelect" aria-label="Select from scraped emails" style="max-width: 160px; display: none;">
+              </select>
+            </div>
+
+            <!-- CC / BCC -->
+            <div class="email-recipients-row">
+              <input type="text" id="emailCc" placeholder="Carbon Copy (comma-separated)" aria-label="Carbon Copy recipients">
+              <input type="text" id="emailBcc" placeholder="BCC (comma-separated)" aria-label="BCC recipients">
+            </div>
+
+            <!-- CC Quick-fill chips -->
+            <div id="ccTemplateRow" class="cc-chip-row">
+              <span class="cc-chip-label">Carbon Copy quick-add</span>
+              <button class="cc-chip" data-email="om@flexype.in" title="Add Om to Carbon Copy">om@flexype.in</button>
+              <button class="cc-chip" data-email="kushu@flexype.in" title="Add Kushu to Carbon Copy">kushu@flexype.in</button>
+              <button class="cc-chip" data-email="team@flexype.in" title="Add Team to Carbon Copy">team@flexype.in</button>
+              <button class="cc-chip cc-chip-clear" id="clearCcBtn" title="Clear Carbon Copy field">Clear</button>
+            </div>
+
+            <!-- Attachment -->
+            <div class="attachment-row">
+              <label for="emailAttachment" class="attachment-trigger">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                </svg>
+                Attach file
+              </label>
+              <input type="file" id="emailAttachment" hidden>
+              <span id="attachmentName" class="attachment-name">No file selected</span>
+              <button id="clearAttachmentBtn" class="attachment-clear" title="Remove attachment" aria-label="Remove attachment" hidden>×</button>
+            </div>
+
+            <textarea id="emailPreview" rows="8" placeholder="Select a merchant to generate email…"></textarea>
+
             <div class="block-actions">
               <button id="sendGmailBtn" class="btn-primary">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
                 Send via Gmail
               </button>
               <button id="copyEmailBtn" class="btn-ghost">Copy</button>
               <button id="resetTemplateBtn" class="btn-ghost">Reset</button>
+              <button id="viewThreadBtn" class="btn-ghost" title="View email thread" hidden>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+                Thread
+              </button>
             </div>
           </div>
 
+          <!-- NOTES -->
           <div class="detail-block">
             <div class="block-title">Notes</div>
             <textarea id="leadNotes" rows="3" placeholder="Internal notes…"></textarea>
-            <div class="block-actions"><button id="saveNotesBtn" class="btn-ghost">Save</button></div>
+            <div class="block-actions">
+              <button id="saveNotesBtn" class="btn-ghost">Save</button>
+            </div>
           </div>
 
+          <!-- STATUS -->
           <div class="detail-block">
             <div class="block-title">Status</div>
             <select id="leadStatus">
@@ -228,131 +444,75 @@
               <option value="Converted">Converted</option>
               <option value="Lost">Lost</option>
             </select>
-            <div class="block-actions"><button id="saveStatusBtn" class="btn-ghost">Save</button></div>
-            <div id="contactedMeta" style="display:none;"></div>
+            <div class="block-actions">
+              <button id="saveStatusBtn" class="btn-ghost">Save</button>
+            </div>
+            <div id="contactedMeta" hidden></div>
           </div>
 
+          <!-- RECENT WATCHLIST -->
           <div class="detail-block">
-            <div class="block-title">Recent Watchlist</div>
+            <div class="block-title">Recent watchlist</div>
             <div id="watchlistItems" class="watchlist-list"></div>
           </div>
-        </div>
+
+        </aside>
       </div>
     </main>
-
-    <!-- ═══════════════════════════════════════════════
-         PAGE: WATCHLIST
-         ═══════════════════════════════════════════════ -->
-    <main class="page page-route" id="page-watchlist" style="display:none;">
-
-      <!-- Watchlist topbar -->
-      <div class="wl-topbar">
-        <div class="wl-stats">
-          <div class="wl-stat"><span class="wl-stat-num" id="wlTotal">0</span><span class="wl-stat-lbl">Watchlisted</span></div>
-          <div class="wl-stat"><span class="wl-stat-num live-num" id="wlLive">0</span><span class="wl-stat-lbl">With live checkout</span></div>
-          <div class="wl-stat"><span class="wl-stat-num red-num" id="wlHot">0</span><span class="wl-stat-lbl">Hot 80+</span></div>
-          <div class="wl-stat"><span class="wl-stat-num" id="wlContacted">0</span><span class="wl-stat-lbl">Contacted</span></div>
-        </div>
-        <div class="wl-controls">
-          <input type="text" id="wlSearch" placeholder="Filter watchlist…" class="wl-search">
-          <select id="wlSort">
-            <option value="score">Score ↓</option>
-            <option value="domain">Domain A–Z</option>
-            <option value="status">Status</option>
-            <option value="added">Recently added</option>
-          </select>
-          <select id="wlStatusFilter">
-            <option value="">All statuses</option>
-            <option value="Not Contacted">Not Contacted</option>
-            <option value="Contacted">Contacted</option>
-            <option value="Replied">Replied</option>
-            <option value="Meeting Scheduled">Meeting Scheduled</option>
-            <option value="Converted">Converted</option>
-            <option value="Lost">Lost</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Bulk action bar -->
-      <div class="wl-bulk-bar" id="wlBulkBar" style="display:none;">
-        <span class="wl-bulk-count" id="wlBulkCount">0 selected</span>
-        <div class="wl-bulk-actions">
-          <button class="wl-bulk-btn" id="wlBulkOpen">Open all</button>
-          <button class="wl-bulk-btn" id="wlBulkExport">Export CSV</button>
-          <button class="wl-bulk-btn wl-bulk-danger" id="wlBulkRemove">Remove from watchlist</button>
-          <button class="wl-bulk-btn" id="wlBulkClear">Clear selection</button>
-        </div>
-      </div>
-
-      <!-- Grid -->
-      <div class="wl-grid" id="wlGrid">
-        <!-- cards injected by pages.js -->
-      </div>
-
-      <div class="wl-empty" id="wlEmpty" style="display:none;">
-        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--t3);margin-bottom:14px;">
-          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-        </svg>
-        <div class="wl-empty-title">No merchants watchlisted yet</div>
-        <div class="wl-empty-sub">Click the star icon on any merchant to add them here.</div>
-        <a href="#dashboard" class="wl-empty-btn">Go to Dashboard</a>
-      </div>
-    </main>
-
-    <!-- ═══════════════════════════════════════════════
-         PAGE: OUTREACH
-         ═══════════════════════════════════════════════ -->
-    <main class="page page-route" id="page-outreach" style="display:none; flex-direction: column; gap: var(--sp-lg);">
-      <div class="wl-topbar" style="border-bottom: 1px solid var(--border); padding-bottom: var(--sp-md);">
-        <div class="wl-stats">
-          <div class="wl-stat"><span class="wl-stat-num" id="outreachTotal">0</span><span class="wl-stat-lbl">Emails Sent</span></div>
-        </div>
-        <div class="wl-controls">
-          <input type="text" id="outreachSearch" placeholder="Filter by domain or recipient…" class="wl-search" style="max-width: 300px;">
-        </div>
-      </div>
-
-      <div class="panel table-panel" style="flex: 1; overflow: hidden; display: flex; flex-direction: column;">
-        <div class="table-scroll" style="flex: 1; overflow-y: auto;">
-          <table id="outreachTable">
-            <thead>
-              <tr>
-                <th>Domain</th>
-                <th>Recipient</th>
-                <th>Subject</th>
-                <th>Sent By</th>
-                <th>Date & Time</th>
-              </tr>
-            </thead>
-            <tbody id="outreachTableBody"></tbody>
-          </table>
-        </div>
-        <div class="wl-empty" id="outreachEmpty" style="display:none;">
-          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--t3);margin-bottom:14px;">
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <div class="wl-empty-title">No outreach emails sent yet</div>
-          <div class="wl-empty-sub">Connect your Gmail and send an email to a merchant from the Dashboard.</div>
-        </div>
-      </div>
-    </main>
-
   </div>
 
-  <!-- LOADER -->
-  <div id="loaderOverlay" class="loader-overlay">
+  <!-- ═══════════════════════════════════════════════
+       LOADER
+       ═══════════════════════════════════════════════ -->
+  <div id="loaderOverlay" class="loader-overlay" role="status" aria-live="polite">
     <div class="loader-box">
-      <div class="loader-ring"></div>
+      <div class="loader-ring" aria-hidden="true"></div>
       <div class="loader-label" id="loaderText">Loading…</div>
       <div class="loader-track"><div class="loader-fill" id="loaderProgressBar"></div></div>
       <div class="loader-sub" id="loaderStatus">Connecting</div>
     </div>
   </div>
 
-  <!-- SIGN OUT MODAL -->
-  <div id="signOutModal" class="modal-overlay" style="display:none;">
+  <!-- ═══════════════════════════════════════════════
+       EMAIL VIEW MODAL
+       ═══════════════════════════════════════════════ -->
+  <div id="emailViewModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalEmailSubject" hidden>
+    <div class="modal-box email-modal-box">
+      <div class="email-modal-header">
+        <h3 id="modalEmailSubject">Email subject</h3>
+        <button class="modal-close-btn" id="modalCloseEmailView" aria-label="Close">×</button>
+      </div>
+      <div class="email-modal-meta">
+        <div class="meta-field"><span class="meta-label">To</span><span id="modalEmailTo">—</span></div>
+        <div class="meta-field" id="modalCcRow"><span class="meta-label">Carbon Copy</span><span id="modalEmailCc">—</span></div>
+        <div class="meta-field"><span class="meta-label">Sent by</span><span id="modalEmailFrom">—</span></div>
+        <div class="meta-field"><span class="meta-label">Date</span><span id="modalEmailDate">—</span></div>
+        <div class="meta-field"><span class="meta-label">Status</span><span id="modalEmailStatus">—</span></div>
+      </div>
+      <div class="email-modal-body-container">
+        <div id="modalEmailBody">Loading…</div>
+      </div>
+      <div class="email-modal-actions">
+        <button class="modal-btn btn-primary" id="modalOpenInGmailBtn" title="Open thread in Gmail">
+          Open in Gmail
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </button>
+        <button class="modal-btn" id="modalEmailBackToDashboard">Select merchant</button>
+        <button class="modal-btn modal-btn-ghost" id="modalCloseEmailViewBtn">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SIGN OUT MODAL
+       ═══════════════════════════════════════════════ -->
+  <div id="signOutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="signOutTitle" hidden>
     <div class="modal-box">
-      <div class="modal-title">Sign out?</div>
+      <div class="modal-title" id="signOutTitle">Sign out?</div>
       <div class="modal-sub">You'll need your password and authenticator code to sign back in.</div>
       <div class="modal-actions">
         <button class="modal-btn modal-btn-ghost" id="modalCancel">Cancel</button>
@@ -363,7 +523,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
+  <script src="auth.js"></script>
   <script src="app.js"></script>
-  <script src="pages.js"></script>
 </body>
 </html>

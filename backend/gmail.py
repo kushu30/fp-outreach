@@ -5,6 +5,8 @@ import json
 import secrets
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+from email.mime.base import MIMEBase
+from email import encoders
 from datetime import datetime
 
 from google.oauth2.credentials import Credentials
@@ -29,6 +31,7 @@ SCOPES = [
     "https://www.googleapis.com/auth/userinfo.email",
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/gmail.send",
+    "https://www.googleapis.com/auth/gmail.readonly",
 ]
 
 # In-memory state store: { state_token: flexype_user_email }
@@ -158,17 +161,32 @@ def send_email(
     cc: str = "",
     bcc: str = "",
     domain: str = "",
+    attachment_data: str = "",
+    attachment_name: str = "",
 ) -> dict:
     """Send email via the logged-in user's Gmail. Logs to Mongo."""
     creds = _load_credentials(flexype_user_email, mongo_db)
     service = build("gmail", "v1", credentials=creds, cache_discovery=False)
 
-    msg = MIMEMultipart("alternative")
+    msg = MIMEMultipart("mixed")
     msg["To"] = to
     msg["Subject"] = subject
     if cc:  msg["Cc"]  = cc
     if bcc: msg["Bcc"] = bcc
+
+    # Attach the body text
     msg.attach(MIMEText(body, "plain", "utf-8"))
+
+    # Decode and attach file if provided
+    if attachment_data and attachment_name:
+        part = MIMEBase("application", "octet-stream")
+        part.set_payload(base64.b64decode(attachment_data))
+        encoders.encode_base64(part)
+        part.add_header(
+            "Content-Disposition",
+            f"attachment; filename=\"{attachment_name}\"",
+        )
+        msg.attach(part)
 
     raw = base64.urlsafe_b64encode(msg.as_bytes()).decode()
     try:
@@ -190,6 +208,7 @@ def send_email(
         "gmail_thread_id":  result.get("threadId"),
         "sent_at":      datetime.utcnow(),
         "status":       "sent",
+        "attachment_name": attachment_name or "",
     }
     mongo_db.sent_emails.insert_one(log_doc)
 
@@ -204,7 +223,7 @@ def list_sent_for_domain(domain: str, mongo_db, limit: int = 20) -> list:
     """Return sent-email log entries for a given merchant domain."""
     cursor = (
         mongo_db.sent_emails
-        .find({"domain": domain}, {"_id": 0, "body": 0})
+        .find({"domain": domain}, {"_id": 0})
         .sort("sent_at", -1)
         .limit(limit)
     )

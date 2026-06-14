@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Scan Changes — FlexyPe Outreach</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="FlexyPe_logo.png">
+  <script src="guard.js"></script>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════
+       SIDEBAR
+       ═══════════════════════════════════════════════ -->
+  <aside class="sidebar" id="sidebar" aria-label="Primary navigation">
+    <div class="sidebar-logo">
+      <img src="FlexyPe_logo.png" alt="FlexyPe Logo" class="sidebar-logo-img">
+      <div class="logo-text">
+        <span class="logo-name">FlexyPe</span>
+        <span class="logo-sub">Outreach</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav" aria-label="Main">
+      <a href="index.html" class="nav-item" data-route="dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="3" y="3" width="7" height="9" rx="1"/>
+          <rect x="14" y="3" width="7" height="5" rx="1"/>
+          <rect x="14" y="12" width="7" height="9" rx="1"/>
+          <rect x="3" y="16" width="7" height="5" rx="1"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="watchlist.html" class="nav-item" data-route="watchlist">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+        </svg>
+        <span>Watchlist</span>
+        <span class="nav-badge" id="navWatchlistCount">0</span>
+      </a>
+
+      <a href="outreach.html" class="nav-item" data-route="outreach">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2" y="4" width="20" height="16" rx="2"/>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+        </svg>
+        <span>Outreach</span>
+      </a>
+
+      <a href="changes.html" class="nav-item active" data-route="changes" aria-current="page">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M16 3h5v5"/>
+          <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+          <path d="M8 21H3v-5"/>
+        </svg>
+        <span>Scan Changes</span>
+      </a>
+
+      <a href="batch.html" class="nav-item" data-route="batch">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 22V4c0-.5.2-1 .6-1.4C5 2.2 5.5 2 6 2h12c.5 0 1 .2 1.4.6.4.4.6.9.6 1.4v18"/>
+          <path d="M10 6h4"/>
+          <path d="M10 10h4"/>
+          <path d="M10 14h4"/>
+          <path d="M10 18h4"/>
+        </svg>
+        <span>Batch Scans</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="user-block">
+        <div class="user-avatar" id="userAvatar">?</div>
+        <div class="user-info">
+          <div class="user-email" id="userEmail">—</div>
+          <div class="user-status"><span class="status-dot"></span>Signed in</div>
+        </div>
+        <button class="user-signout" id="signOutBtn" title="Sign out" aria-label="Sign out">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/>
+            <line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════
+       MAIN
+       ═══════════════════════════════════════════════ -->
+  <div class="main-wrap">
+
+    <!-- TOPBAR -->
+    <header class="topbar" role="banner">
+      <div class="topbar-left">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <a href="index.html" class="breadcrumb-link">Outreach</a>
+          <svg class="breadcrumb-sep" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+          <h1 class="page-title">Scan Changes</h1>
+        </nav>
+      </div>
+
+      <div class="topbar-right">
+        <a href="index.html" class="btn-outline">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M19 12H5"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span>Back to Dashboard</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main class="page page-secondary" id="page-changes" role="main">
+
+      <!-- HEADER ROW: stats + search -->
+      <section class="wl-topbar">
+        <div class="wl-stats">
+          <div class="wl-stat">
+            <span class="wl-stat-num" id="changesTotal">0</span>
+            <span class="wl-stat-lbl">Active changes</span>
+          </div>
+        </div>
+        <div class="wl-controls">
+          <div class="search-box wl-search-box">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/>
+              <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <input type="text" id="changesSearch" placeholder="Filter by domain…" aria-label="Filter scan changes">
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB NAVIGATION -->
+      <div class="tabs-nav">
+        <button class="tab-btn active" id="tabCritical">
+          <span>Critical Shifts</span>
+          <span class="tab-badge" id="badgeCritical">0</span>
+        </button>
+        <button class="tab-btn" id="tabOther">
+          <span>Other Changes</span>
+          <span class="tab-badge" id="badgeOther">0</span>
+        </button>
+      </div>
+
+      <!-- BULK ACKNOWLEDGE CONTROL BAR -->
+      <div class="changes-bulk-bar" id="changesBulkBar">
+        <div class="changes-bulk-left">
+          <span id="changesSelectedCount">0 selected</span>
+        </div>
+        <div class="changes-bulk-actions">
+          <label class="toggle-wrapper" title="Show previously acknowledged changes">
+            <input type="checkbox" id="toggleShowAck" class="toggle-input">
+            <span>Show Acknowledged</span>
+          </label>
+          <button class="btn-ack" id="btnAckSelected" disabled>Acknowledge Selected</button>
+          <button class="btn-ack" id="btnAckAll">Acknowledge All</button>
+        </div>
+      </div>
+
+      <!-- TABLE -->
+      <section class="panel table-panel page-table" aria-label="Scan changes log">
+        <div class="table-scroll">
+          <table id="changesTable">
+            <thead>
+              <tr>
+                <th style="width: 40px; text-align: center;"><input type="checkbox" id="selectAllChanges" aria-label="Select all changes"></th>
+                <th>Domain</th>
+                <th>Changed field</th>
+                <th>Old value</th>
+                <th>New value</th>
+                <th>Date &amp; time</th>
+                <th style="width: 100px; text-align: center;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="changesTableBody"></tbody>
+          </table>
+        </div>
+
+        <div class="wl-empty wl-empty-inline" id="changesEmpty" hidden>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+          </svg>
+          <div class="wl-empty-title" id="emptyTitle">No changes found</div>
+          <div class="wl-empty-sub" id="emptySub">Unacknowledged changes will appear here automatically when scans run.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- LOADER -->
+  <div id="loaderOverlay" class="loader-overlay" role="status" aria-live="polite">
+    <div class="loader-box">
+      <div class="loader-ring" aria-hidden="true"></div>
+      <div class="loader-label" id="loaderText">Loading…</div>
+      <div class="loader-track"><div class="loader-fill" id="loaderProgressBar"></div></div>
+      <div class="loader-sub" id="loaderStatus">Connecting</div>
+    </div>
+  </div>
+
+  <!-- SIGN OUT MODAL -->
+  <div id="signOutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="signOutTitle" hidden>
+    <div class="modal-box">
+      <div class="modal-title" id="signOutTitle">Sign out?</div>
+      <div class="modal-sub">You'll need your password and authenticator code to sign back in.</div>
+      <div class="modal-actions">
+        <button class="modal-btn modal-btn-ghost" id="modalCancel">Cancel</button>
+        <button class="modal-btn modal-btn-danger" id="modalConfirm">Sign out</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="auth.js"></script>
+  <script src="changes.js"></script>
+</body>
+</html>

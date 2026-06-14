@@ -3,21 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080810">
-  <title>Sign in · FlexyPe</title>
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Sign in — FlexyPe</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="auth.css">
+  <link rel="icon" type="image/png" href="FlexyPe_logo.png">
 </head>
 <body>
 
-  <div class="card">
+  <main class="card" role="main">
 
     <!-- HEADER -->
-    <div class="card-header">
+    <header class="card-header">
       <div class="logo-row">
-        <div class="logo-mark">F</div>
+        <img src="FlexyPe_logo.png" alt="FlexyPe Logo" class="sidebar-logo-img">
         <div class="logo-text">
           <span class="logo-name">FlexyPe</span>
           <span class="logo-sub">Outreach</span>
@@ -25,13 +28,13 @@
       </div>
       <h1 class="card-title" id="title">Sign in</h1>
       <p class="card-sub" id="subtitle">Enter your credentials to continue</p>
-    </div>
+    </header>
 
     <!-- BODY -->
     <div class="card-body">
 
-      <!-- STEP 1 — credentials -->
-      <div class="step active" id="step-creds">
+      <!-- ─── STEP 1: CREDENTIALS ──────────────────────── -->
+      <section class="step active" id="step-creds" aria-label="Credentials">
         <div class="field">
           <label for="email">Email</label>
           <input type="email" id="email" placeholder="you@flexype.in" autocomplete="username" autofocus>
@@ -42,18 +45,33 @@
           <input type="password" id="password" placeholder="••••••••" autocomplete="current-password">
           <div class="err-msg" id="passwordErr">Incorrect password</div>
         </div>
-        <button class="btn" id="credBtn">Continue</button>
-        <div class="divider"><span>or</span></div>
-        <a href="setup.html" class="btn btn-ghost" style="display:flex;align-items:center;justify-content:center;text-decoration:none;height:40px;">
-          Set up 2FA on this account
-        </a>
-      </div>
 
-      <!-- STEP 2 — TOTP -->
-      <div class="step" id="step-totp">
+        <button class="btn" id="credBtn">
+          <span>Continue</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
+        </button>
+
+        <div class="divider"><span>or</span></div>
+
+        <a href="setup.html" class="btn btn-ghost btn-link-anchor">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="11" width="18" height="11" rx="2"/>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span>Set up 2FA on this account</span>
+        </a>
+      </section>
+
+      <!-- ─── STEP 2: TOTP ─────────────────────────────── -->
+      <section class="step" id="step-totp" aria-label="Two-factor authentication">
         <div id="userPillWrap"></div>
-        <div class="section-title">Enter 6-digit code from authenticator app</div>
-        <div class="otp-wrap" id="otpInputs">
+
+        <div class="section-title">Enter the 6-digit code from your authenticator app</div>
+
+        <div class="otp-wrap" id="otpInputs" role="group" aria-label="One-time code">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 1">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 2">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 3">
@@ -61,27 +79,42 @@
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 5">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 6">
         </div>
+
         <div class="timer-row">
           <span class="timer-label">Code refreshes in</span>
           <div class="timer-bar-wrap"><div class="timer-bar" id="timerBar"></div></div>
           <span class="timer-text" id="timerText">30s</span>
         </div>
-        <div class="status-box" id="totpStatus"></div>
-        <button class="btn" id="verifyBtn">Verify &amp; sign in</button>
-        <div style="text-align:center;margin-top:14px;">
-          <button class="btn-link" id="backBtn">← Use a different account</button>
+
+        <div class="status-box" id="totpStatus" role="status" aria-live="polite"></div>
+
+        <button class="btn" id="verifyBtn">
+          <span>Verify &amp; sign in</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </button>
+
+        <div class="card-actions-center">
+          <button class="btn-link" id="backBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Use a different account
+          </button>
         </div>
-      </div>
+      </section>
 
     </div>
 
     <!-- FOOTER -->
-    <div class="card-footer">
+    <footer class="card-footer">
       <a href="setup.html">Set up 2FA</a>
-      <span style="color:var(--t3)">·</span>
+      <span class="card-footer-sep" aria-hidden="true">·</span>
       <a href="#" id="helpLink">Help</a>
-    </div>
-  </div>
+    </footer>
+  </main>
 
   <script src="auth.js"></script>
   <script>
@@ -127,32 +160,42 @@
           return;
         }
 
-        const users = A.loadUsers();
-        const user = users[email];
+        const btn = A.$("credBtn");
+        btn.disabled = true;
+        btn.querySelector("span").textContent = "Verifying…";
 
-        if (!A.verifyPassword(user, password)) {
-          A.setErr("password", "passwordErr", true, "Incorrect email or password");
-          return;
-        }
+        A.verifyCredentialsAPI(email, password).then(user => {
+          btn.disabled = false;
+          btn.querySelector("span").textContent = "Continue";
 
-        // 2FA is mandatory — every account must have a secret.
-        if (!user.secret) {
-          A.toast("This account has no 2FA configured. Set it up first.", "error");
-          setTimeout(() => window.location.href = "setup.html?email=" + encodeURIComponent(email), 1000);
-          return;
-        }
+          if (!user) {
+            A.setErr("password", "passwordErr", true, "Incorrect email or password");
+            return;
+          }
 
-        currentEmail = email;
-        currentUser  = user;
+          // 2FA is mandatory
+          if (!user.secret) {
+            A.toast("This account has no 2FA configured. Set it up first.", "error");
+            setTimeout(() => window.location.href = "setup.html?email=" + encodeURIComponent(email), 1000);
+            return;
+          }
 
-        // Render user pill on TOTP step
-        A.$("userPillWrap").innerHTML =
-          `<div class="user-pill"><div class="user-dot">${email[0].toUpperCase()}</div>${email}</div>`;
+          currentEmail = email;
+          currentUser  = user;
 
-        show("step-totp", "Two-factor auth", "Enter the 6-digit code from your authenticator app");
-        wireOTPInputs();
-        startTimer();
-        setTimeout(() => A.$("otpInputs").querySelector("input").focus(), 60);
+          // Render user pill on TOTP step
+          A.$("userPillWrap").innerHTML =
+            `<div class="user-pill"><div class="user-dot">${email[0].toUpperCase()}</div>${email}</div>`;
+
+          show("step-totp", "Two-factor auth", "Enter the 6-digit code from your authenticator app");
+          wireOTPInputs();
+          startTimer();
+          setTimeout(() => A.$("otpInputs").querySelector("input").focus(), 60);
+        }).catch(() => {
+          btn.disabled = false;
+          btn.querySelector("span").textContent = "Continue";
+          A.toast("Cannot reach server. Check your connection.", "error");
+        });
       }
 
       // ─── STEP 2: TOTP ──────────────────────────
@@ -202,19 +245,19 @@
 
         const btn = A.$("verifyBtn");
         btn.disabled = true;
-        btn.textContent = "Verifying…";
+        btn.querySelector("span").textContent = "Verifying…";
 
         const ok = await A.verifyTOTP(currentUser.secret, code);
 
         if (ok) {
           stopTimer();
           A.createSession(currentEmail);
-          A.$("totpStatus").className = "status-box status-box success show";
+          A.$("totpStatus").className = "status-box success show";
           A.$("totpStatus").textContent = "Verified. Redirecting…";
-          btn.textContent = "Signed in ✓";
+          btn.querySelector("span").textContent = "Signed in";
           setTimeout(() => window.location.replace("index.html"), 600);
         } else {
-          A.$("totpStatus").className = "status-box status-box error show";
+          A.$("totpStatus").className = "status-box error show";
           A.$("totpStatus").textContent = "Incorrect code. Check your authenticator app and try again.";
           const inputs = A.$("otpInputs").querySelectorAll("input");
           inputs.forEach(x => { x.classList.add("err"); x.value = ""; });
@@ -222,7 +265,7 @@
             inputs.forEach(x => x.classList.remove("err"));
             A.$("totpStatus").className = "status-box";
             btn.disabled = false;
-            btn.textContent = "Verify & sign in";
+            btn.querySelector("span").textContent = "Verify & sign in";
             inputs[0].focus();
           }, 1400);
         }
@@ -237,7 +280,7 @@
           const rem = A.totpRemaining();
           bar.style.width = (rem / A.TOTP_PERIOD * 100) + "%";
           txt.textContent = rem + "s";
-          bar.style.background = rem <= 7 ? "var(--red)" : (rem <= 15 ? "var(--amber)" : "var(--accent)");
+          bar.style.background = rem <= 7 ? "var(--error)" : (rem <= 15 ? "var(--warning)" : "var(--primary)");
         }
         tick();
         timerInterval = setInterval(tick, 500);

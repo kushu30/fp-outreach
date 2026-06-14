@@ -3,20 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#080810">
-  <title>Set up 2FA · FlexyPe</title>
+  <meta name="theme-color" content="#FFFFFF">
+  <title>Set up 2FA — FlexyPe</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="auth.css">
+  <link rel="icon" type="image/png" href="FlexyPe_logo.png">
 </head>
 <body>
 
-  <div class="card">
+  <main class="card" role="main">
 
-    <div class="card-header">
+    <!-- HEADER -->
+    <header class="card-header">
       <div class="logo-row">
-        <div class="logo-mark">F</div>
+        <img src="FlexyPe_logo.png" alt="FlexyPe Logo" class="sidebar-logo-img">
         <div class="logo-text">
           <span class="logo-name">FlexyPe</span>
           <span class="logo-sub">Outreach</span>
@@ -24,18 +28,19 @@
       </div>
       <h1 class="card-title" id="title">Set up two-factor auth</h1>
       <p class="card-sub" id="subtitle">Required for all FlexyPe accounts</p>
-    </div>
+    </header>
 
+    <!-- BODY -->
     <div class="card-body">
 
-      <div class="steps-bar">
+      <div class="steps-bar" aria-label="Setup progress">
         <div class="seg active" id="seg-1"></div>
         <div class="seg" id="seg-2"></div>
         <div class="seg" id="seg-3"></div>
       </div>
 
-      <!-- STEP 1: account -->
-      <div class="step active" id="step-acct">
+      <!-- ─── STEP 1: ACCOUNT ──────────────────────── -->
+      <section class="step active" id="step-acct" aria-label="Account">
         <div class="field">
           <label for="acctEmail">Account email</label>
           <input type="email" id="acctEmail" placeholder="you@flexype.in" autocomplete="username">
@@ -46,28 +51,43 @@
           <input type="password" id="acctPassword" placeholder="••••••••" autocomplete="current-password">
           <div class="err-msg" id="acctPasswordErr">Incorrect password</div>
         </div>
-        <p class="help-text">
-          You need an authenticator app installed on your phone before continuing.
-          We recommend <strong>Google Authenticator</strong>, <strong>Authy</strong>, or <strong>1Password</strong>.
-        </p>
-        <button class="btn" id="acctBtn">Continue</button>
-        <div style="text-align:center;margin-top:14px;">
-          <a href="login.html" class="btn-link">← Back to sign in</a>
-        </div>
-      </div>
 
-      <!-- STEP 2: scan QR -->
-      <div class="step" id="step-scan">
+        <p class="help-text">
+          <span>You need an authenticator app installed on your phone before continuing.
+          We recommend <strong>Google Authenticator</strong>, <strong>Authy</strong>, or <strong>1Password</strong>.</span>
+        </p>
+
+        <button class="btn" id="acctBtn">
+          <span>Continue</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
+        </button>
+
+        <div class="card-actions-center">
+          <a href="login.html" class="btn-link">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Back to sign in
+          </a>
+        </div>
+      </section>
+
+      <!-- ─── STEP 2: SCAN QR ──────────────────────── -->
+      <section class="step" id="step-scan" aria-label="Scan QR code">
         <div id="scanUserPill"></div>
 
         <p class="help-text">
           <span class="step-num">1</span>
-          Open your authenticator app and scan this QR code.
+          <span>Open your authenticator app and scan this QR code.</span>
         </p>
 
         <div class="qr-wrap">
-          <canvas id="qrCanvas" width="180" height="180"></canvas>
-          <div class="qr-hint">Or enter the key manually:</div>
+          <div id="qrBox"></div>
+          <div class="qr-hint">Or enter the key manually</div>
         </div>
 
         <div class="secret-row">
@@ -75,25 +95,38 @@
           <button class="copy-btn" id="copyBtn">Copy</button>
         </div>
 
-        <p class="help-text" style="margin-top:6px;">
+        <p class="help-text">
           <span class="step-num">2</span>
-          Your app will display a 6-digit code that refreshes every 30 seconds.
+          <span>Your app will display a 6-digit code that refreshes every 30 seconds.</span>
         </p>
 
-        <button class="btn" id="scanContinueBtn">I've scanned it</button>
-        <div style="text-align:center;margin-top:14px;">
-          <button class="btn-link" id="scanBackBtn">← Back</button>
-        </div>
-      </div>
+        <button class="btn" id="scanContinueBtn">
+          <span>I've scanned it</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
+        </button>
 
-      <!-- STEP 3: verify -->
-      <div class="step" id="step-verify">
+        <div class="card-actions-center">
+          <button class="btn-link" id="scanBackBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Back
+          </button>
+        </div>
+      </section>
+
+      <!-- ─── STEP 3: VERIFY ───────────────────────── -->
+      <section class="step" id="step-verify" aria-label="Verify code">
         <p class="help-text">
           <span class="step-num">3</span>
-          Enter the 6-digit code from your app to confirm setup.
+          <span>Enter the 6-digit code from your app to confirm setup.</span>
         </p>
 
-        <div class="otp-wrap" id="otpInputs">
+        <div class="otp-wrap" id="otpInputs" role="group" aria-label="One-time code">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 1">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 2">
           <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]" aria-label="Digit 3">
@@ -108,49 +141,66 @@
           <span class="timer-text" id="timerText">30s</span>
         </div>
 
-        <div class="status-box" id="setupStatus"></div>
+        <div class="status-box" id="setupStatus" role="status" aria-live="polite"></div>
 
-        <button class="btn" id="activateBtn">Activate 2FA</button>
-        <div style="text-align:center;margin-top:14px;">
-          <button class="btn-link" id="verifyBackBtn">← Back</button>
+        <button class="btn" id="activateBtn">
+          <span>Activate 2FA</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </button>
+
+        <div class="card-actions-center">
+          <button class="btn-link" id="verifyBackBtn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M19 12H5"/>
+              <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Back
+          </button>
         </div>
-      </div>
+      </section>
 
-      <!-- STEP 4: done -->
-      <div class="step" id="step-done">
-        <div style="text-align:center;padding:14px 0 20px;">
-          <div style="width:56px;height:56px;border-radius:50%;background:var(--green-dim);border:1px solid rgba(52,211,153,0.3);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <!-- ─── STEP 4: DONE ─────────────────────────── -->
+      <section class="step" id="step-done" aria-label="Setup complete">
+        <div class="done-block">
+          <div class="done-icon" aria-hidden="true">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="20 6 9 17 4 12"/>
             </svg>
           </div>
-          <h2 style="font-size:16px;font-weight:600;color:var(--t1);margin-bottom:6px;">2FA is now active</h2>
-          <p style="font-size:12.5px;color:var(--t2);">You'll be asked for a code each time you sign in.</p>
+          <h2 class="done-title">2FA is now active</h2>
+          <p class="done-sub">You'll be asked for a code each time you sign in.</p>
         </div>
 
-        <div class="status-box info show" style="margin-bottom:6px;">
+        <div class="status-box info show recovery-note">
           Save your recovery key somewhere safe — you'll need it if you lose access to your authenticator.
         </div>
-        <div class="secret-row" style="margin-bottom:18px;">
+        <div class="secret-row">
           <span class="secret-val" id="recoveryVal">—</span>
           <button class="copy-btn" id="copyRecoveryBtn">Copy</button>
         </div>
 
-        <a href="login.html" class="btn" style="display:flex;align-items:center;justify-content:center;text-decoration:none;">
-          Continue to sign in
+        <a href="login.html" class="btn btn-link-anchor">
+          <span>Continue to sign in</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M5 12h14"/>
+            <path d="m12 5 7 7-7 7"/>
+          </svg>
         </a>
-      </div>
+      </section>
 
     </div>
 
-    <div class="card-footer">
+    <!-- FOOTER -->
+    <footer class="card-footer">
       <a href="login.html">Sign in</a>
-    </div>
-  </div>
+    </footer>
+  </main>
 
   <script src="auth.js"></script>
-  <!-- qrcodejs from cdnjs allowlist -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <!-- qrcodejs bundled locally — no CDN dependency -->
+  <script src="qrcode.min.js"></script>
   <script>
     (function () {
       const A = window.FP_AUTH;
@@ -191,22 +241,32 @@
           return;
         }
 
-        const users = A.loadUsers();
-        const user = users[email];
+        const btn = A.$("acctBtn");
+        btn.disabled = true;
+        btn.querySelector("span").textContent = "Verifying…";
 
-        if (!A.verifyPassword(user, password)) {
-          A.setErr("acctPassword", "acctPasswordErr", true, "Incorrect email or password");
-          return;
-        }
+        A.verifyCredentialsAPI(email, password).then(user => {
+          btn.disabled = false;
+          btn.querySelector("span").textContent = "Continue";
 
-        setupEmail = email;
-        setupSecret = A.generateSecret();
+          if (!user) {
+            A.setErr("acctPassword", "acctPasswordErr", true, "Incorrect email or password");
+            return;
+          }
 
-        A.$("scanUserPill").innerHTML =
-          `<div class="user-pill"><div class="user-dot">${email[0].toUpperCase()}</div>${email}</div>`;
+          setupEmail = email;
+          setupSecret = A.generateSecret();
 
-        renderQR(setupSecret, email);
-        show("step-scan", 2);
+          A.$("scanUserPill").innerHTML =
+            `<div class="user-pill"><div class="user-dot">${email[0].toUpperCase()}</div>${email}</div>`;
+
+          renderQR(setupSecret, email);
+          show("step-scan", 2);
+        }).catch(() => {
+          btn.disabled = false;
+          btn.querySelector("span").textContent = "Continue";
+          A.toast("Cannot reach server. Check your connection.", "error");
+        });
       }
 
       // ─── STEP 2: QR ────────────────────────────
@@ -214,40 +274,24 @@
         // format secret with spaces every 4 chars for readability
         A.$("secretVal").textContent = secret.match(/.{1,4}/g).join(" ");
 
-        const canvas = A.$("qrCanvas");
-        const ctx = canvas.getContext("2d");
-        const size = 180;
         const uri = A.otpauthURI(secret, email, "FlexyPe");
+        const box = A.$("qrBox");
+        box.innerHTML = ""; // clear previous
 
-        if (typeof qrcode === "undefined") {
-          ctx.fillStyle = "#161628";
-          ctx.fillRect(0, 0, size, size);
-          ctx.fillStyle = "#f87171";
-          ctx.font = "11px monospace";
-          ctx.fillText("QR library failed to load.", 12, size / 2 - 6);
-          ctx.fillText("Use the key manually.", 12, size / 2 + 12);
+        if (typeof QRCode === "undefined") {
+          box.classList.add("qr-fallback");
+          box.innerHTML = `<div class="qr-fallback-msg">QR library failed.<br>Use the key below.</div>`;
           return;
         }
 
-        const qr = qrcode(0, "M");
-        qr.addData(uri);
-        qr.make();
-        const modules = qr.getModuleCount();
-        const margin = 8;
-        const cell = (size - margin * 2) / modules;
-
-        // background
-        ctx.fillStyle = "#0c0c18";
-        ctx.fillRect(0, 0, size, size);
-        // modules
-        ctx.fillStyle = "#e8e8f0";
-        for (let r = 0; r < modules; r++) {
-          for (let c = 0; c < modules; c++) {
-            if (qr.isDark(r, c)) {
-              ctx.fillRect(margin + c * cell, margin + r * cell, cell + 0.5, cell + 0.5);
-            }
-          }
-        }
+        new QRCode(box, {
+          text: uri,
+          width: 180,
+          height: 180,
+          colorDark: "#0F172A",
+          colorLight: "#ffffff",
+          correctLevel: QRCode.CorrectLevel.M
+        });
       }
 
       A.$("copyBtn").addEventListener("click", () => {
@@ -306,25 +350,32 @@
 
         const btn = A.$("activateBtn");
         btn.disabled = true;
-        btn.textContent = "Verifying…";
+        btn.querySelector("span").textContent = "Verifying…";
 
         const ok = await A.verifyTOTP(setupSecret, code);
 
         if (ok) {
           stopTimer();
-          // persist
-          const users = A.loadUsers();
-          users[setupEmail] = {
-            ...(users[setupEmail] || {}),
-            secret: setupSecret,
-            twoFAEnabled: true,
-          };
-          A.saveUsers(users);
+          // Save new TOTP secret to backend
+          const apiBase = localStorage.getItem("fp_api_url") || "http://localhost:8080";
+          const adminSecret = "flexy-admin-secret-2026"; // same as ADMIN_SECRET in .env
+          try {
+            await fetch(`${apiBase}/api/users/${encodeURIComponent(setupEmail)}`, {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+                "X-Admin-Secret": adminSecret
+              },
+              body: JSON.stringify({ secret: setupSecret })
+            });
+          } catch (e) {
+            console.warn("[2FA setup] Could not persist secret to backend:", e);
+          }
 
           A.$("recoveryVal").textContent = setupSecret.match(/.{1,4}/g).join(" ");
           show("step-done", 3);
         } else {
-          A.$("setupStatus").className = "status-box status-box error show";
+          A.$("setupStatus").className = "status-box error show";
           A.$("setupStatus").textContent = "That code didn't match. Make sure your device time is correct and try the next code.";
           const inputs = A.$("otpInputs").querySelectorAll("input");
           inputs.forEach(x => { x.classList.add("err"); x.value = ""; });
@@ -332,7 +383,7 @@
             inputs.forEach(x => x.classList.remove("err"));
             A.$("setupStatus").className = "status-box";
             btn.disabled = false;
-            btn.textContent = "Activate 2FA";
+            btn.querySelector("span").textContent = "Activate 2FA";
             inputs[0].focus();
           }, 1500);
         }
@@ -355,7 +406,7 @@
           const rem = A.totpRemaining();
           bar.style.width = (rem / A.TOTP_PERIOD * 100) + "%";
           txt.textContent = rem + "s";
-          bar.style.background = rem <= 7 ? "var(--red)" : (rem <= 15 ? "var(--amber)" : "var(--accent)");
+          bar.style.background = rem <= 7 ? "var(--error)" : (rem <= 15 ? "var(--warning)" : "var(--primary)");
         }
         tick();
         timerInterval = setInterval(tick, 500);

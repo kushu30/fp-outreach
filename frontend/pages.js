@@ -1,4 +1,4 @@
-// pages.js — v4 — routing, watchlist page, auth UI, Gmail API send
+// pages.js — v5 — routing, watchlist page, auth UI, Gmail API send
 // Loads AFTER app.js so it can read `leads`, `watchlist`, `selectedLead`
 
 (function () {
@@ -73,8 +73,22 @@
   document.getElementById("userAvatar").textContent = email[0].toUpperCase();
 
   const modal = document.getElementById("signOutModal");
-  function openModal() { modal.style.display = "flex"; requestAnimationFrame(() => modal.classList.add("show")); }
-  function closeModal() { modal.classList.remove("show"); setTimeout(() => (modal.style.display = "none"), 180); }
+
+  function openModal() {
+    if (!modal) return;
+    modal.hidden = false;
+    modal.style.display = "flex";
+    requestAnimationFrame(() => modal.classList.add("show"));
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove("show");
+    setTimeout(() => {
+      modal.style.display = "none";
+      modal.hidden = true;
+    }, 180);
+  }
 
   document.getElementById("signOutBtn")?.addEventListener("click", openModal);
   document.getElementById("modalCancel")?.addEventListener("click", closeModal);
@@ -92,6 +106,7 @@
     dashboard: { title: "Dashboard", section: "page-dashboard" },
     watchlist: { title: "Watchlist", section: "page-watchlist" },
     outreach:  { title: "Outreach Log", section: "page-outreach" },
+    changes:   { title: "Scan Changes", section: "page-changes" },
   };
 
   function currentRoute() {
@@ -110,15 +125,28 @@
     document.querySelectorAll(".page-route").forEach((p) => (p.style.display = "none"));
     const sec = document.getElementById(r.section);
     if (sec) sec.style.display = "flex";
-    document.getElementById("pageTitle").textContent = r.title;
+    const pageTitle = document.getElementById("pageTitle");
+    if (pageTitle) pageTitle.textContent = r.title;
     setActiveNav(route);
     if (route === "watchlist") renderWatchlistPage();
     if (route === "outreach") renderOutreachPage();
+    if (route === "changes") renderChangesPage();
   }
 
   window.addEventListener("hashchange", () => showRoute(currentRoute()));
+
+  // Nav click handler — only intercept if the target section exists in DOM
+  // (enables standalone page navigation via real hrefs when sections are absent)
   document.querySelectorAll(".nav-item[data-route]").forEach((el) => {
-    el.addEventListener("click", (e) => { e.preventDefault(); location.hash = "#" + el.dataset.route; });
+    el.addEventListener("click", (e) => {
+      const route = el.dataset.route;
+      const section = document.getElementById(ROUTES[route]?.section);
+      if (section) {
+        e.preventDefault();
+        location.hash = "#" + route;
+      }
+      // else: let the natural href navigation happen (e.g. watchlist.html)
+    });
   });
 
   // ═══════════════════════════════════════════════════════════
@@ -147,15 +175,17 @@
     if (gmailStatus.connected) {
       pill.className = "gmail-pill gmail-pill-connected";
       pill.innerHTML = `
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
-        Gmail · ${esc(gmailStatus.google_email || "connected")}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>${esc(gmailStatus.google_email || "connected")}</span>
+        <span class="gmail-status-dot connected"></span>
       `;
       pill.title = `Connected as ${gmailStatus.google_name || gmailStatus.google_email}. Click to disconnect.`;
     } else {
       pill.className = "gmail-pill gmail-pill-disconnected";
       pill.innerHTML = `
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Connect Gmail
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        <span>Connect Gmail</span>
+        <span class="gmail-status-dot disconnected"></span>
       `;
       pill.title = "Click to connect your Google account to send emails from this dashboard";
     }
@@ -216,7 +246,7 @@
     const params = new URLSearchParams(location.search);
     const g = params.get("gmail");
     if (!g) return;
-    if (g === "connected") toast("Gmail connected ✓", "success");
+    if (g === "connected") toast("Gmail connected", "success");
     else if (g === "error") toast("Gmail connection failed: " + (params.get("reason") || "unknown"), "error");
     // Clean URL
     history.replaceState({}, "", location.pathname + location.hash);
@@ -318,7 +348,7 @@
     const wrap = document.createElement("div");
     wrap.className = "email-cc-row";
     wrap.innerHTML = `
-      <input type="text" id="emailCC" placeholder="CC (comma-separated)" value="${esc(getDefaultCC())}">
+      <input type="text" id="emailCC" placeholder="CC (comma-separated)" value="${esc(getDefaultCC())}" aria-label="CC recipients">
       <button class="cc-save-btn" id="emailCCSaveBtn" title="Remember this CC for future emails">Save default</button>
     `;
     tpl.parentNode.insertBefore(wrap, tpl);
@@ -342,7 +372,8 @@
   function renderWatchlistPage() {
     const leads = getLeads();
     const wl = getWatchlist();
-    document.getElementById("navWatchlistCount").textContent = wl.size;
+    const navCount = document.getElementById("navWatchlistCount");
+    if (navCount) navCount.textContent = wl.size;
 
     let items = leads.filter((l) => wl.has(l.domain));
     const search = (document.getElementById("wlSearch")?.value || "").toLowerCase();
@@ -356,16 +387,22 @@
     else if (sort === "added") items.sort((a, b) => getAddedTime(b.domain) - getAddedTime(a.domain));
     else items.sort((a, b) => b.lead_score - a.lead_score);
 
-    document.getElementById("wlTotal").textContent = wl.size;
-    document.getElementById("wlLive").textContent = items.filter((l) => l.live_checkout).length;
-    document.getElementById("wlHot").textContent = items.filter((l) => l.lead_score >= 80).length;
-    document.getElementById("wlContacted").textContent = items.filter((l) => getStatus(l.domain) !== "Not Contacted").length;
+    const wlTotal = document.getElementById("wlTotal");
+    const wlLive = document.getElementById("wlLive");
+    const wlHot = document.getElementById("wlHot");
+    const wlContacted = document.getElementById("wlContacted");
+    if (wlTotal) wlTotal.textContent = wl.size;
+    if (wlLive) wlLive.textContent = items.filter((l) => l.live_checkout).length;
+    if (wlHot) wlHot.textContent = items.filter((l) => l.lead_score >= 80).length;
+    if (wlContacted) wlContacted.textContent = items.filter((l) => getStatus(l.domain) !== "Not Contacted").length;
 
     const grid = document.getElementById("wlGrid");
     const empty = document.getElementById("wlEmpty");
 
-    if (wl.size === 0) { grid.innerHTML = ""; empty.style.display = "flex"; return; }
-    empty.style.display = "none";
+    if (!grid) return;
+
+    if (wl.size === 0) { grid.innerHTML = ""; if (empty) empty.style.display = "flex"; return; }
+    if (empty) empty.style.display = "none";
 
     if (items.length === 0) {
       grid.innerHTML = '<div class="wl-empty-filter">No merchants match the current filters.</div>';
@@ -380,7 +417,7 @@
       return `
         <div class="wl-card ${isSel ? "selected" : ""}" data-domain="${esc(l.domain)}">
           <div class="wl-card-checkbox" data-action="select">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
           <div class="wl-card-header">
             <div class="wl-card-domain" title="${esc(l.domain)}">${esc(l.domain)}</div>
@@ -388,7 +425,7 @@
           </div>
           <div class="wl-card-tags">
             ${l.live_checkout ? `<span class="live-chip">${esc(l.live_checkout)}</span>` : ""}
-            ${l.has_kwikpass ? '<span class="badge badge-tech" style="background:rgba(251,191,36,0.1);color:#fbbf24;border-color:rgba(251,191,36,0.2)">Kwikpass</span>' : ""}
+            ${l.has_kwikpass ? '<span class="badge badge-kwikpass">Kwikpass</span>' : ""}
             <span class="pri-chip ${priChipClass(l.priority)}">${esc(l.priority)}</span>
           </div>
           <div class="wl-card-meta">
@@ -397,11 +434,11 @@
             <div class="wl-meta-row"><span class="wl-meta-key">Scanned</span><span class="wl-meta-val">${esc(l.last_scan || "—")}</span></div>
           </div>
           <div class="wl-card-actions">
-            <button class="wl-card-btn" data-action="open" title="Open in dashboard"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>View</button>
-            <button class="wl-card-btn" data-action="visit" title="Visit website"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button>
-            ${l.emails?.length ? `<button class="wl-card-btn" data-action="email" title="Send email via Gmail"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></button>` : ""}
-            ${l.whatsapp_link ? `<a class="wl-card-btn" data-action="wa" href="${esc(l.whatsapp_link)}" target="_blank" rel="noopener" title="WhatsApp" onclick="event.stopPropagation()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>` : ""}
-            <button class="wl-card-btn wl-card-remove" data-action="remove" title="Remove from watchlist"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+            <button class="wl-card-btn" data-action="open" title="Open in dashboard"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>View</button>
+            <button class="wl-card-btn" data-action="visit" title="Visit website"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></button>
+            ${l.emails?.length ? `<button class="wl-card-btn" data-action="email" title="Send email via Gmail"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg></button>` : ""}
+            ${l.whatsapp_link ? `<a class="wl-card-btn" data-action="wa" href="${esc(l.whatsapp_link)}" target="_blank" rel="noopener" title="WhatsApp" onclick="event.stopPropagation()"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>` : ""}
+            <button class="wl-card-btn wl-card-remove" data-action="remove" title="Remove from watchlist"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
           </div>
         </div>
       `;
@@ -469,9 +506,12 @@
 
   function updateBulkBar() {
     const bar = document.getElementById("wlBulkBar");
+    if (!bar) return;
     const count = selectedDomains.size;
     bar.style.display = count > 0 ? "flex" : "none";
-    document.getElementById("wlBulkCount").textContent = `${count} selected`;
+    bar.hidden = count === 0;
+    const countEl = document.getElementById("wlBulkCount");
+    if (countEl) countEl.textContent = `${count} selected`;
   }
 
   document.getElementById("wlBulkClear")?.addEventListener("click", () => {
@@ -524,6 +564,7 @@
   });
 
   document.getElementById("outreachSearch")?.addEventListener("input", filterAndRenderOutreach);
+  document.getElementById("changesSearch")?.addEventListener("input", filterAndRenderChanges);
 
   // ═══════════════════════════════════════════════════════════
   // 8b. OUTREACH PAGE LOGIC
@@ -536,9 +577,10 @@
     const empty = document.getElementById("outreachEmpty");
     if (!tbody) return;
 
-    tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:var(--t3);padding:40px;">Loading outreach logs…</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="5" class="table-loading">Loading outreach logs…</td></tr>';
     if (empty) empty.style.display = "none";
-    document.getElementById("outreachTotal").textContent = "…";
+    const totalEl = document.getElementById("outreachTotal");
+    if (totalEl) totalEl.textContent = "…";
 
     try {
       const res = await api("/api/sent-log");
@@ -561,17 +603,18 @@
     if (!tbody) return;
 
     const search = (document.getElementById("outreachSearch")?.value || "").toLowerCase();
-    
+
     let items = outreachLogs;
     if (search) {
-      items = items.filter(l => 
-        (l.domain || "").toLowerCase().includes(search) || 
+      items = items.filter(l =>
+        (l.domain || "").toLowerCase().includes(search) ||
         (l.to || "").toLowerCase().includes(search) ||
         (l.subject || "").toLowerCase().includes(search)
       );
     }
 
-    document.getElementById("outreachTotal").textContent = outreachLogs.length;
+    const totalEl = document.getElementById("outreachTotal");
+    if (totalEl) totalEl.textContent = outreachLogs.length;
 
     if (items.length === 0) {
       tbody.innerHTML = "";
@@ -585,16 +628,132 @@
       const dateStr = l.sent_at ? new Date(l.sent_at).toLocaleString() : "—";
       return `
         <tr>
-          <td><strong style="color:var(--t1);cursor:pointer;" class="outreach-domain-click" data-domain="${esc(l.domain)}">${esc(l.domain || "—")}</strong></td>
-          <td><a href="mailto:${esc(l.to)}" style="color:var(--t2);text-decoration:none;">${esc(l.to)}</a></td>
-          <td style="color:var(--t2);max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${esc(l.subject)}">${esc(l.subject)}</td>
-          <td style="color:var(--t3);font-size:11px;">${esc(l.flexype_user)}</td>
-          <td style="color:var(--t3);font-size:11px;">${esc(dateStr)}</td>
+          <td><strong class="outreach-domain-click" data-domain="${esc(l.domain)}">${esc(l.domain || "—")}</strong></td>
+          <td><a href="mailto:${esc(l.to)}" class="contact-link" onclick="event.stopPropagation()">${esc(l.to)}</a></td>
+          <td class="cell-truncate" title="${esc(l.subject)}">${esc(l.subject)}</td>
+          <td class="cell-muted">${esc(l.flexype_user)}</td>
+          <td class="change-date-cell">${esc(dateStr)}</td>
         </tr>
       `;
     }).join("");
 
     tbody.querySelectorAll(".outreach-domain-click").forEach((el) => {
+      el.addEventListener("click", () => {
+        const domain = el.dataset.domain;
+        if (!domain) return;
+        const lead = getLeads().find((l) => l.domain === domain);
+        location.hash = "#dashboard";
+        setTimeout(() => {
+          if (lead) {
+            if (typeof window.showLead === "function") window.showLead(lead);
+            document.querySelectorAll("#leadTable tbody tr").forEach((r) => r.classList.remove("active"));
+            const row = document.querySelector(`#leadTable tbody tr[data-domain="${domain}"]`);
+            if (row) { row.classList.add("active"); row.scrollIntoView({ block: "nearest" }); }
+          }
+        }, 80);
+      });
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // 8c. SCAN CHANGES PAGE LOGIC
+  // ═══════════════════════════════════════════════════════════
+
+  let fingerprintChanges = [];
+
+  async function renderChangesPage() {
+    const tbody = document.getElementById("changesTableBody");
+    const empty = document.getElementById("changesEmpty");
+    if (!tbody) return;
+
+    tbody.innerHTML = '<tr><td colspan="5" class="table-loading">Loading scan changes…</td></tr>';
+    if (empty) empty.style.display = "none";
+    const totalEl = document.getElementById("changesTotal");
+    if (totalEl) totalEl.textContent = "…";
+
+    try {
+      const res = await api("/api/monitor/changes");
+      if (res.ok) {
+        fingerprintChanges = await res.json();
+      } else {
+        fingerprintChanges = [];
+      }
+    } catch (e) {
+      console.warn("[Changes] failed to fetch logs:", e);
+      fingerprintChanges = [];
+    }
+
+    filterAndRenderChanges();
+  }
+
+  function filterAndRenderChanges() {
+    const tbody = document.getElementById("changesTableBody");
+    const empty = document.getElementById("changesEmpty");
+    if (!tbody) return;
+
+    const search = (document.getElementById("changesSearch")?.value || "").toLowerCase();
+
+    let items = [];
+    fingerprintChanges.forEach((log) => {
+      const merchant = log.merchant || "";
+      if (search && !merchant.toLowerCase().includes(search)) return;
+
+      const changesObj = log.changes || {};
+      const fields = Object.keys(changesObj);
+
+      if (fields.length === 0) {
+        items.push({
+          merchant,
+          field: "fingerprint",
+          oldVal: "unknown",
+          newVal: "updated",
+          timestamp: log.timestamp
+        });
+        return;
+      }
+
+      fields.forEach((field) => {
+        let oldVal = changesObj[field].old;
+        let newVal = changesObj[field].new;
+
+        if (Array.isArray(oldVal)) oldVal = oldVal.join(", ") || "[]";
+        if (Array.isArray(newVal)) newVal = newVal.join(", ") || "[]";
+
+        items.push({
+          merchant,
+          field,
+          oldVal: String(oldVal),
+          newVal: String(newVal),
+          timestamp: log.timestamp
+        });
+      });
+    });
+
+    const totalEl = document.getElementById("changesTotal");
+    if (totalEl) totalEl.textContent = items.length;
+
+    if (items.length === 0) {
+      tbody.innerHTML = "";
+      if (empty) empty.style.display = "flex";
+      return;
+    }
+
+    if (empty) empty.style.display = "none";
+
+    tbody.innerHTML = items.map((l) => {
+      const dateStr = l.timestamp ? new Date(l.timestamp).toLocaleString() : "—";
+      return `
+        <tr>
+          <td><strong class="change-domain-click" data-domain="${esc(l.merchant)}">${esc(l.merchant || "—")}</strong></td>
+          <td><span class="change-field-badge">${esc(l.field.replace(/_/g, " "))}</span></td>
+          <td><span class="val-old">${esc(l.oldVal)}</span></td>
+          <td><span class="val-new">${esc(l.newVal)}</span></td>
+          <td class="change-date-cell">${esc(dateStr)}</td>
+        </tr>
+      `;
+    }).join("");
+
+    tbody.querySelectorAll(".change-domain-click").forEach((el) => {
       el.addEventListener("click", () => {
         const domain = el.dataset.domain;
         if (!domain) return;
@@ -641,7 +800,8 @@
   setTimeout(() => {
     if (!location.hash) location.hash = "#dashboard";
     showRoute(currentRoute());
-    document.getElementById("navWatchlistCount").textContent = getWatchlist().size;
+    const navCount = document.getElementById("navWatchlistCount");
+    if (navCount) navCount.textContent = getWatchlist().size;
     refreshGmailStatus();
   }, 100);
 
