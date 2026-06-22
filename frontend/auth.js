@@ -310,6 +310,19 @@ window.FP_AUTH = {
     renderGmailPill();
   }
 
+  function initSidebarToggle() {
+    const btn = document.getElementById("sidebarToggleBtn");
+    if (!btn) return;
+    const collapsed = localStorage.getItem("sidebar_collapsed") === "true";
+    if (collapsed) {
+      document.body.classList.add("sidebar-collapsed");
+    }
+    btn.addEventListener("click", () => {
+      const isCollapsed = document.body.classList.toggle("sidebar-collapsed");
+      localStorage.setItem("sidebar_collapsed", isCollapsed ? "true" : "false");
+    });
+  }
+
   // Expose helpers globally
   window.FP_AUTH.checkGmailStatus = checkGmailStatus;
   window.FP_AUTH.startGmailConnect = startGmailConnect;
@@ -317,6 +330,8 @@ window.FP_AUTH = {
   window.FP_AUTH.getGmailStatus = () => gmailStatus;
 
   document.addEventListener("DOMContentLoaded", async () => {
+    initSidebarToggle();
+
     const topRight = document.querySelector(".topbar-right");
     if (!topRight) return;
 

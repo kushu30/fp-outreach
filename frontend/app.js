@@ -24,6 +24,7 @@ window.selectedLead = selectedLead;
 const ICONS = {
   check: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
   checkSmall: `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>`,
+  shopify: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`,
   star: `<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
   starOutline: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
   starFilled: `<svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
@@ -34,6 +35,12 @@ const ICONS = {
   tag: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.59 13.41 13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,
   link: `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>`,
   alert: `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>`,
+  // Hot brand signal — flame
+  flame: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>`,
+  // Win-back signal — rotate-cw ("was here before")
+  winback: `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>`,
+  // KwikPass detected — zap
+  zap: `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`,
 };
 
 // ─── Email Templates ──────────────────────────────────────────────────────────
@@ -225,6 +232,19 @@ function updateStats() {
   ).length;
 }
 
+// ─── Data Normalisation ───────────────────────────────────────────────────────
+// Strip the live checkout provider from historical_checkouts on load.
+// A provider that's currently live is not "historical" — showing it in both
+// sections is misleading and inflates historical checkout counts.
+function normalizeLeads(data) {
+  return data.map((l) => ({
+    ...l,
+    historical_checkouts: (l.historical_checkouts || []).filter(
+      (p) => p !== l.live_checkout,
+    ),
+  }));
+}
+
 // ─── Table ────────────────────────────────────────────────────────────────────
 
 function renderTable(data) {
@@ -236,7 +256,8 @@ function renderTable(data) {
   const histProv = document.getElementById("historicalFilter")?.value || "";
   const priority = document.getElementById("priorityFilter")?.value || "";
 
-  const filtered = data.filter(
+  // Split into Shopify and non-Shopify first
+  const allFiltered = data.filter(
     (l) =>
       l.domain.toLowerCase().includes(search) &&
       (!liveProv || l.live_checkout === liveProv) &&
@@ -244,7 +265,10 @@ function renderTable(data) {
       (!priority || l.priority === priority),
   );
 
-  // Apply sorting
+  const filtered = allFiltered.filter((l) => l.shopify !== false || l.shopify === undefined);
+  const nonShopifyLeads = allFiltered.filter((l) => l.shopify === false);
+
+  // Apply sorting to shopify leads
   filtered.sort((a, b) => {
     // If one has an active unacknowledged competitor shift, prioritize it to the top!
     const hasShiftA = a.latest_change && a.latest_change.changes && !a.latest_change.acknowledged && 
@@ -315,39 +339,32 @@ function renderTable(data) {
     if (isWL) tr.classList.add("watchlisted");
     tr.setAttribute("data-domain", lead.domain);
 
-    let changeAlert = "";
-    if (lead.latest_change && lead.latest_change.changes) {
-      const keys = Object.keys(lead.latest_change.changes);
-      if (keys.includes("theme_id") || keys.includes("theme_family")) {
-        changeAlert = `<span class="change-alert-text" title="Theme changed recently">${ICONS.alert}<span>Theme</span></span>`;
-      } else if (
-        keys.includes("checkout_providers") ||
-        keys.includes("checkout_scripts") ||
-        keys.includes("live_checkout")
-      ) {
-        changeAlert = `<span class="change-alert-text" title="Checkout changed recently">${ICONS.alert}<span>Checkout</span></span>`;
-      } else {
-        changeAlert = `<span class="change-alert-text" title="Fingerprint updated recently">${ICONS.alert}<span>Updated</span></span>`;
-      }
-    }
-
     let shiftTag = "";
     if (lead.latest_change && lead.latest_change.changes && !lead.latest_change.acknowledged) {
       const providerChange = lead.latest_change.changes.checkout_providers || lead.latest_change.changes.live_checkout;
       if (providerChange) {
-        let oldVal = Array.isArray(providerChange.old) ? providerChange.old.join(", ") : String(providerChange.old || "");
-        let newVal = Array.isArray(providerChange.new) ? providerChange.new.join(", ") : String(providerChange.new || "");
-        
-        const oldLower = oldVal.toLowerCase();
-        const newLower = newVal.toLowerCase();
-        
+        let oldArr = Array.isArray(providerChange.old) ? providerChange.old : [String(providerChange.old || "")];
+        let newArr = Array.isArray(providerChange.new) ? providerChange.new : [String(providerChange.new || "")];
+
+        oldArr = oldArr.map(x => String(x).trim()).filter(Boolean);
+        newArr = newArr.map(x => String(x).trim()).filter(Boolean);
+
+        const removed = oldArr.filter(x => !newArr.includes(x));
+        const added = newArr.filter(x => !oldArr.includes(x));
+
+        let fromStr = removed.length ? removed.join(", ") : "None";
+        let toStr = added.length ? added.join(", ") : "None";
+
+        if (!Array.isArray(providerChange.old) && !Array.isArray(providerChange.new)) {
+          fromStr = providerChange.old || "None";
+          toStr = providerChange.new || "None";
+        }
+
         const competitors = ["gokwik", "shopflo", "razorpay", "fastrr", "ecom360", "cashfree", "flexype"];
-        const leftCompetitor = competitors.some(c => oldLower.includes(c));
-        
-        if (leftCompetitor && oldLower !== newLower) {
-          const oldName = oldVal || "None";
-          const newName = newVal || "None";
-          shiftTag = `<span class="change-alert-text" style="background:var(--warning-soft);color:var(--warning-hover);border-color:var(--warning-border);" title="recently shifted from ${esc(oldName)} to ${esc(newName)}">recently shifted from ${esc(oldName)} to ${esc(newName)}</span>`;
+        const leftCompetitor = competitors.some(c => fromStr.toLowerCase().includes(c));
+
+        if (leftCompetitor && fromStr.toLowerCase() !== toStr.toLowerCase()) {
+          shiftTag = `<span class="change-alert-text" style="background:var(--warning-soft);color:var(--warning-hover);border-color:var(--warning-border);" title="recent: ${esc(fromStr)} → ${esc(toStr)}">recent: ${esc(fromStr)} → ${esc(toStr)}</span>`;
         }
       }
     }
@@ -362,11 +379,22 @@ function renderTable(data) {
       lead.status ||
       "Not Contacted";
 
+    // Hot brand and win-back badges for the score cell
+    const isWinBack = (lead.historical_checkouts || []).includes("FlexyPe") && lead.live_checkout !== "FlexyPe";
+    const isHot = lead.hot_brand;
+    const scoreBadges = [
+      isHot ? `<span class="hot-brand-badge" title="Hot brand signal detected">${ICONS.flame}</span>` : "",
+      isWinBack ? `<span class="winback-badge" title="Previously used FlexyPe — win-back opportunity">${ICONS.winback}</span>` : "",
+    ].join("");
+
     tr.innerHTML = `
       <td title="${esc(lead.domain)}">
         <div class="domain-cell-wrap">
           <div class="domain-main-name">
             <span class="domain-name-text">${esc(lead.domain)}</span>
+            ${lead.shopify ? `<span class="indicator-badge shopify" title="Shopify Store: ${esc(lead.myshopify_domain || '')}">${ICONS.shopify}${ICONS.checkSmall}</span>` : ""}
+            ${lead.phone_numbers?.length ? `<span class="indicator-badge phone" title="Has Phone Number">${ICONS.phone}${ICONS.checkSmall}</span>` : ""}
+            ${lead.emails?.length ? `<span class="indicator-badge email" title="Has Email: ${esc(lead.emails.join(', '))}">${ICONS.mailSmall}${ICONS.checkSmall}</span>` : ""}
             ${isWL ? `<span class="watchlist-star" aria-label="Watchlisted">${ICONS.star}</span>` : ""}
             ${
               status === "Contacted" || status === "Replied" ?
@@ -379,17 +407,12 @@ function renderTable(data) {
             }
           </div>
           <div class="domain-sub-text">
-            ${themeDisplay ? `<span>Theme: ${esc(themeDisplay)}</span>` : ""}
-            ${changeAlert}
             ${shiftTag}
           </div>
         </div>
       </td>
-      <td><span class="score-chip ${scoreClass(lead.lead_score)}">${lead.lead_score}</span></td>
-      <td>${lead.live_checkout ? `<span class="live-chip">${esc(lead.live_checkout)}</span>` : dashSpan}</td>
-      <td class="cell-icon">${lead.whatsapp_number ? ICONS.check : dashSpan}</td>
-      <td class="cell-icon">${lead.phone_numbers?.length ? ICONS.check : dashSpan}</td>
-      <td title="${esc(lead.myshopify_domain || "")}">${lead.myshopify_domain ? `<span class="cell-mono">${esc(lead.myshopify_domain)}</span>` : dashSpan}</td>
+      <td><div class="score-cell">${scoreBadges}<span class="score-chip ${scoreClass(lead.lead_score)}">${lead.lead_score}</span></div></td>
+      <td>${lead.live_checkout ? `<span class="live-chip">${esc(lead.live_checkout)}</span>` : (lead.shopify ? `<span class="live-chip" style="background:#f0fdf4;color:#16a34a;border-color:rgba(22,163,74,0.15);display:inline-flex;align-items:center;gap:4px;">${ICONS.shopify}Shopify</span>` : dashSpan)}</td>
       <td><span class="pri-chip ${priChipClass(lead.priority)}">${esc(lead.priority)}</span></td>
     `;
 
@@ -422,6 +445,51 @@ function renderTable(data) {
 
   document.getElementById("leadCount").textContent =
     `${filtered.length} / ${leads.length}`;
+
+  // ── Non-Shopify section ──
+  renderNonShopifySection(nonShopifyLeads);
+}
+
+function renderNonShopifySection(nonShopifyLeads) {
+  let section = document.getElementById("nonShopifySection");
+  if (!section) {
+    // Create section after the table panel
+    const leftPanel = document.getElementById("leftPanel");
+    section = document.createElement("div");
+    section.id = "nonShopifySection";
+    section.className = "non-shopify-section";
+    leftPanel.appendChild(section);
+  }
+
+  if (!nonShopifyLeads.length) {
+    section.style.display = "none";
+    return;
+  }
+
+  section.style.display = "block";
+  const isExpanded = section.dataset.expanded === "true";
+
+  section.innerHTML = `
+    <button class="non-shopify-toggle" id="nonShopifyToggle" aria-expanded="${isExpanded}">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+      <span>${nonShopifyLeads.length} Non-Shopify brand${nonShopifyLeads.length === 1 ? "" : "s"} — not scored, not contacted</span>
+      <svg class="toggle-chevron ${isExpanded ? "expanded" : ""}" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+    </button>
+    <div class="non-shopify-list" style="display: ${isExpanded ? "block" : "none"}">
+      ${nonShopifyLeads.map(l => `
+        <div class="non-shopify-row">
+          <span class="non-shopify-domain">${esc(l.domain)}</span>
+          <span class="non-shopify-reason">Not Shopify — outreach skipped</span>
+        </div>
+      `).join("")}
+    </div>
+  `;
+
+  document.getElementById("nonShopifyToggle").addEventListener("click", () => {
+    const expanded = section.dataset.expanded === "true";
+    section.dataset.expanded = String(!expanded);
+    renderNonShopifySection(nonShopifyLeads);
+  });
 }
 
 function getEmailTrustScore(email) {
@@ -458,6 +526,7 @@ function showLead(lead) {
   const meta = document.getElementById("merchantMeta");
   meta.innerHTML = `
     ${lead.shopify ? '<span class="shopify-tag">Shopify</span>' : ""}
+    ${lead.hot_brand ? `<span class="hot-brand-badge-detail" style="background:#fee2e2;color:#ef4444;border:1px solid rgba(239,68,68,0.15);padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;display:inline-flex;align-items:center;gap:4px;">${ICONS.flame} ${esc(lead.hot_brand_reason || "Hot Brand")}</span>` : ""}
     <span class="meta-date">Scanned ${esc(lead.last_scan || "—")}</span>
   `;
 
@@ -502,23 +571,36 @@ function showLead(lead) {
     liveCard.textContent = "No live checkout detected";
   }
 
-  // Historical
+  // Historical — live checkout already stripped from data at load time
   const histEl = document.getElementById("historicalBadges");
-  const histOnly = (lead.historical_checkouts || []).filter(
-    (p) => p !== lead.live_checkout,
-  );
+  const hist = lead.historical_checkouts || [];
+  const isWinBack = hist.includes("FlexyPe") && lead.live_checkout !== "FlexyPe";
   histEl.innerHTML =
-    histOnly.length ?
-      histOnly
-        .map((p) => `<span class="badge badge-hist">${esc(p)}</span>`)
+    hist.length ?
+      hist
+        .map((p) => {
+          const isFP = p === "FlexyPe";
+          if (isFP && isWinBack) {
+            return `<span class="badge badge-hist badge-hist-flexype" style="display:inline-flex;align-items:center;gap:4px;background:#e0e7ff !important;color:#4f46e5 !important;border:1.5px solid #818cf8 !important;padding:4px 10px;font-weight:600;box-shadow:0 0 8px rgba(99,102,241,0.15);">${ICONS.winback} Win-back (FlexyPe)</span>`;
+          }
+          const cls = isFP ? "badge badge-hist badge-hist-flexype" : "badge badge-hist";
+          return `<span class="${cls}">${esc(p)}</span>`;
+        })
         .join("")
     : '<span class="badge-empty">None detected</span>';
 
-  // Kwikpass
-  document.getElementById("kwikpassStatus").innerHTML =
-    lead.has_kwikpass ?
-      '<span class="kp-yes">Kwikpass detected — Login/OTP enabled</span>'
-    : '<span class="kp-no">Not detected</span>';
+  // Kwikpass — indicator only
+  const kwikEl = document.getElementById("kwikpassStatus");
+  if (lead.has_kwikpass) {
+    kwikEl.innerHTML = `
+      <div class="kwikpass-indicator">
+        <span class="kwikpass-indicator-icon">${ICONS.zap}</span>
+        <span class="kwikpass-indicator-label">KwikPass detected</span>
+      </div>
+    `;
+  } else {
+    kwikEl.innerHTML = '<span class="kp-no">Not detected</span>';
+  }
 
   // Contact
   const contactEl = document.getElementById("contactInfo");
@@ -858,14 +940,14 @@ async function loadData() {
     if (!res.ok) throw new Error("Not found");
     const data = await res.json();
     if (!data?.length) throw new Error("Empty");
-    leads = data;
+    leads = normalizeLeads(data);
     window.leads = leads;
     setProgress(90, "Building dashboard…");
     await delay(150);
     toast(`Loaded ${leads.length} merchants`);
   } catch {
     setProgress(70, "Using demo data…");
-    leads = generateDemoData();
+    leads = normalizeLeads(generateDemoData());
     window.leads = leads;
     await delay(150);
     toast(`Demo mode — ${leads.length} merchants`);
@@ -912,6 +994,8 @@ async function scanSingleDomain(domainOverride) {
   const input = document.getElementById("singleScanInput");
   const btn = document.getElementById("singleScanBtn");
   const status = document.getElementById("scanStatus");
+  const spinner = document.getElementById("scanSpinner");
+  const scanField = document.getElementById("scanField");
 
   const raw =
     typeof domainOverride === "string" ? domainOverride : input?.value || "";
@@ -932,8 +1016,10 @@ async function scanSingleDomain(domainOverride) {
   }
 
   btn.disabled = true;
-  btn.textContent = "…";
-  status.textContent = "Scanning";
+  btn.textContent = "Scanning";
+  status.textContent = "";
+  if (spinner) spinner.hidden = false;
+  if (scanField) scanField.classList.add("scanning");
   toast(`Scanning ${domain}`, "info");
 
   let result = null;
@@ -958,28 +1044,26 @@ async function scanSingleDomain(domainOverride) {
   }
 
   if (result && !result.error) {
-    const idx = leads.findIndex((l) => l.domain === result.domain);
-    if (idx === -1) leads.unshift(result);
-    else leads[idx] = result;
+    const [normalized] = normalizeLeads([result]);
+    const idx = leads.findIndex((l) => l.domain === normalized.domain);
+    if (idx === -1) leads.unshift(normalized);
+    else leads[idx] = normalized;
     window.leads = leads;
     populateFilters();
     updateStats();
     renderTable(leads);
-    showLead(result);
+    showLead(normalized);
     setTimeout(() => highlightRow(result.domain), 80);
-    status.textContent = "Done";
     if (input) input.value = "";
     toast(`Scanned ${result.domain}`, "success");
   } else {
-    status.textContent = "Not found";
     toast("Not found. Start API server or run full scan.", "error");
   }
 
   btn.disabled = false;
   btn.textContent = "Scan";
-  setTimeout(() => {
-    if (status.textContent !== "Done") status.textContent = "";
-  }, 3000);
+  if (spinner) spinner.hidden = true;
+  if (scanField) scanField.classList.remove("scanning");
 }
 
 async function checkApi() {

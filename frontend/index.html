@@ -26,6 +26,11 @@
         <span class="logo-name">FlexyPe</span>
         <span class="logo-sub">Outreach</span>
       </div>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
     </div>
 
     <nav class="sidebar-nav" aria-label="Main">
@@ -76,6 +81,7 @@
         <span>Batch Scans</span>
       </a>
     </nav>
+
 
     <div class="sidebar-bottom">
       <div class="user-block">
@@ -155,13 +161,24 @@
 
       <!-- QUICK SCAN -->
       <section class="scan-strip" aria-label="Quick scan">
-        <span class="scan-label">Quick scan</span>
-        <div class="scan-field">
-          <input type="text" id="singleScanInput" placeholder="example.com" class="scan-input" aria-label="Domain to scan">
-          <button id="singleScanBtn" class="btn-scan">Scan</button>
-        </div>
-        <span id="scanStatus" class="scan-status" role="status"></span>
+          <div class="scan-field" id="scanField">
+          <!-- Globe / domain prefix icon -->
+          <svg class="scan-prefix-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+          <input type="text" id="singleScanInput" placeholder="Enter domain to scan, e.g. example.com" class="scan-input" aria-label="Domain to scan" autocomplete="off" spellcheck="false">
+            <!-- Circular progress indicator -->
+            <div class="scan-spinner" id="scanSpinner" hidden>
+              <svg class="scan-spinner-svg" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+                <circle class="scan-spinner-track" cx="16" cy="16" r="13" stroke-width="2.5"/>
+                <circle class="scan-spinner-arc" cx="16" cy="16" r="13" stroke-width="2.5" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <button id="singleScanBtn" class="btn-scan">Scan</button>
+          </div>
+        <span id="scanStatus" class="scan-status" role="status" aria-live="polite"></span>
       </section>
+
 
       <!-- STATS ROW -->
       <section class="stats-row" aria-label="Lead summary">
@@ -217,7 +234,7 @@
       <div class="split">
 
         <!-- LEAD TABLE -->
-        <section class="panel table-panel" id="leftPanel" aria-label="Lead table">
+        <section class="panel table-panel" id="leftPanel" style="width: 100%;" aria-label="Lead table">
           <div class="table-scroll">
             <table id="leadTable">
               <thead>
@@ -225,9 +242,6 @@
                   <th class="sortable" data-sort="domain">Domain <span class="sort-icon" id="sort-icon-domain">↕</span></th>
                   <th class="sortable" data-sort="score">Score <span class="sort-icon" id="sort-icon-score">↓</span></th>
                   <th>Live</th>
-                  <th>WhatsApp</th>
-                  <th>Phone</th>
-                  <th>MyShopify</th>
                   <th class="sortable" data-sort="priority">Priority <span class="sort-icon" id="sort-icon-priority">↕</span></th>
                 </tr>
               </thead>
@@ -267,10 +281,10 @@
         </section>
 
         <!-- RESIZER -->
-        <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" aria-label="Resize panels"></div>
+        <div class="resizer" id="resizer" style="display: none;" role="separator" aria-orientation="vertical" aria-label="Resize panels"></div>
 
         <!-- DETAIL PANEL -->
-        <aside class="panel detail-panel" id="detailPanel" aria-label="Merchant details">
+        <aside class="panel detail-panel" id="detailPanel" style="display: none;" aria-label="Merchant details">
 
           <!-- HEADER -->
           <div class="detail-header">
@@ -466,10 +480,13 @@
        ═══════════════════════════════════════════════ -->
   <div id="loaderOverlay" class="loader-overlay" role="status" aria-live="polite">
     <div class="loader-box">
-      <div class="loader-ring" aria-hidden="true"></div>
-      <div class="loader-label" id="loaderText">Loading…</div>
+      <div class="loader-brand">
+        <img src="FlexyPe_logo.png" alt="FlexyPe Logo" class="loader-logo-img">
+        <span class="loader-brand-name">FlexyPe</span>
+      </div>
+      <div class="loader-label" id="loaderText">Verifying your account</div>
+      <div class="loader-sub" id="loaderStatus">This will only take a moment</div>
       <div class="loader-track"><div class="loader-fill" id="loaderProgressBar"></div></div>
-      <div class="loader-sub" id="loaderStatus">Connecting</div>
     </div>
   </div>
 

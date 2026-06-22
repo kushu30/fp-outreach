@@ -1,0 +1,44 @@
+{
+  "test-store-1.com": {
+    "shopify": true,
+    "theme_id": "123456789",
+    "theme_family": "Dawn (Mock)",
+    "checkout_providers": ["FlexyPe"],
+    "checkout_scripts": ["https://cdn.flexype.com/checkout.js"],
+    "app_signatures": ["flexype"],
+    "live_checkout": "FlexyPe",
+    "has_kwikpass": true,
+    "title": "Shark Tank Bestseller — Store 1",
+    "description": "As seen on Shark Tank India! Our best selling mock store.",
+    "emails": ["sales@test-store-1.com"],
+    "phone_numbers": ["+91 9876543210"]
+  },
+  "test-store-2.com": {
+    "shopify": true,
+    "theme_id": "987654321",
+    "theme_family": "Sense (Mock)",
+    "checkout_providers": ["Razorpay"],
+    "checkout_scripts": ["https://magic-plugins.razorpay.com/shopify.js"],
+    "app_signatures": ["razorpay"],
+    "live_checkout": "Razorpay",
+    "has_kwikpass": false,
+    "title": "Test Store 2 — Active Razorpay Checkout",
+    "description": "A standard ecommerce store testing active checkout migrations.",
+    "emails": ["support@test-store-2.com"],
+    "phone_numbers": []
+  },
+  "test-store-3.com": {
+    "shopify": false,
+    "theme_id": "unknown",
+    "theme_family": "unknown",
+    "checkout_providers": [],
+    "checkout_scripts": [],
+    "app_signatures": [],
+    "live_checkout": null,
+    "has_kwikpass": false,
+    "title": "Non-Shopify Test Store 3",
+    "description": "Custom site testing the non-Shopify zero scoring filter.",
+    "emails": ["admin@test-store-3.com"],
+    "phone_numbers": []
+  }
+}

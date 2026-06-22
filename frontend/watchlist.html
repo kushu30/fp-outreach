@@ -26,6 +26,11 @@
         <span class="logo-name">FlexyPe</span>
         <span class="logo-sub">Outreach</span>
       </div>
+      <button class="sidebar-toggle-btn" id="sidebarToggleBtn" aria-label="Toggle Sidebar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
     </div>
 
     <nav class="sidebar-nav" aria-label="Main">
@@ -76,6 +81,29 @@
         <span>Batch Scans</span>
       </a>
     </nav>
+
+    <!-- Available Credits Card -->
+    <div class="sidebar-credits-card">
+      <div class="credits-header">
+        <span class="credits-label">Available Credits</span>
+        <div class="credits-arrow-circle">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </div>
+      </div>
+      <div class="credits-value">₹0.00</div>
+    </div>
+
+    <!-- View Store Link -->
+    <a href="#" class="sidebar-view-store">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+      <span>View Store</span>
+    </a>
 
     <div class="sidebar-bottom">
       <div class="user-block">
@@ -204,13 +232,15 @@
     </main>
   </div>
 
-  <!-- LOADER -->
   <div id="loaderOverlay" class="loader-overlay" role="status" aria-live="polite">
     <div class="loader-box">
-      <div class="loader-ring" aria-hidden="true"></div>
-      <div class="loader-label" id="loaderText">Loading…</div>
+      <div class="loader-brand">
+        <img src="FlexyPe_logo.png" alt="FlexyPe Logo" class="loader-logo-img">
+        <span class="loader-brand-name">FlexyPe</span>
+      </div>
+      <div class="loader-label" id="loaderText">Verifying your account</div>
+      <div class="loader-sub" id="loaderStatus">This will only take a moment</div>
       <div class="loader-track"><div class="loader-fill" id="loaderProgressBar"></div></div>
-      <div class="loader-sub" id="loaderStatus">Connecting</div>
     </div>
   </div>
 

@@ -944,20 +944,25 @@ def acknowledge_changes():
 
 
 def recalculate_all_scores():
-    """Recalculate lead_score and priority for all merchants based on the updated scoring engine."""
-    print("[Startup] Recalculating lead scores and priorities for all merchants...")
+    """Recalculate lead_score, priority and hot_brand for all merchants based on the updated scoring engine."""
+    print("[Startup] Recalculating lead scores, priorities, and hot brand signals for all merchants...")
     try:
         from main_scraper import ScoringEngine
         all_merchants = list(merchants.find({}))
         updated_count = 0
         for m in all_merchants:
-            # Calculate new score and priority using current database document fields
-            score = ScoringEngine.calculate_score(m)
+            # Detect hot brand and calculate new score/priority
+            hot_brand = ScoringEngine.detect_hot_brand(m)
+            hot_brand_reason = ScoringEngine.detect_hot_brand_reason(m) if hot_brand else ""
+            m_with_hot = {**m, 'hot_brand': hot_brand}
+            score = ScoringEngine.calculate_score(m_with_hot)
             priority = ScoringEngine.get_priority(score)
             
             merchants.update_one(
                 {"_id": m["_id"]},
                 {"$set": {
+                    "hot_brand": hot_brand,
+                    "hot_brand_reason": hot_brand_reason,
                     "lead_score": score,
                     "priority": priority
                 }}
