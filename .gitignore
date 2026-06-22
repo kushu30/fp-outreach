@@ -8,3 +8,4 @@ scan_*.log
 results.json
 .env
 .env.example
+backend/credentials.json
