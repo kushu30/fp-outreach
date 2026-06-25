@@ -57,17 +57,7 @@ def sync_merchants():
         print(f"Authentication Error: {e}")
         sys.exit(1)
 
-    # Dynamically find the title of the first sheet/tab
-    try:
-        sheet_metadata = service.spreadsheets().get(spreadsheetId=sheet_id).execute()
-        sheets = sheet_metadata.get('sheets', '')
-        if sheets:
-            sheet_title = sheets[0].get('properties', {}).get('title', 'Sheet1')
-        else:
-            sheet_title = 'Sheet1'
-    except Exception as e:
-        print(f"Error retrieving spreadsheet metadata: {e}")
-        sheet_title = 'Sheet1'
+    sheet_title = 'Notes'
 
     print("Fetching change history and merchant details from database...")
     # Fetch all confirmed checkout changes sorted by newest first
@@ -75,10 +65,7 @@ def sync_merchants():
     rows = []
 
     # Headers
-    headers = [
-        "Store Name", "Domain", "Old Checkout", "New Checkout", "Change Date",
-        "Current Status", "Emails", "Phones", "Notes"
-    ]
+    headers = ["Date", "Store Name", "Domain", "Churned to"]
     rows.append(headers)
 
     for h in cursor:
@@ -90,26 +77,19 @@ def sync_merchants():
         old_val = lc_change.get("old") or "None"
         new_val = lc_change.get("new") or "None"
 
-        # Fetch current merchant details
-        m = merchants.find_one({"domain": domain}) or {}
-        store_name = extract_store_name(domain)
+        if str(old_val).strip().lower() != "flexype":
+            continue
 
-        emails = ", ".join(m.get("emails", [])) if isinstance(m.get("emails"), list) else str(m.get("emails") or "")
-        phones = ", ".join(m.get("phone_numbers", [])) if isinstance(m.get("phone_numbers"), list) else str(m.get("phone_numbers") or "")
+        store_name = extract_store_name(domain)
 
         t = h.get("timestamp")
         t_str = t.strftime('%Y-%m-%d %H:%M') if isinstance(t, datetime) else str(t or "")
 
         rows.append([
+            t_str,
             store_name,
             domain,
-            old_val,
-            new_val,
-            t_str,
-            m.get("status", "Not Contacted"),
-            emails,
-            phones,
-            m.get("notes", "")
+            new_val
         ])
 
     print(f"Syncing {len(rows) - 1} confirmed changes to Google Sheet '{sheet_title}' (ID: {sheet_id})...")
@@ -118,7 +98,7 @@ def sync_merchants():
         # Clear existing data first
         service.spreadsheets().values().clear(
             spreadsheetId=sheet_id,
-            range=f"'{sheet_title}'!A1:Z",
+            range=f"'{sheet_title}'!A1:D",
             body={}
         ).execute()
 

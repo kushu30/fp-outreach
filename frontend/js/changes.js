@@ -43,9 +43,11 @@
   }
 
   // ─── Auth / Session Initialization ──────────────────────────────────────────
-  const userEmail = getSessionUser();
-  document.getElementById("userEmail").textContent = userEmail;
-  document.getElementById("userAvatar").textContent = userEmail[0].toUpperCase();
+  const userEmail = window.FP_currentUser;
+  const userName = window.FP_currentUserName || userEmail;
+
+  document.getElementById("userEmail").textContent = userName;
+  document.getElementById("userAvatar").textContent = userName[0].toUpperCase();
 
   // Watchlist Count for Sidebar nav
   try {
@@ -70,8 +72,7 @@
     }, 180);
   });
   document.getElementById("modalConfirm")?.addEventListener("click", () => {
-    sessionStorage.removeItem("fp_session");
-    window.location.replace("login.html");
+    window.FP_signOut();
   });
 
   // ─── Data Loading ─────────────────────────────────────────────────────────────

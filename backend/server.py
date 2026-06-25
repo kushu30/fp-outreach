@@ -267,6 +267,11 @@ def _check_admin():
         return False  # ADMIN_SECRET not configured → deny
     provided = request.headers.get("X-Admin-Secret", "")
     return secrets.compare_digest(admin_secret, provided)
+VALID_ROLES = {
+    "admin",
+    "salesteammember",
+    "supportteammember"
+}
 
 def _hash_password(plain: str) -> str:
     """SHA-256 hash for passwords (consistent with frontend verifyPassword)."""
@@ -289,12 +294,16 @@ def _seed_default_users():
         if db.fp_users.find_one({"email": email}):
             continue
         db.fp_users.insert_one({
+            "name": name,
             "email": email,
             "password_hash": _hash_password(password),
             "secret": secret,
-            "role": "admin",
+            "role": role,
+            "active": True,
             "twoFAEnabled": bool(secret),
-            "created_at": _dt.utcnow()
+            "created_at": _dt.utcnow(),
+            "created_by": request.headers.get("X-User-Email", "admin"),
+            "last_password_change": _dt.utcnow()
         })
         print(f"[users] Seeded user: {email}")
 
@@ -307,7 +316,16 @@ def list_users():
     """List all users (admin only — returns safe fields, no hashes)."""
     if not _check_admin():
         return jsonify({"error": "Unauthorized"}), 401
-    users = list(db.fp_users.find({}, {"_id": 0, "password_hash": 0}))
+    users = list(
+        db.fp_users.find(
+            {},
+            {
+                "_id": 0,
+                "password_hash": 0,
+                "secret": 0
+            }
+        ).sort("name", 1)
+    )
     return jsonify(users)
 
 
@@ -316,11 +334,15 @@ def create_user():
     """Create a new user (admin only)."""
     if not _check_admin():
         return jsonify({"error": "Unauthorized"}), 401
-    data = request.get_json(silent=True) or {}
+    name = (data.get("name") or "").strip()
     email = (data.get("email") or "").strip().lower()
     password = (data.get("password") or "").strip()
     secret = (data.get("secret") or "").strip().upper()
-    role = (data.get("role") or "user").strip()
+    role = (data.get("role") or "salesteammember").strip().lower()
+    if role not in VALID_ROLES:
+        return jsonify({
+            "error": "Invalid role"
+        }), 400
     if not email or not password:
         return jsonify({"error": "email and password required"}), 400
     if db.fp_users.find_one({"email": email}):
@@ -346,11 +368,14 @@ def update_user(email):
     updates = {}
     if data.get("password"):
         updates["password_hash"] = _hash_password(data["password"].strip())
+        updates["last_password_change"] = _dt.utcnow()
     if "secret" in data:
         updates["secret"] = data["secret"].strip().upper()
         updates["twoFAEnabled"] = bool(updates["secret"])
-    if "role" in data:
-        updates["role"] = data["role"].strip()
+    if "name" in data:
+        updates["name"] = data["name"].strip()
+    if "active" in data:
+        updates["active"] = bool(data["active"])
     if not updates:
         return jsonify({"error": "Nothing to update"}), 400
     result = db.fp_users.update_one({"email": email}, {"$set": updates})
@@ -386,15 +411,53 @@ def auth_login():
     if not email or not password:
         return jsonify({"error": "email and password required"}), 400
     user = db.fp_users.find_one({"email": email}, {"_id": 0})
+    if user and not user.get("active", True):
+        return jsonify({
+            "error": "This account has been disabled."
+        }), 403
     if not user or user.get("password_hash") != _hash_password(password):
         return jsonify({"error": "Invalid email or password"}), 401
     return jsonify({
         "ok": True,
+        "name": user.get("name", ""),
         "email": email,
-        "role": user.get("role", "user"),
+        "role": user.get("role", "salesteammember"),
+        "active": user.get("active", True),
         "twoFAEnabled": user.get("twoFAEnabled", False),
-        "secret": user.get("secret", "")  # needed for client-side TOTP
+        "secret": user.get("secret", "")
     })
+
+
+@app.route("/api/users/change-password", methods=["POST"])
+def change_password():
+    data = request.get_json(silent=True) or {}
+
+    email = (data.get("email") or "").strip().lower()
+    old_password = (data.get("old_password") or "").strip()
+    new_password = (data.get("new_password") or "").strip()
+
+    if not email or not old_password or not new_password:
+        return jsonify({"error": "Missing fields"}), 400
+
+    user = db.fp_users.find_one({"email": email})
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    if user["password_hash"] != _hash_password(old_password):
+        return jsonify({"error": "Incorrect password"}), 401
+
+    db.fp_users.update_one(
+        {"email": email},
+        {
+            "$set": {
+                "password_hash": _hash_password(new_password),
+                "last_password_change": _dt.utcnow()
+            }
+        }
+    )
+
+    return jsonify({"ok": True})
 
 
 # ─────────────────────────────────────────────

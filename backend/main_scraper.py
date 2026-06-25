@@ -1290,10 +1290,15 @@ def mark_dead_reading(domain: str, reason: str):
         logger.warning(f'{canonical}: deactivated after {dead_count} dead scans ({reason})')
         old_live = existing.get("live_checkout")
         if old_live and old_live.lower() == "flexype":
-            send_slack_notification(
-                canonical, old_live, None,
-                f"⚠️ Store inactive after {dead_count} dead scans ({reason})"
-            )
+            FLEXY_CLOSED.append(canonical)
+            fingerprint_history.insert_one({
+                "merchant": canonical, "old_hash": "", "new_hash": "",
+                "changes": {"live_checkout": {
+                    "old": old_live,
+                    "new": "Closed"}},
+                "confirmed": True,
+                "timestamp": datetime.utcnow()
+            })
     else:
         logger.info(f'{canonical}: dead reading {dead_count}/{ABANDON_AFTER} ({reason})')
     merchants.update_one({"domain": canonical}, {"$set": set_fields}, upsert=True)
@@ -1314,6 +1319,7 @@ def mark_active(domain: str):
 
 FLEXY_LEFTERS = []
 FLEXY_JOINERS = []
+FLEXY_CLOSED = []
 
 
 def _is_flexype_departure(old_chk, new_chk) -> bool:
@@ -1321,18 +1327,26 @@ def _is_flexype_departure(old_chk, new_chk) -> bool:
 
 
 def _promote_change(canonical, old_chk, new_chk, reason, r):
-    send_slack_notification(canonical, old_chk, new_chk, reason, status="confirmed")
     old_lower = (old_chk or "").lower()
     new_lower = (new_chk or "").lower()
-    if old_lower == "flexype" and new_lower != "flexype":
-        FLEXY_LEFTERS.append(canonical)
-    elif new_lower == "flexype" and old_lower != "flexype":
-        FLEXY_JOINERS.append(canonical)
+    
+    is_closed = (new_lower in ["none", "unknown", ""])
+
+    if is_closed:
+        if old_lower == "flexype":
+            FLEXY_CLOSED.append(canonical)
+    else:
+        send_slack_notification(canonical, old_chk, new_chk, reason, status="confirmed")
+        if old_lower == "flexype":
+            FLEXY_LEFTERS.append(canonical)
+        elif new_lower == "flexype":
+            FLEXY_JOINERS.append(canonical)
+
     fingerprint_history.insert_one({
         "merchant": canonical, "old_hash": "", "new_hash": "",
         "changes": {"live_checkout": {
             "old": old_chk if old_chk else "None",
-            "new": new_chk if new_chk else "None"}},
+            "new": "Closed" if is_closed else (new_chk if new_chk else "None")}},
         "confirmed": True,
         "timestamp": datetime.utcnow()
     })
@@ -1416,7 +1430,8 @@ def _persist_result(r: dict, exclude_master: bool):
 
                     if (FLEXYPE_DEPARTURE_ALERT_ON_PENDING
                             and pending_count == 1
-                            and _is_flexype_departure(confirmed_chk, reading_chk)):
+                            and _is_flexype_departure(confirmed_chk, reading_chk)
+                            and (reading_chk or "").lower() not in ["none", "unknown", ""]):
                         send_slack_notification(
                             canonical, confirmed_chk, reading_chk,
                             "pending", status="pending"
@@ -1739,12 +1754,14 @@ def main():
         flexype_count = sum(1 for r in results if r.get('live_checkout') == 'FlexyPe')
         left_str = ", ".join(f"`{d}`" for d in FLEXY_LEFTERS) if FLEXY_LEFTERS else "None"
         joined_str = ", ".join(f"`{d}`" for d in FLEXY_JOINERS) if FLEXY_JOINERS else "None"
+        closed_str = ", ".join(f"`{d}`" for d in FLEXY_CLOSED) if FLEXY_CLOSED else "None"
         summary_text = (
             f"🚀 *Active Scan Completed Summary (`main_scraper.py`)*\n"
             f"• *Total Scanned:* {len(domains)}\n"
             f"• *Total with FlexyPe (confirmed):* {flexype_count}\n"
             f"• *Confirmed left FlexyPe this run:* {len(FLEXY_LEFTERS)} ({left_str})\n"
             f"• *Confirmed joined FlexyPe:* {len(FLEXY_JOINERS)} ({joined_str})\n"
+            f"• *Store Closed (was FlexyPe):* {len(FLEXY_CLOSED)} ({closed_str})\n"
         )
         try:
             requests.post(webhook_url, json={"text": summary_text}, timeout=10)

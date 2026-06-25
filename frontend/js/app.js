@@ -1521,9 +1521,11 @@ async function openEmailThreadModal(emailLog) {
 
 document.addEventListener("DOMContentLoaded", () => {
   // Authentication header sync and Sign out Modal Wiring
-  const email = window.FP_currentUser || "admin@flexype.in";
-  document.getElementById("userEmail").textContent = email;
-  document.getElementById("userAvatar").textContent = email[0].toUpperCase();
+  const userEmail = window.FP_currentUser;
+  const userName = window.FP_currentUserName || userEmail;
+
+  document.getElementById("userEmail").textContent = userName;
+  document.getElementById("userAvatar").textContent = userName[0].toUpperCase();
 
   const modal = document.getElementById("signOutModal");
   document.getElementById("signOutBtn")?.addEventListener("click", () => {
@@ -1539,8 +1541,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 180);
   });
   document.getElementById("modalConfirm")?.addEventListener("click", () => {
-    sessionStorage.removeItem("fp_session");
-    window.location.replace("login.html");
+    window.FP_signOut();
   });
 
   // Close details panel and return to Full View (100% width)

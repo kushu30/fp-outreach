@@ -121,8 +121,14 @@ function getSession() {
     return null;
   }
 }
-function createSession(email) {
-  const s = { email, startedAt: Date.now() };
+function createSession(user) {
+  const s = {
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    startedAt: Date.now(),
+    lastActivity: Date.now()
+  };
   sessionStorage.setItem(SESSION_KEY, JSON.stringify(s));
   return s;
 }

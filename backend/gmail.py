@@ -142,7 +142,7 @@ def _load_credentials(flexype_user_email: str, mongo_db) -> Credentials:
     if not doc or not doc.get("refresh_token"):
         raise PermissionError("Gmail is not connected for this user. Connect Gmail first.")
 
-    return Credentials(
+    creds = Credentials(
         token=None,
         refresh_token=doc["refresh_token"],
         token_uri="https://oauth2.googleapis.com/token",
@@ -150,6 +150,16 @@ def _load_credentials(flexype_user_email: str, mongo_db) -> Credentials:
         client_secret=CLIENT_SECRET,
         scopes=doc.get("scopes", SCOPES),
     )
+
+    from google.auth.transport.requests import Request
+    from google.auth.exceptions import RefreshError
+
+    try:
+        creds.refresh(Request())
+    except RefreshError as e:
+        raise PermissionError("Gmail connection has expired. Please reconnect Gmail.") from e
+
+    return creds
 
 
 def send_email(

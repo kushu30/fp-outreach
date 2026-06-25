@@ -9,3 +9,4 @@ results.json
 .env
 .env.example
 backend/credentials.json
+dump_backend.py

@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="css/auth.css">
   <link rel="icon" type="image/png" href="FlexyPe_logo.png">
 </head>
 <body>
@@ -116,7 +116,7 @@
     </footer>
   </main>
 
-  <script src="auth.js"></script>
+  <script src="js/auth.js"></script>
   <script>
     (function () {
       const A = window.FP_AUTH;
@@ -251,11 +251,26 @@
 
         if (ok) {
           stopTimer();
-          A.createSession(currentEmail);
+          A.createSession({
+            name: currentUser.name,
+            email: currentUser.email,
+            role: currentUser.role
+          });
           A.$("totpStatus").className = "status-box success show";
           A.$("totpStatus").textContent = "Verified. Redirecting…";
           btn.querySelector("span").textContent = "Signed in";
-          setTimeout(() => window.location.replace("index.html"), 600);
+          setTimeout(() => {
+            switch (currentUser.role) {
+              case "admin":
+                window.location.replace("dashboard-selector.html");
+                break;
+              case "supportteammember":
+                window.location.replace("support.html");
+                break;
+              default:
+                window.location.replace("index.html");
+            }
+          }, 600);
         } else {
           A.$("totpStatus").className = "status-box error show";
           A.$("totpStatus").textContent = "Incorrect code. Check your authenticator app and try again.";

@@ -59,6 +59,8 @@
 
   // ── PUBLIC API ─────────────────────────────
   window.FP_currentUser = session.email;
+  window.FP_currentUserName = session.name;
+  window.FP_currentRole = session.role;
 
   window.FP_signOut = function () {
     clearAndRedirect();
@@ -93,8 +95,7 @@
   // ── CROSS-TAB SIGN-OUT ─────────────────────
   window.addEventListener("storage", (e) => {
     if (e.key === "fp_signout_signal") {
-      sessionStorage.removeItem(SESSION_KEY);
-      window.location.replace(LOGIN_PAGE);
+      window.FP_signOut();
     }
   });
 })();
