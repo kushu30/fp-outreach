@@ -1,4 +1,5 @@
 (function () {
+  window.FP_requireRole("admin", "salesteammember");
   const API_URL = localStorage.getItem("fp_api_url") || "http://localhost:8080";
   let scanQueue = [];
   let isScanning = false;

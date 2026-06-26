@@ -1,0 +1,402 @@
+
+============================================================
+FlexyPe Outreach Server
+============================================================
+Server running at: http://localhost:8080
+
+Usage:
+  1. Open http://localhost:8080 in browser
+  2. Enter domain in scan bar
+  3. Click 'Scan Domain'
+============================================================
+
+[Startup] Recalculating lead scores, priorities, and hot brand signals for all merchants...
+[Startup] Score recalculation complete. Updated 1014 merchants.
+ * Serving Flask app 'server'
+ * Debug mode: off
+[36m  →[0m  [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.10.189:8080
+[36m  →[0m  [33mPress CTRL+C to quit[0m
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:20] "GET /api/support/churned HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "[36mGET /support.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "[36mGET /js/support.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:34] "GET /api/support/churned HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:56] "[36mGET /users.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:56] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:56] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:56] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:56] "[36mGET /js/users.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:16:56] "GET /api/users HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[36mGET /batch.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[36mGET /js/batch.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:24] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[36mGET /changes.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[36mGET /js/changes.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 17:17:26] "GET /api/monitor/changes HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 18:29:25] "[36mGET /login.html?reason=expired HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 18:29:25] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 18:29:25] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 18:29:25] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:39:42] "POST /api/auth/login HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:40:38] "[36mGET /dashboard-selector.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:40:39] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:40:39] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:40:39] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:39] "[36mGET /support.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:39] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:39] "[36mGET /js/support.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:39] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:39] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:39] "GET /api/support/churned HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:50] "[36mGET /users.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:50] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:50] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:50] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:50] "[36mGET /js/users.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:50] "GET /api/users HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[36mGET /batch.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[36mGET /js/batch.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:53] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[36mGET /changes.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[36mGET /js/changes.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:41:54] "GET /api/monitor/changes HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:02] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[36mGET /watchlist.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[36mGET /js/watchlist.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:06] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:07] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[36mGET /watchlist.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[36mGET /js/watchlist.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:10] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:11] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /watchlist.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /js/watchlist.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:22] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:26] "[36mGET /support.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:26] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:26] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:26] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:26] "[36mGET /js/support.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:26] "GET /api/support/churned HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:42] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:47] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:52] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:52] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:53] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:53] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:54] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:55] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:56] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:57] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:57] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:42:57] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET / HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /login.html?reason=expired HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:07] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:10] "POST /api/auth/login HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:21] "GET /dashboard-selector.html HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:21] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:21] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:21] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:23] "GET /support.html HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:23] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:23] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:23] "GET /js/support.js HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:23] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:23] "GET /api/support/churned HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:24] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 20:43:28] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 21:43:43] "[36mGET /login.html?reason=expired HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 21:43:43] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 21:43:43] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [25/Jun/2026 21:43:43] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET / HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /login.html?reason=expired HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:38] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:41] "POST /api/auth/login HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:57] "[36mGET /dashboard-selector.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:57] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:57] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:57] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:06:59] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:00] "[36mGET /watchlist.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[36mGET /js/watchlist.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:01] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[31m  ✗[0m  Exception on /api/auth/google/start [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:07:04] "[35m[1mGET /api/auth/google/start HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:18] "[36mGET /watchlist.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:18] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:18] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:18] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:18] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:18] "[36mGET /js/watchlist.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:19] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:19] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:19] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:11:20] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:47] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:48] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:49] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:50] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:51] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /js/app.js HTTP/1.1[0m" 304 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:52] "[31m[1mGET /results.json HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:59] "[36mGET /login.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:59] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:59] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:19:59] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:20:02] "POST /api/auth/login HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:54] "[36mGET /dashboard-selector.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:54] "[36mGET /css/auth.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:54] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:54] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "GET /js/app.js HTTP/1.1" 200 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:57] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:32:58] "GET /results.json HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:33:20] "[31m[1mPOST /scan-domain HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:33:20] "[31m[1mGET /results.json?t=1782457400659 HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:33:27] "[31m[1mPOST /scan-domain HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:33:27] "[31m[1mGET /results.json?t=1782457407127 HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:47] "[31m[1mPOST /scan-domain HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:47] "[31m[1mGET /results.json?t=1782457487315 HTTP/1.1[0m" 401 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[36mGET /index.html HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[36mGET /css/styles.css HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[36mGET /js/guard.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[36mGET /js/auth.js HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "GET /js/app.js HTTP/1.1" 200 -
+[31m  ✗[0m  Exception on /api/auth/google/status [GET]
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "GET /health HTTP/1.1" 200 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[35m[1mGET /api/auth/google/status HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:49] "[36mGET /FlexyPe_logo.png HTTP/1.1[0m" 304 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:50] "GET /results.json HTTP/1.1" 200 -
+
+[Scan] Request for: gayatriheritage.com (exclude_master=False)
+[Scan] Failed to update domains.csv: [Errno 2] No such file or directory: '../data/domains.csv'
+RETURN CODE: 2
+STDOUT: 
+STDERR: /Users/kushagrashukla/.pyenv/versions/3.10.16/bin/python: can't open file '/Users/kushagrashukla/coding/gokwik-leads/inputScanner.py': [Errno 2] No such file or directory
+
+[Scan] Failed: gayatriheritage.com (diagnostics written to failed_scans.log)
+STDOUT:
+
+STDERR:
+/Users/kushagrashukla/.pyenv/versions/3.10.16/bin/python: can't open file '/Users/kushagrashukla/coding/gokwik-leads/inputScanner.py': [Errno 2] No such file or directory
+
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:57] "[35m[1mPOST /scan-domain HTTP/1.1[0m" 500 -
+[36m  →[0m  127.0.0.1 - - [26/Jun/2026 12:34:57] "[31m[1mGET /results.json?t=1782457497919 HTTP/1.1[0m" 401 -

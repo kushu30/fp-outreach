@@ -16,7 +16,7 @@ except Exception as e:
 
 async def scan_single(domain, exclude_master=False):
     try:
-        results = await ms.run_scanner([domain], max_concurrent=1, exclude_master=exclude_master)
+        results = await ms.run_scanner([domain], max_concurrent=1, exclude_master=exclude_master, gate=False)
         if results and len(results) > 0:
             single = results[0]
             

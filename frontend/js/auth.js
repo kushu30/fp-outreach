@@ -107,12 +107,17 @@ function otpauthURI(secret, email, issuer = "FlexyPe") {
 
 const SESSION_KEY = "fp_session";
 const SESSION_TTL_MS = 8 * 60 * 60 * 1000;
+const IDLE_TIMEOUT_MS = 60 * 60 * 1000;
 
 function getSession() {
   try {
     const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || "null");
     if (!s) return null;
     if (Date.now() - s.startedAt > SESSION_TTL_MS) {
+      clearSession();
+      return null;
+    }
+    if (s.lastActivity && Date.now() - s.lastActivity > IDLE_TIMEOUT_MS) {
       clearSession();
       return null;
     }

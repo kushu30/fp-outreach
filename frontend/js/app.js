@@ -1,4 +1,5 @@
 // app.js — FlexyPe Merchant Intelligence Platform
+window.FP_requireRole("admin", "salesteammember");
 
 let leads = [];
 let selectedLead = null;
@@ -936,7 +937,10 @@ async function loadData() {
   try {
     await delay(200);
     setProgress(35, "Parsing records…");
-    const res = await fetch(`${API_URL}/results.json`);
+    const session = window.FP_AUTH?.getSession?.();
+    const headers = {};
+    if (session) headers["X-User-Email"] = session.email;
+    const res = await fetch(`${API_URL}/results.json`, { headers });
     if (!res.ok) throw new Error("Not found");
     const data = await res.json();
     if (!data?.length) throw new Error("Empty");
@@ -1024,9 +1028,13 @@ async function scanSingleDomain(domainOverride) {
 
   let result = null;
   try {
+    const session = window.FP_AUTH?.getSession?.();
+    const headers = { "Content-Type": "application/json" };
+    if (session) headers["X-User-Email"] = session.email;
+    
     const res = await fetch(`${API_URL}/scan-domain`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({ domain }),
     });
     if (res.ok) result = await res.json();
@@ -1034,7 +1042,7 @@ async function scanSingleDomain(domainOverride) {
 
   if (!result || result.error) {
     try {
-      const res = await fetch(`results.json?t=${Date.now()}`);
+      const res = await fetch(`results.json?t=${Date.now()}`, { headers });
       if (res.ok) {
         const all = await res.json();
         result =

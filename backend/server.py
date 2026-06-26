@@ -2,6 +2,33 @@
 import warnings
 warnings.filterwarnings("ignore")
 
+from bs4 import BeautifulSoup
+from functools import wraps
+
+# ─────────────────────────────────────────────
+#  AUTH / ROLE HELPERS
+# ─────────────────────────────────────────────
+def current_user():
+    email = request.headers.get("X-User-Email", "").strip().lower()
+    if not email:
+        return None
+    return db.fp_users.find_one({"email": email})
+
+def require_role(*roles):
+    def decorator(fn):
+        @wraps(fn)
+        def wrapper(*args, **kwargs):
+            user = current_user()
+            if not user:
+                return jsonify({"error":"Unauthorized"}),401
+            if not user.get("active", True):
+                return jsonify({"error":"Account disabled"}),403
+            if user["role"] not in roles:
+                return jsonify({"error":"Forbidden"}),403
+            return fn(*args, **kwargs)
+        return wrapper
+    return decorator
+
 from flask import Flask, request, jsonify, send_from_directory, redirect
 from flask_cors import CORS
 import subprocess
@@ -95,6 +122,7 @@ def app_js():
     return send_from_directory("../frontend", 'app.js')
 
 @app.route('/scan-domain', methods=['POST'])
+@require_role("admin", "salesteammember")
 def scan():
     data = request.json or {}
     domain = data.get('domain')
@@ -172,6 +200,7 @@ def scan():
             return jsonify({"error": "Scan failed", "domain": domain}), 500
 
 @app.route('/results.json')
+@require_role("admin", "salesteammember")
 def results():
     from datetime import datetime
     data = list(
@@ -238,12 +267,7 @@ def health():
 # The frontend sends `X-User-Email` header on every authenticated request.
 # In production, swap this for a real session/JWT lookup.
 
-def _current_user():
-    email = request.headers.get("X-User-Email", "").strip().lower()
-    if not email:
-        return None
-    return email
-
+from functools import wraps
 
 # ─────────────────────────────────────────────
 #  USER MANAGEMENT (MongoDB-backed, admin-only)
@@ -260,13 +284,6 @@ def _current_user():
 import hashlib, secrets, base64
 from datetime import datetime as _dt
 
-def _check_admin():
-    """Returns True if request carries a valid admin secret."""
-    admin_secret = os.getenv("ADMIN_SECRET", "")
-    if not admin_secret:
-        return False  # ADMIN_SECRET not configured → deny
-    provided = request.headers.get("X-Admin-Secret", "")
-    return secrets.compare_digest(admin_secret, provided)
 VALID_ROLES = {
     "admin",
     "salesteammember",
@@ -312,10 +329,9 @@ _seed_default_users()
 
 
 @app.route("/api/users", methods=["GET"])
+@require_role("admin")
 def list_users():
     """List all users (admin only — returns safe fields, no hashes)."""
-    if not _check_admin():
-        return jsonify({"error": "Unauthorized"}), 401
     users = list(
         db.fp_users.find(
             {},
@@ -324,16 +340,15 @@ def list_users():
                 "password_hash": 0,
                 "secret": 0
             }
-        ).sort("name", 1)
+        ).sort([("role", 1), ("name", 1)])
     )
     return jsonify(users)
 
 
 @app.route("/api/users", methods=["POST"])
+@require_role("admin")
 def create_user():
     """Create a new user (admin only)."""
-    if not _check_admin():
-        return jsonify({"error": "Unauthorized"}), 401
     name = (data.get("name") or "").strip()
     email = (data.get("email") or "").strip().lower()
     password = (data.get("password") or "").strip()
@@ -359,10 +374,9 @@ def create_user():
 
 
 @app.route("/api/users/<email>", methods=["PATCH"])
+@require_role("admin")
 def update_user(email):
     """Update password or TOTP secret for a user (admin only)."""
-    if not _check_admin():
-        return jsonify({"error": "Unauthorized"}), 401
     email = email.strip().lower()
     data = request.get_json(silent=True) or {}
     updates = {}
@@ -374,6 +388,11 @@ def update_user(email):
         updates["twoFAEnabled"] = bool(updates["secret"])
     if "name" in data:
         updates["name"] = data["name"].strip()
+    if "role" in data:
+        role = data["role"].strip().lower()
+        if role not in VALID_ROLES:
+            return jsonify({"error": "Invalid role"}), 400
+        updates["role"] = role
     if "active" in data:
         updates["active"] = bool(data["active"])
     if not updates:
@@ -385,14 +404,101 @@ def update_user(email):
 
 
 @app.route("/api/users/<email>", methods=["DELETE"])
+@require_role("admin")
 def delete_user(email):
     """Delete a user (admin only)."""
-    if not _check_admin():
-        return jsonify({"error": "Unauthorized"}), 401
     email = email.strip().lower()
+    requester = request.headers.get("X-User-Email", "").lower()
+
+    if requester == email:
+        return jsonify({
+            "error": "You cannot delete your own account."
+        }), 400
+
     result = db.fp_users.delete_one({"email": email})
     if result.deleted_count == 0:
         return jsonify({"error": "User not found"}), 404
+    return jsonify({"ok": True})
+
+
+@app.route("/api/users/<email>/reset-password", methods=["POST"])
+@require_role("admin")
+def reset_password(email):
+
+    data = request.get_json(silent=True) or {}
+    new_password = (data.get("password") or "").strip()
+
+    if len(new_password) < 8:
+        return jsonify({"error": "Password too short"}), 400
+
+    db.fp_users.update_one(
+        {"email": email.lower()},
+        {
+            "$set": {
+                "password_hash": _hash_password(new_password),
+                "last_password_change": _dt.utcnow()
+            }
+        }
+    )
+    return jsonify({"ok": True})
+
+
+@app.route("/api/auth/change-password", methods=["POST"])
+def change_password():
+    user = current_user()
+    if not user:
+        return jsonify({"error": "Not signed in"}), 401
+
+    data = request.get_json(silent=True) or {}
+    old_password = (data.get("old_password") or "").strip()
+    new_password = (data.get("new_password") or "").strip()
+
+    if len(new_password) < 8:
+        return jsonify({"error": "New password must be at least 8 characters"}), 400
+
+    import bcrypt
+    if not bcrypt.checkpw(old_password.encode("utf-8"), user["password_hash"]):
+        return jsonify({"error": "Incorrect current password"}), 401
+
+    db.fp_users.update_one(
+        {"email": user["email"]},
+        {
+            "$set": {
+                "password_hash": _hash_password(new_password),
+                "last_password_change": _dt.utcnow()
+            }
+        }
+    )
+    return jsonify({"ok": True})
+
+
+@app.route("/api/users/<email>/disable", methods=["POST"])
+@require_role("admin")
+def disable_user(email):
+
+    db.fp_users.update_one(
+        {"email": email.lower()},
+        {
+            "$set": {
+                "active": False
+            }
+        }
+    )
+    return jsonify({"ok": True})
+
+
+@app.route("/api/users/<email>/enable", methods=["POST"])
+@require_role("admin")
+def enable_user(email):
+
+    db.fp_users.update_one(
+        {"email": email.lower()},
+        {
+            "$set": {
+                "active": True
+            }
+        }
+    )
     return jsonify({"ok": True})
 
 
@@ -417,6 +523,16 @@ def auth_login():
         }), 403
     if not user or user.get("password_hash") != _hash_password(password):
         return jsonify({"error": "Invalid email or password"}), 401
+
+    db.fp_users.update_one(
+        {"email": email},
+        {
+            "$set": {
+                "last_login": _dt.utcnow()
+            }
+        }
+    )
+
     return jsonify({
         "ok": True,
         "name": user.get("name", ""),
@@ -427,6 +543,34 @@ def auth_login():
         "secret": user.get("secret", "")
     })
 
+
+
+@app.route("/api/auth/setup-totp", methods=["POST"])
+def auth_setup_totp():
+    data = request.json or {}
+    email = (data.get("email") or "").strip().lower()
+    password = data.get("password", "")
+    secret = data.get("secret", "").strip().upper()
+    
+    if not email or not password or not secret:
+        return jsonify({"error": "Missing fields"}), 400
+        
+    user = db.fp_users.find_one({"email": email})
+    if not user:
+        return jsonify({"error": "Invalid credentials"}), 401
+        
+    import bcrypt
+    if not bcrypt.checkpw(password.encode("utf-8"), user["password_hash"]):
+        return jsonify({"error": "Invalid credentials"}), 401
+        
+    db.fp_users.update_one(
+        {"email": email},
+        {"$set": {
+            "secret": secret,
+            "twoFAEnabled": True
+        }}
+    )
+    return jsonify({"ok": True})
 
 @app.route("/api/users/change-password", methods=["POST"])
 def change_password():
@@ -466,7 +610,7 @@ def change_password():
 
 @app.route("/api/auth/google/start", methods=["GET"])
 def gmail_oauth_start():
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in to FlexyPe"}), 401
     try:
@@ -499,7 +643,7 @@ def gmail_oauth_callback():
 
 @app.route("/api/auth/google/status", methods=["GET"])
 def gmail_oauth_status():
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in"}), 401
     return jsonify(gmail_mod.get_connection_status(user, db))
@@ -507,7 +651,7 @@ def gmail_oauth_status():
 
 @app.route("/api/auth/google/disconnect", methods=["POST"])
 def gmail_oauth_disconnect():
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in"}), 401
     ok = gmail_mod.disconnect(user, db)
@@ -519,8 +663,9 @@ def gmail_oauth_disconnect():
 # ─────────────────────────────────────────────
 
 @app.route("/api/send-email", methods=["POST"])
+@require_role("admin", "salesteammember")
 def send_email_route():
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in to FlexyPe"}), 401
 
@@ -579,9 +724,10 @@ def send_email_route():
 
 
 @app.route("/api/sent-log", methods=["GET"])
+@require_role("admin", "salesteammember")
 def sent_log_route():
     """List of sent emails for a domain (or for the current user)."""
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in"}), 401
     domain = (request.args.get("domain") or "").strip().lower()
@@ -602,8 +748,9 @@ def sent_log_route():
 
 
 @app.route("/api/outreach/thread", methods=["GET"])
+@require_role("admin", "salesteammember")
 def get_email_thread():
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in"}), 401
         
@@ -727,8 +874,9 @@ def get_email_thread():
 
 
 @app.route("/api/outreach/sync-replies", methods=["POST"])
+@require_role("admin", "salesteammember")
 def sync_outreach_replies():
-    user = _current_user()
+    user = current_user()
     if not user:
         return jsonify({"error": "Not signed in"}), 401
         
@@ -916,6 +1064,7 @@ def sync_outreach_replies():
 # ─────────────────────────────────────────────
 
 @app.route("/api/monitor/scan-fingerprints", methods=["POST"])
+@require_role("admin", "salesteammember")
 def monitor_scan_fingerprints():
     import threading
     import fingerprint_scanner as fs
@@ -929,6 +1078,7 @@ def monitor_scan_fingerprints():
 
 
 @app.route("/api/monitor/run-playwright-all", methods=["POST"])
+@require_role("admin", "salesteammember")
 def monitor_run_playwright_all():
     import threading
     import fingerprint_scanner as fs
@@ -942,6 +1092,7 @@ def monitor_run_playwright_all():
 
 
 @app.route("/api/monitor/runs", methods=["GET"])
+@require_role("admin", "salesteammember")
 def monitor_runs_log():
     cursor = db.playwright_runs.find(
         {},
@@ -957,6 +1108,7 @@ def monitor_runs_log():
 
 
 @app.route("/api/monitor/changes", methods=["GET"])
+@require_role("admin", "salesteammember")
 def monitor_changes_log():
     from datetime import datetime
     cursor = fingerprint_history.find({}).sort("timestamp", -1).limit(200)
@@ -973,6 +1125,7 @@ def monitor_changes_log():
 
 
 @app.route("/api/monitor/changes/acknowledge", methods=["POST"])
+@require_role("admin", "salesteammember")
 def acknowledge_changes():
     from bson.objectid import ObjectId
     data = request.json or {}
@@ -1036,6 +1189,65 @@ def recalculate_all_scores():
         print(f"[Startup] Error during score recalculation: {e}")
 
 
+
+@app.route("/api/support/churned", methods=["GET"])
+@require_role("admin", "supportteammember")
+def get_churned_stores():
+    from datetime import datetime
+    # Find all fingerprint changes where live_checkout old was FlexyPe and new is different
+    cursor = fingerprint_history.find({
+        "changes.live_checkout.old": {"$regex": ".*FlexyPe.*", "$options": "i"},
+        "changes.live_checkout.new": {"$not": {"$regex": ".*FlexyPe.*", "$options": "i"}}
+    }).sort("timestamp", -1)
+    
+    out = []
+    for d in cursor:
+        d["_id"] = str(d["_id"])
+        
+        # Extract fields for frontend
+        d["domain"] = d.get("merchant", "Unknown")
+        changes = d.get("changes", {})
+        live_checkout = changes.get("live_checkout", {})
+        d["old_checkout"] = live_checkout.get("old", "FlexyPe")
+        d["new_checkout"] = live_checkout.get("new", "Unknown")
+        
+        if isinstance(d.get("timestamp"), datetime):
+            d["timestamp"] = d["timestamp"].isoformat()
+        
+        # We need notes and assigned fields
+        if "notes" not in d:
+            d["notes"] = ""
+        if "assigned" not in d:
+            d["assigned"] = ""
+            
+        out.append(d)
+    return jsonify(out)
+
+@app.route("/api/support/churned/<change_id>", methods=["PATCH"])
+@require_role("admin", "supportteammember")
+def update_churned_store(change_id):
+    from bson.objectid import ObjectId
+    data = request.json or {}
+    
+    updates = {}
+    if "notes" in data:
+        updates["notes"] = str(data["notes"])
+    if "assigned" in data:
+        updates["assigned"] = str(data["assigned"])
+        
+    if not updates:
+        return jsonify({"ok": True})
+        
+    res = fingerprint_history.update_one(
+        {"_id": ObjectId(change_id)},
+        {"$set": updates}
+    )
+    
+    if res.matched_count == 0:
+        return jsonify({"error": "Change not found"}), 404
+        
+    return jsonify({"ok": True})
+
 if __name__ == '__main__':
     print("\n" + "=" * 60)
     print("FlexyPe Outreach Server")
@@ -1050,3 +1262,4 @@ if __name__ == '__main__':
     
     recalculate_all_scores()
     app.run(host='0.0.0.0', port=8080, debug=False)
+

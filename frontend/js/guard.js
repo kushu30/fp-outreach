@@ -59,8 +59,15 @@
 
   // ── PUBLIC API ─────────────────────────────
   window.FP_currentUser = session.email;
-  window.FP_currentUserName = session.name;
   window.FP_currentRole = session.role;
+  window.FP_currentUserName = session.name;
+  window.FP_sessionStarted = session.startedAt;
+  
+  window.FP_requireRole = (...roles) => {
+    if (!roles.includes(window.FP_currentRole)) {
+      window.location.replace("403.html");
+    }
+  };
 
   window.FP_signOut = function () {
     clearAndRedirect();
@@ -96,6 +103,32 @@
   window.addEventListener("storage", (e) => {
     if (e.key === "fp_signout_signal") {
       window.FP_signOut();
+    }
+  });
+
+  // ── HIDE TABS BASED ON ROLES ─────────
+  document.addEventListener("DOMContentLoaded", () => {
+    const role = session.role;
+    const usersNav = document.getElementById("usersNav");
+    const supportNav = document.getElementById("supportNav");
+    
+    // Hide Admin Users Tab
+    if (usersNav) {
+      usersNav.style.display = role === "admin" ? "flex" : "none";
+    }
+    
+    // Hide Support Dashboard from Sales
+    if (supportNav) {
+      supportNav.style.display = (role === "admin" || role === "supportteammember") ? "flex" : "none";
+    }
+
+    // Hide Sales Dashboards from Support
+    if (role === "supportteammember") {
+      const salesRoutes = ["dashboard", "watchlist", "outreach", "changes", "batch"];
+      salesRoutes.forEach(r => {
+        const el = document.querySelector(`[data-route="${r}"]`);
+        if (el) el.style.display = "none";
+      });
     }
   });
 })();

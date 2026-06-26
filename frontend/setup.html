@@ -358,15 +358,15 @@
           stopTimer();
           // Save new TOTP secret to backend
           const apiBase = localStorage.getItem("fp_api_url") || "http://localhost:8080";
-          const adminSecret = "flexy-admin-secret-2026"; // same as ADMIN_SECRET in .env
           try {
-            await fetch(`${apiBase}/api/users/${encodeURIComponent(setupEmail)}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-                "X-Admin-Secret": adminSecret
-              },
-              body: JSON.stringify({ secret: setupSecret })
+            await fetch(`${apiBase}/api/auth/setup-totp`, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ 
+                email: setupEmail, 
+                password: A.$("acctPassword").value,
+                secret: setupSecret 
+              })
             });
           } catch (e) {
             console.warn("[2FA setup] Could not persist secret to backend:", e);
