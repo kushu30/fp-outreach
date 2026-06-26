@@ -87,5 +87,6 @@ zipp==3.23.0
 zstandard==0.25.0
 google-auth-oauthlib
 google-api-python-client
-brotligunicorn==21.2.0
+brotli
+gunicorn==21.2.0
 bcrypt==4.1.2
